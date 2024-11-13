@@ -12,3 +12,5 @@ Uma oportunidade de aprendizado e uma homenagem pra minha artista favorita!
 <div align="center">
 <img src="https://mariafcknt.github.io/portfolio-brului/img/Yamiyo.jpg" alt="wallpaper">
 </div>
+
+[//]: # "8 commits só pro readme é sacanagem"
