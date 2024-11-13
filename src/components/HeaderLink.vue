@@ -1,0 +1,72 @@
+<template>
+  <RouterLink
+    :to="to"
+    :class="{ active: isActive }"
+    class="header-link"
+    @click="setActive"
+  >
+    {{ text }}
+  </RouterLink>
+</template>
+
+<script setup>
+import { RouterLink, useRoute } from "vue-router";
+import { ref, watch } from "vue";
+
+const props = defineProps({
+  to: { type: String, required: true },
+  text: { type: String, required: true },
+  activeLink: String,
+  setActiveLink: Function,
+});
+
+const route = useRoute();
+const isActive = ref(route.path === props.to);
+
+function setActive() {
+  props.setActiveLink(props.text.toLowerCase());
+}
+
+watch(
+  () => route.path,
+  (newPath) => {
+    isActive.value = newPath === props.to;
+  }
+);
+</script>
+
+<style scoped lang="scss">
+@import "../assets/variables.scss";
+
+.header-link {
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+.header-link.active {
+  color: $gold-text;
+}
+
+.header-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: black;
+  transition: width 0.3s ease;
+}
+
+.header-link:hover::after {
+  width: 100%;
+}
+
+.header-link.active::after {
+  background-color: $gold-text;
+  width: 100%;
+}
+</style>

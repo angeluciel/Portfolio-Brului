@@ -1,0 +1,39 @@
+$secondary-bg: #eddada;
+$secondary-hg-bg: #d8a0a0;
+$text-color: #373131;
+$button-hover-bg: transparent;
+$button-hover-text: #d8a0a0;
+$gold-text: #ba8d2e;
+
+$semibold-weight: 600;
+$xbold-weight: 800;
+
+@mixin button-style($bg-color, $text-color, $border-color) {
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  width: 312px;
+  font-size: 22px;
+  font-weight: $xbold-weight;
+  border-radius: 8px;
+  background: $bg-color;
+  color: $text-color;
+  border: 2px solid $border-color;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $button-hover-bg;
+    color: $bg-color;
+  }
+}
+
+%card-style {
+  color: $text-color;
+  border-radius: 16px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
