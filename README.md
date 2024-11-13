@@ -8,7 +8,7 @@ Uma oportunidade de aprendizado e uma homenagem pra minha artista favorita!
 <a href="https://github.com/mariafcknt">mariafcknt</a>
 </div>
 
-<h2>Algumas das artes da Brului</h2>
+<h2>Exemplo de uma das artes da Brului</h2>
 <div align="center">
 <img src="https://mariafcknt.github.io/portfolio-brului/img/Yamiyo.jpg" alt="wallpaper">
 </div>
