@@ -3,7 +3,7 @@
 Uma oportunidade de aprendizado e uma homenagem pra minha artista favorita!
 </p>
 
-<p align="center">Tive esse idéia por conta do portfólio original da artista, criado pela nossa amiga:</p>
+<p align="center">Tive esse idéia por conta do <a href="https://mariafcknt.github.io/portfolio-brului/index.html">portfólio original da artista</p>, criado pela nossa amiga:</p>
 <div align="center">
 <a href="https://github.com/mariafcknt">mariafcknt</a>
 </div>
