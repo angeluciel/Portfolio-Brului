@@ -11,7 +11,7 @@
       <span>Contact me to get your very own art!</span>
     </div>
     <div class="contacts">
-      <span>Contacts</span>
+      <span class="contacts_title">Contacts</span>
       <ul class="contacts_list">
         <li>+55 (00) 9 9999-9999</li>
         <li>emailExample@mail.com</li>
@@ -35,13 +35,14 @@ import "../components/icons/twtIcon.svg";
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
+@use "../assets/variables";
 
 .body {
   display: flex;
   flex-direction: column;
   gap: 4rem;
   padding: 0 48px;
+  color: variables.$text-color;
 
   .top {
     text-transform: uppercase;
@@ -71,18 +72,29 @@ import "../components/icons/twtIcon.svg";
           height: 300px;
           object-fit: cover;
           border-radius: 100%;
-          border: 8px solid $text-color;
+          border: 8px solid variables.$text-color;
         }
       }
     }
   }
   .contacts {
     font-size: 24px;
+    gap: 2rem;
 
-    span {
+    .contacts_title {
       text-transform: uppercase;
     }
+
     .contacts_list {
+      display: block;
+      margin: 12px 0;
+
+      li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.4rem;
+      }
       img {
         max-width: 25px;
       }

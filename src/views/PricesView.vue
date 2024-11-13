@@ -64,7 +64,7 @@ import HeaderBar from "../components/HeaderBar.vue";
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
+@use "../assets/variables";
 
 .text {
   display: flex;
@@ -81,7 +81,7 @@ import HeaderBar from "../components/HeaderBar.vue";
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    font-weight: $semibold-weight;
+    font-weight: variables.$semibold-weight;
   }
 
   .bottom_text {
@@ -94,7 +94,7 @@ import HeaderBar from "../components/HeaderBar.vue";
       justify-content: center;
       text-align: center;
       font-size: 24px;
-      font-weight: $semibold-weight;
+      font-weight: variables.$semibold-weight;
     }
     .idk {
       text-decoration: underline;
@@ -102,7 +102,7 @@ import HeaderBar from "../components/HeaderBar.vue";
       transition: all 0.2s ease;
     }
     .idk:hover {
-      color: $text-color;
+      color: variables.$text-color;
       opacity: 50%;
     }
   }

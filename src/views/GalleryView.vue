@@ -30,13 +30,14 @@ import HeaderBar from "../components/HeaderBar.vue";
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
+@use "../assets/variables";
 
 .artworks {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: variables.$text-color;
 
   .my-portfolio {
     font-family: "Abril Fatface", serif;
