@@ -16,11 +16,11 @@
         <li>+55 (00) 9 9999-9999</li>
         <li>emailExample@mail.com</li>
         <li>
-          <img src="../components/icons/instaIcon.svg" alt="insta" />
+          <fa :icon="['fab', 'instagram']" />
           <span>@bru__lui</span>
         </li>
         <li>
-          <img src="../components/icons/twtIcon.svg" alt="twt" />
+          <fa :icon="['fab', 'x-twitter']" />
           <span>@Bru__Lui</span>
         </li>
       </ul>
@@ -35,14 +35,14 @@ import "../components/icons/twtIcon.svg";
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/variables";
+@use "../assets/variables" as var;
 
 .body {
   display: flex;
   flex-direction: column;
   gap: 4rem;
   padding: 0 48px;
-  color: variables.$text-color;
+  color: var.$text-color;
 
   .top {
     text-transform: uppercase;
@@ -57,10 +57,7 @@ import "../components/icons/twtIcon.svg";
       gap: 124px;
 
       span {
-        font-family: "Abril Fatface", serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 96px;
+        @include var.fontAbril(96px, 400, normal);
       }
 
       .sage-image {
@@ -72,7 +69,7 @@ import "../components/icons/twtIcon.svg";
           height: 300px;
           object-fit: cover;
           border-radius: 100%;
-          border: 8px solid variables.$text-color;
+          border: 8px solid var.$text-color;
         }
       }
     }

@@ -1,3 +1,5 @@
+// COLORS
+
 $secondary-bg: #eddada;
 $secondary-hg-bg: #d8a0a0;
 $text-color: #373131;
@@ -5,8 +7,20 @@ $button-hover-bg: transparent;
 $button-hover-text: #d8a0a0;
 $gold-text: #ba8d2e;
 
+// MAIN PAGE
+
+$main-button-bg: #2b424e;
+$main-button-bg-hover: #3d4b53;
+
 $semibold-weight: 600;
 $xbold-weight: 800;
+
+@mixin fontAbril($size: 96px, $weight: 400, $style: normal) {
+  font-family: "Abril Fatface", serif;
+  font-weight: $weight;
+  font-style: $style;
+  font-size: $size;
+}
 
 @mixin button-style($bg-color, $text-color, $border-color) {
   align-items: center;
