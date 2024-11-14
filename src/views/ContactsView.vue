@@ -11,21 +11,21 @@
       <div class="bottom">
         <h3>Contacts</h3>
         <ul class="contacts_list">
-        <li>+55 (00) 9 9999-9999</li>
-        <li>emailExample@mail.com</li>
-        <li>
-          <img src="../components/icons/instaIcon.svg" alt="insta" />
-          <span>@bru__lui</span>
-        </li>
-        <li>
-          <img src="../components/icons/twtIcon.svg" alt="twt" />
-          <span>@Bru__Lui</span>
-        </li>
-      </ul>
+          <li>+55 (00) 9 9999-9999</li>
+          <li>emailExample@mail.com</li>
+          <li>
+            <fa :icon="['fab', 'instagram']" />
+            <span>@bru__lui</span>
+          </li>
+          <li>
+            <fa :icon="['fab', 'x-twitter']" />
+            <span>@Bru__Lui</span>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="sage-image">
-      <img src="../assets/images/Sage.jpg" alt="pfp">
+      <img src="../assets/images/Sage.jpg" alt="pfp" />
     </div>
   </div>
 </template>
@@ -34,14 +34,14 @@
 import HeaderBar from "../components/HeaderBar.vue";
 </script>
 <style lang="scss" scoped>
-@use "../assets/variables";
+@use "../assets/variables" as var;
 
 .body {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 2rem 3rem 0 3rem;
-  color: variables.$text-color;
+  color: var.$text-color;
 
   .main {
     display: flex;
@@ -63,11 +63,10 @@ import HeaderBar from "../components/HeaderBar.vue";
 
         h1 {
           font-family: "Abril Fatface", serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 96px;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 96px;
         }
-        
       }
 
       span {
@@ -81,19 +80,19 @@ import HeaderBar from "../components/HeaderBar.vue";
       gap: 1rem;
 
       .contacts_list {
-      display: block;
-      margin: 12px 0;
+        display: block;
+        margin: 12px 0;
 
-      li {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.4rem;
+        li {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 0.4rem;
+        }
+        img {
+          max-width: 25px;
+        }
       }
-      img {
-        max-width: 25px;
-      }
-    }
 
       h3 {
         text-transform: uppercase;
@@ -104,23 +103,20 @@ import HeaderBar from "../components/HeaderBar.vue";
   .sage-image {
     display: flex;
     flex-direction: column;
-    
+
     width: 300px;
     height: 100%;
-    align-content:start ;
+    align-content: start;
     justify-content: flex-start;
     margin: 1rem;
-    
 
-        img {
-          width: 300px;
-          height: 300px;
-          object-fit: cover;
-          border-radius: 100%;
-          border: 8px solid variables.$text-color;
-        }
-      }
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 100%;
+      border: 8px solid var.$text-color;
+    }
+  }
 }
-
-
 </style>

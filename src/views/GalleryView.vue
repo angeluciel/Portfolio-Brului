@@ -30,20 +30,17 @@ import HeaderBar from "../components/HeaderBar.vue";
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/variables";
+@use "../assets/variables" as var;
 
 .artworks {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: variables.$text-color;
+  color: var.$text-color;
 
   .my-portfolio {
-    font-family: "Abril Fatface", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 96px;
+    @include var.fontAbril(96px, 400, normal);
   }
 
   .images {
