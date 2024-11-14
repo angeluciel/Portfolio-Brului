@@ -1,18 +1,16 @@
 <template>
   <HeaderBar></HeaderBar>
   <div class="body">
-    <div class="top">
-      <div class="top_main">
-        <span>Bring your visions to life</span>
-        <div class="sage-image">
-          <img src="../assets/images/Sage.jpg" alt="bru" />
+    <div class="main">
+      <div class="top">
+        <div class="top_text">
+          <h1>Bring your visions to life</h1>
         </div>
+        <span>Contact me to get your very own art!</span>
       </div>
-      <span>Contact me to get your very own art!</span>
-    </div>
-    <div class="contacts">
-      <span class="contacts_title">Contacts</span>
-      <ul class="contacts_list">
+      <div class="bottom">
+        <h3>Contacts</h3>
+        <ul class="contacts_list">
         <li>+55 (00) 9 9999-9999</li>
         <li>emailExample@mail.com</li>
         <li>
@@ -24,68 +22,65 @@
           <span>@Bru__Lui</span>
         </li>
       </ul>
+      </div>
+    </div>
+    <div class="sage-image">
+      <img src="../assets/images/Sage.jpg" alt="pfp">
     </div>
   </div>
 </template>
 
 <script setup>
 import HeaderBar from "../components/HeaderBar.vue";
-import "../components/icons/instaIcon.svg";
-import "../components/icons/twtIcon.svg";
 </script>
-
 <style lang="scss" scoped>
 @use "../assets/variables";
 
 .body {
   display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding: 0 48px;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2rem 3rem 0 3rem;
   color: variables.$text-color;
 
-  .top {
-    text-transform: uppercase;
-    span {
-      font-size: 24px;
-    }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
 
-    .top_main {
+    .top {
       display: flex;
-      justify-content: space-around;
-      align-content: center;
-      gap: 124px;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 48rem;
+      text-transform: uppercase;
 
-      span {
-        font-family: "Abril Fatface", serif;
+      .top_text {
+        display: flex;
+        padding: 24px 0;
+
+        h1 {
+          font-family: "Abril Fatface", serif;
         font-weight: 400;
         font-style: normal;
         font-size: 96px;
-      }
-
-      .sage-image {
-        width: 300px;
-        height: 300px;
-
-        img {
-          width: 300px;
-          height: 300px;
-          object-fit: cover;
-          border-radius: 100%;
-          border: 8px solid variables.$text-color;
         }
+        
+      }
+
+      span {
+        font-size: 24px;
       }
     }
-  }
-  .contacts {
-    font-size: 24px;
-    gap: 2rem;
 
-    .contacts_title {
-      text-transform: uppercase;
-    }
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
 
-    .contacts_list {
+      .contacts_list {
       display: block;
       margin: 12px 0;
 
@@ -99,6 +94,33 @@ import "../components/icons/twtIcon.svg";
         max-width: 25px;
       }
     }
+
+      h3 {
+        text-transform: uppercase;
+      }
+    }
   }
+
+  .sage-image {
+    display: flex;
+    flex-direction: column;
+    
+    width: 300px;
+    height: 100%;
+    align-content:start ;
+    justify-content: flex-start;
+    margin: 1rem;
+    
+
+        img {
+          width: 300px;
+          height: 300px;
+          object-fit: cover;
+          border-radius: 100%;
+          border: 8px solid variables.$text-color;
+        }
+      }
 }
+
+
 </style>

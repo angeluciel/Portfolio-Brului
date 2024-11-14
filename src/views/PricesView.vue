@@ -1,6 +1,7 @@
 <script setup>
 import CardTemplateVue from "@/components/CardTemplate.vue";
 import HeaderBar from "../components/HeaderBar.vue";
+import FooterBar from "@/components/FooterBar.vue";
 </script>
 
 <template>
@@ -20,7 +21,7 @@ import HeaderBar from "../components/HeaderBar.vue";
       <CardTemplateVue
         title="Lineart + Color"
         subtitle="For an affordable luxury."
-        price="$24.99"
+        price="R$25 ~ R$70"
         :topics="[
           'Colored Pieces',
           'Impeccable Lineart',
@@ -35,7 +36,7 @@ import HeaderBar from "../components/HeaderBar.vue";
       <CardTemplateVue
         title="Complete Render"
         subtitle="For the best you can get"
-        price="$45.99"
+        price="R$46 ~ R$100"
         :topics="[
           'Fully Rendered Art',
           'Detailed Pieces',
@@ -50,7 +51,7 @@ import HeaderBar from "../components/HeaderBar.vue";
       <CardTemplateVue
         title="Other"
         subtitle="For different Ideas"
-        price="$5.00"
+        price="R$5 ~ R$100"
         :topics="[
           'Scenery',
           'Complex Background',
@@ -61,6 +62,7 @@ import HeaderBar from "../components/HeaderBar.vue";
       />
     </div>
   </main>
+  <FooterBar/>
 </template>
 
 <style lang="scss" scoped>
@@ -114,6 +116,7 @@ main {
   align-items: center;
   max-width: 100vw;
   overflow-x: hidden;
+  padding: 0 0 2rem 0;
 }
 
 .card_section {
