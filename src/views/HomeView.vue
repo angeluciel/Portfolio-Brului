@@ -23,7 +23,12 @@
         <div class="socials">
           <button class="cta_button" type="button">
             <span>Bring your visions to life</span>
-            <fa :icon="['fas', 'greater-than']" />
+            <Icon
+              icon="ic:baseline-arrow-forward-ios"
+              width="2.25rem"
+              height="2.25rem"
+              style="color: white"
+            />
           </button>
           <div class="instagram">
             <fa :icon="['fab', 'instagram']" />
@@ -33,16 +38,22 @@
           </div>
         </div>
         <div class="stats">
-          <div class="left">
-            <div class="bottom_title">+ 5 years</div>
+          <div class="bottom_left">
+            <div class="year_plus">
+              <Icon icon="ic:round-plus" class="icon" />
+              <div class="bottom_title">5 years</div>
+            </div>
             <div class="bottom_subtitle">
               Of experience making my own, as well as clients' projects.
             </div>
           </div>
-          <div class="right">
-            <div class="bottom_title">+ 200.000</div>
+          <div class="bottom_right">
+            <div class="year_plus">
+              <Icon icon="ic:round-plus" class="icon" />
+              <div class="bottom_title">200k</div>
+            </div>
             <div class="bottom_subtitle">
-              Followers on social medias, giving me feedbacks on my projects!
+              Followers on my social media, giving me feedbacks on my projects.
             </div>
           </div>
         </div>
@@ -54,7 +65,9 @@
 
 <script setup>
 import HeaderBar from "../components/HeaderBar.vue";
+import { Icon } from "@iconify/vue";
 </script>
+
 <style lang="scss" scoped>
 @use "../assets/variables.scss" as var;
 
@@ -149,6 +162,15 @@ import HeaderBar from "../components/HeaderBar.vue";
           background: var.$main-button-bg;
           color: white;
           font-style: italic;
+
+          span {
+            font-size: 30px;
+          }
+
+          .greater-than {
+            height: 36px;
+            width: 36px;
+          }
         }
 
         .instagram,
@@ -168,27 +190,37 @@ import HeaderBar from "../components/HeaderBar.vue";
         display: flex;
         flex-direction: row;
 
-        .left,
-        .right {
+        .bottom_left {
+          border-right: 4px solid #98a3c1;
+        }
+
+        .bottom_left,
+        .bottom_right {
           display: flex;
           flex-direction: column;
+          justify-content: flex-start;
 
-          .bottom_title {
+          .year_plus {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            margin-left: 1rem;
 
-            font-size: 56px;
-            font-weight: bold;
-            font-style: italic;
+            .icon {
+              width: 36px;
+              height: 36px;
+            }
+
+            .bottom_title {
+              font-size: 56px;
+              font-style: italic;
+              font-weight: bold;
+            }
           }
 
           .bottom_subtitle {
-            display: flex;
-            flex-direction: row;
-            gap: 1.5rem;
-            padding: 3rem 1.5rem;
-
+            padding: 1rem 2rem;
             font-size: 20px;
+            font-weight: 600;
           }
         }
       }

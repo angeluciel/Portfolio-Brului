@@ -62,7 +62,7 @@ import FooterBar from "@/components/FooterBar.vue";
       />
     </div>
   </main>
-  <FooterBar/>
+  <FooterBar />
 </template>
 
 <style lang="scss" scoped>
@@ -73,9 +73,10 @@ import FooterBar from "@/components/FooterBar.vue";
   flex-direction: column;
   width: 100%;
   justify-content: center;
+  padding-top: 2rem;
   align-items: center;
-  gap: 36px;
-  margin-top: 32px;
+  gap: 0.5rem;
+  margin-top: 2rem;
 
   .header_comission {
     display: flex;

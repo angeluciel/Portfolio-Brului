@@ -14,11 +14,11 @@
           <li>+55 (00) 9 9999-9999</li>
           <li>emailExample@mail.com</li>
           <li>
-            <fa :icon="['fab', 'instagram']" />
+            <fa :icon="['fab', 'instagram']" id="icon" />
             <span>@bru__lui</span>
           </li>
           <li>
-            <fa :icon="['fab', 'x-twitter']" />
+            <fa :icon="['fab', 'x-twitter']" id="icon" />
             <span>@Bru__Lui</span>
           </li>
         </ul>
@@ -28,10 +28,12 @@
       <img src="../assets/images/Sage.jpg" alt="pfp" />
     </div>
   </div>
+  <FooterBar></FooterBar>
 </template>
 
 <script setup>
 import HeaderBar from "../components/HeaderBar.vue";
+import FooterBar from "@/components/FooterBar.vue";
 </script>
 <style lang="scss" scoped>
 @use "../assets/variables" as var;
@@ -40,7 +42,7 @@ import HeaderBar from "../components/HeaderBar.vue";
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 2rem 3rem 0 3rem;
+  padding: 2rem 3rem 5rem 3rem;
   color: var.$text-color;
 
   .main {
@@ -88,6 +90,11 @@ import HeaderBar from "../components/HeaderBar.vue";
           flex-direction: row;
           align-items: center;
           gap: 0.4rem;
+          color: var.$text-color;
+
+          #icon {
+            fill: white !important;
+          }
         }
         img {
           max-width: 25px;
