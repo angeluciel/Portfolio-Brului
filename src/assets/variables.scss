@@ -7,10 +7,23 @@ $button-hover-bg: transparent;
 $button-hover-text: #d8a0a0;
 $gold-text: #ba8d2e;
 
+// Insta & twt colors
+$colors: (
+  instagram: #c13584,
+  twitter: #1da1f2,
+);
+
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 12deg)};
+  }
+}
+
 // MAIN PAGE
 
 $main-button-bg: #2b424e;
-$main-button-bg-hover: #3d4b53;
+$main-button-bg-hover: #505e66;
 
 $semibold-weight: 600;
 $xbold-weight: 800;
