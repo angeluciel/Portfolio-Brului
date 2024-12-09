@@ -75,13 +75,15 @@
     </div>
   </div>
 
-  <div class="lower">
+  <section class="lower">
     <SliderComponent />
-  </div>
+  </section>
+  <FooterBar></FooterBar>
 </template>
 
 <script setup>
 import HeaderBar from "../components/HeaderBar.vue";
+import FooterBar from "@/components/FooterBar.vue";
 import SliderComponent from "@/components/SliderComponent.vue";
 import { Icon } from "@iconify/vue";
 </script>
@@ -99,6 +101,10 @@ $black: #282936;
   $ease: cubic-bezier(0.65, 0, 0.076, 1)
 ) {
   transition: $property $duration $ease;
+}
+
+.lower {
+  height: 100vh;
 }
 
 .body {

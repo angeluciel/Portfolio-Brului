@@ -1,4 +1,5 @@
 // COLORS
+@use "sass:color";
 
 $secondary-bg: #eddada;
 $secondary-hg-bg: #d8a0a0;
@@ -16,7 +17,7 @@ $colors: (
 @each $button, $color in $colors {
   .#{$button} {
     --color: #{$color};
-    --hover: #{adjust-hue($color, 12deg)};
+    --hover: #{color.adjust($color, $hue: 12deg)};
   }
 }
 

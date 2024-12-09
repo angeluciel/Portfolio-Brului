@@ -44,7 +44,7 @@ function setActiveLink(link) {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
+@use "../assets/variables.scss" as var;
 
 .pfp_image {
   width: 135px;
