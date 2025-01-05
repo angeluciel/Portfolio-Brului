@@ -4,12 +4,10 @@ import HeaderBar from "./components/HeaderBar.vue";
 
 <template>
   <div id="app">
-    <!-- Adicione o cabeçalho para navegação -->
-    <!-- Rendeiriza o componente de rota atual -->
     <router-view />
   </div>
 </template>
 
 <style scoped>
-/* Aqui você pode colocar estilos globais ou específicos para o App */
+/* imagine uma estilização top aqui */
 </style>
