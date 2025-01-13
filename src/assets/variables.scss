@@ -14,6 +14,8 @@ $colors: (
   twitter: #1da1f2,
 );
 
+$cta-colors: (#af21de, #ffc300, #606060);
+
 @each $button, $color in $colors {
   .#{$button} {
     --color: #{$color};

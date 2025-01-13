@@ -74,8 +74,7 @@
       </div>
     </div>
   </div>
-
-  <section class="lower">
+  <section class="slider">
     <SliderComponent />
   </section>
   <FooterBar></FooterBar>
@@ -103,7 +102,7 @@ $black: #282936;
   transition: $property $duration $ease;
 }
 
-.lower {
+.slider {
   height: 100vh;
 }
 

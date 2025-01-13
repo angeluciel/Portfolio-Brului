@@ -8,6 +8,11 @@ import HeaderBar from "./components/HeaderBar.vue";
   </div>
 </template>
 
-<style scoped>
-/* imagine uma estilização top aqui */
+<style scoped lang="scss">
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 </style>

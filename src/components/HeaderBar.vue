@@ -36,6 +36,10 @@
 import { ref } from "vue";
 import HeaderLink from "@/components/HeaderLink.vue";
 
+const NavBar = () => {
+  useState;
+};
+
 const activeLink = ref("home");
 
 function setActiveLink(link) {
