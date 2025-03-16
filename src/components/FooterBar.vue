@@ -79,7 +79,7 @@
         transition: 0.3s ease-in;
 
         &:hover {
-          background: rgba(255, 255, 255, 1);
+          background: rgba(114, 109, 109, 0.5);
         }
 
         img {

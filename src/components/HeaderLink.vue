@@ -36,7 +36,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
-@import "../assets/variables.scss";
+@use "../assets/variables.scss" as var;
 
 .header-link {
   padding: 10px;
@@ -44,10 +44,12 @@ watch(
   position: relative;
   transition: all 0.3s ease;
   color: black;
+  font-weight: 600;
 }
 
 .header-link.active {
-  color: $gold-text;
+  color: var.$gold-text;
+  font-weight: 700;
 }
 
 .header-link::after {
@@ -65,8 +67,8 @@ watch(
   width: 100%;
 }
 
-.header-link.active::after {
-  background-color: $gold-text;
+.header-link.active:hover::after {
+  background-color: var.$gold-text;
   width: 100%;
 }
 </style>

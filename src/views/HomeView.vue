@@ -1,5 +1,5 @@
 <template>
-  <HeaderBar></HeaderBar>
+  <HeaderBar class="HeaderBar"></HeaderBar>
   <div class="body">
     <img src="../assets/images/last-last.jpg" alt="image" />
     <div class="right">
@@ -21,32 +21,25 @@
       </div>
       <div class="bottom">
         <div class="socials">
-          <!-- <button class="cta_button" type="button">
-          
-            <span>Bring your visions to life</span>
-            <Icon
-              icon="ic:baseline-arrow-forward-ios"
-              width="2.25rem"
-              height="2.25rem"
-              style="color: white"
-            />
-          </button>
-           -->
           <div id="container">
+            <!-- bring your visions to life button "byvtl" for short -->
             <button class="learn-more">
               <span class="circle" aria-hidden="true">
                 <span class="icon arrow"></span>
               </span>
               <span class="button-text">Bring your visions to life</span>
             </button>
+            <!-- end of byvtl button -->
           </div>
           <div class="socials">
             <div class="instagram slide">
-              <!-- Adiciona a classe 'slide' -->
               <fa :icon="['fab', 'instagram']" />
             </div>
-            <div class="twitter slide">
-              <!-- Adiciona a classe 'slide' -->
+            <div
+              :class="{ darkMode: isDarkMode }"
+              @click="toggleDarkMode"
+              class="twitter slide"
+            >
               <fa :icon="['fab', 'x-twitter']" />
             </div>
           </div>
@@ -85,12 +78,49 @@ import HeaderBar from "../components/HeaderBar.vue";
 import FooterBar from "@/components/FooterBar.vue";
 import SliderComponent from "@/components/SliderComponent.vue";
 import { Icon } from "@iconify/vue";
+import { ref, watch } from "vue";
+
+const isDarkMode = ref(false);
+
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+};
+
+watch(isDarkMode, (newVal) => {
+  if (newVal) {
+    document.documentElement.style.setProperty("--secondary-bg", "#373131");
+    document.documentElement.style.setProperty("--secondary-hg-bg", "#1e1e1e");
+    document.documentElement.style.setProperty("--text-color", "#eddada");
+    document.documentElement.style.setProperty(
+      "--button-hover-bg",
+      "transparent"
+    );
+    document.documentElement.style.setProperty(
+      "--button-hover-text",
+      "#d8a0a0"
+    );
+    document.documentElement.style.setProperty("--gold-text", "#ba8d2e");
+  } else {
+    document.documentElement.style.setProperty("--secondary-bg", "#eddada");
+    document.documentElement.style.setProperty("--secondary-hg-bg", "#d8a0a0");
+    document.documentElement.style.setProperty("--text-color", "#373131");
+    document.documentElement.style.setProperty(
+      "--button-hover-bg",
+      "transparent"
+    );
+    document.documentElement.style.setProperty(
+      "--button-hover-text",
+      "#d8a0a0"
+    );
+    document.documentElement.style.setProperty("--gold-text", "#ba8d2e");
+  }
+});
 </script>
 
 <style lang="scss" scoped>
 @use "../assets/variables.scss" as var;
 
-$bg: #f3f8fa;
+// variables for byvtl button
 $white: #fff;
 $black: #282936;
 
@@ -186,36 +216,7 @@ $black: #282936;
         align-items: center;
         gap: 2rem;
 
-        /*
-        .cta_button {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 60px;
-          border: none;
-          padding: 1.2rem 1rem;
-          gap: 20px;
-          background: var.$main-button-bg;
-          color: white;
-          font-style: italic;
-          transition: 0.5s ease;
-          cursor: pointer;
-
-          &:hover {
-            background: var.$main-button-bg-hover;
-          }
-          span {
-            font-size: 30px;
-            font-style: italic;
-          }
-
-          .greater-than {
-            height: 36px;
-            width: 36px;
-          }
-        }
-          */
-
+        // byvtl styling
         button {
           position: relative;
           display: inline-block;
@@ -268,13 +269,14 @@ $black: #282936;
                     right: 0.0625rem;
                     width: 0.625rem;
                     height: 0.625rem;
-                    border-top: 0.125rem solid #fff;
-                    border-right: 0.125rem solid #fff;
+                    border-top: 0.125rem solid $white;
+                    border-right: 0.125rem solid $white;
                     transform: rotate(45deg);
                   }
                 }
               }
             }
+
             .button-text {
               @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
 
@@ -343,6 +345,9 @@ $black: #282936;
             box-shadow: inset 6.5em 0 0 0 var(--hover);
             color: #fff;
             border-color: var(--hover);
+          }
+          &:hover {
+            cursor: pointer;
           }
 
           svg {

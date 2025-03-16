@@ -30,37 +30,22 @@ defineProps({
     required: true,
   },
 });
-
-for (let i = 0; i <= 3; i++) {}
 </script>
 
 <style scoped lang="scss">
 @use "../assets/variables.scss" as var;
+@use "sass:list";
 
 .swiper-slide {
   position: relative;
   overflow: hidden;
 
-  &:nth-child(1) .cta-button {
-    background-color: nth(var.$cta-colors, 1);
+  // Cycle through the CTA button colors dynamically based on the number of colors in $cta-colors.
+  @for $i from 1 through list.length(var.$cta-colors) {
+    &:nth-child(#{list.length(var.$cta-colors)}n + #{$i}) .cta-button {
+      background-color: list.nth(var.$cta-colors, $i);
+    }
   }
-  &:nth-child(2) .cta-button {
-    background-color: nth(var.$cta-colors, 2);
-  }
-  &:nth-child(3) .cta-button {
-    background-color: nth(var.$cta-colors, 3);
-  }
-}
-$i: 1;
-
-@for $i from 1 through 3 {
-  .swiper-slide:nth-child(#{$i}) .cta-button {
-    background-color: nth(
-      var.$cta-colors,
-      (($i - 1) % length(var.$cta-colors)) + 1
-    );
-  }
-  $i: 1;
 }
 
 .slide-bgimg {
@@ -71,6 +56,8 @@ $i: 1;
   height: 100%;
   background-position: center;
   background-size: cover;
+  /* Darken the image by reducing brightness by 40% */
+  filter: brightness(60%);
 }
 
 .overlay {
@@ -88,7 +75,8 @@ $i: 1;
   flex-direction: column;
   position: absolute;
   top: 50%;
-  left: 10%;
+  /* Remove fixed left positioning so we can control margins on the text */
+  left: 0;
   transform: translateY(-50%);
   color: #fff;
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
@@ -96,18 +84,24 @@ $i: 1;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  /* Main title: Abril Fatface, 80px, left aligned with an 80px left margin */
+  font-family: "Abril Fatface", cursive;
+  font-size: 80px;
+  text-align: left;
+  margin-left: 80px;
+  margin-bottom: 60px; /* 60px gap between title and caption */
 }
 
 .caption {
-  font-size: 1rem;
-  line-height: 1.4;
-  max-width: 50%;
-  word-wrap: break-word;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
+  /* Description: Nunito, bold italic, 24px, left aligned with an 80px left margin */
+  font-family: "Nunito", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: left;
+  margin-left: 80px;
+  /* Ensure the description doesn't exceed 26% of the container width */
+  max-width: 26%;
 }
 
 .cta-button {
@@ -118,5 +112,10 @@ $i: 1;
   border-radius: 16px;
   color: white;
   transition: background-color 0.3s ease-in-out;
+  margin-left: 80px;
+  margin-top: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

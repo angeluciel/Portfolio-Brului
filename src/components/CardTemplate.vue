@@ -49,11 +49,11 @@ const variantClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
+@use "../assets/variables.scss" as var;
 
 .card {
   @extend %card-style;
-  background: $secondary-bg;
+  background: var.$secondary-bg;
   height: 524px;
 
   .top {
@@ -63,7 +63,7 @@ const variantClass = computed(() => {
 
     .title {
       display: flex;
-      font-weight: $xbold-weight;
+      font-weight: var.$xbold-weight;
       flex-direction: column;
       align-items: center;
       justify-content: end;
@@ -88,13 +88,13 @@ const variantClass = computed(() => {
 
         span {
           opacity: 50%;
-          font-weight: $xbold-weight;
+          font-weight: var.$xbold-weight;
           font-size: 16px;
         }
 
         h3 {
           font-size: 36px;
-          font-weight: $xbold-weight;
+          font-weight: var.$xbold-weight;
         }
       }
     }
@@ -112,27 +112,27 @@ const variantClass = computed(() => {
         align-items: center;
         justify-content: center;
         padding: 12px;
-        border-bottom: 1px solid $text-color;
+        border-bottom: 1px solid var.$text-color;
         gap: 12px;
         font-size: 22px;
-        font-weight: $semibold-weight;
+        font-weight: var.$semibold-weight;
       }
     }
   }
 
   &.card-regular {
     @extend %card-style;
-    background: $secondary-bg;
+    background: var.$secondary-bg;
     height: 524px;
 
     button {
-      @include button-style(#d8a0a0, #fefefe, #d8a0a0);
+      @include var.button-style(#d8a0a0, #fefefe, #d8a0a0);
     }
   }
 
   &.card-main {
     @extend %card-style;
-    background: $secondary-hg-bg;
+    background: var.$secondary-hg-bg;
     height: 560px;
 
     .bottom {
@@ -146,7 +146,7 @@ const variantClass = computed(() => {
     }
 
     button {
-      @include button-style(#fefefe, $secondary-hg-bg, #fefefe);
+      @include var.button-style(#fefefe, var.$secondary-hg-bg, #fefefe);
     }
   }
 }
@@ -176,7 +176,7 @@ const variantClass = computed(() => {
 
       .plus {
         color: #ba8d2e;
-        font-weight: $xbold-weight;
+        font-weight: var.$xbold-weight;
       }
     }
   }

@@ -26,7 +26,6 @@ import Swiper from "swiper";
 import "swiper/css";
 import SlideItem from "./SliderItem.vue";
 
-// Lista de slides
 const slides = ref([
   {
     background: "/src/assets/images/wallpaper1.png",
@@ -74,10 +73,16 @@ onMounted(() => {
 @use "../assets/variables.scss" as var;
 
 .swiper-container {
+  /* Ensure the slider occupies 100% of the viewport height */
   width: 100%;
   height: 100vh;
   overflow: hidden;
   box-sizing: border-box;
+
+  /* Sticky positioning keeps the slider pinned to the top on scroll */
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .main-slider {

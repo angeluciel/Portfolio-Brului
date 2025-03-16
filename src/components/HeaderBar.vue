@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <div class="esquerda">
+    <img src="./icons/icon.png" alt="bruna" class="pfp_image" />
+    <div class="options">
       <HeaderLink
         to="/"
         text="Home"
@@ -13,9 +14,6 @@
         :activeLink="activeLink"
         :setActiveLink="setActiveLink"
       />
-    </div>
-    <img src="./icons/icon.png" alt="pfp" class="pfp_image" />
-    <div class="direita">
       <HeaderLink
         to="/contacts"
         text="Contacts"
@@ -28,6 +26,24 @@
         :activeLink="activeLink"
         :setActiveLink="setActiveLink"
       />
+    </div>
+    <div class="direita">
+      <HeaderLink
+        class="loginBtn"
+        to="/login"
+        text="login"
+        :activeLink="activeLink"
+        :setActiveLink="setActiveLink"
+      />
+      <div class="shop">
+        <fa :icon="['fas', 'bag-shopping']" />
+        <HeaderLink
+          to="/shop"
+          text="shop"
+          :activeLink="activeLink"
+          :setActiveLink="setActiveLink"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -51,25 +67,44 @@ function setActiveLink(link) {
 @use "../assets/variables.scss" as var;
 
 .pfp_image {
-  width: 135px;
+  width: 100px;
   border-radius: 100%;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  gap: 43px;
+  align-items: start;
+  justify-content: center;
 }
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 0 100px;
   width: 100%;
   margin-top: 32px;
 
-  .esquerda,
   .direita {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
-    gap: 100px;
+    justify-content: end;
+    gap: 16px;
+
+    > .loginBtn {
+      color: #646464;
+    }
   }
+}
+
+.shop {
+  border: 2px solid black;
+  border-radius: 32px;
+  padding: 0.4rem 0.8rem;
+  gap: 10px;
 }
 </style>
