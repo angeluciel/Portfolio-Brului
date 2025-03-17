@@ -48,7 +48,7 @@
           <div class="bottom_left">
             <div class="year_plus">
               <Icon icon="ic:round-plus" class="icon" />
-              <div class="bottom_title">5 years</div>
+              <div class="bottom_title">10 years</div>
             </div>
             <div class="bottom_subtitle">
               Of experience making my own, as well as clients' projects.
@@ -60,7 +60,7 @@
               <div class="bottom_title">200k</div>
             </div>
             <div class="bottom_subtitle">
-              Followers on my social media, giving me feedbacks on my projects.
+              Hours of practice, studying every aspect of art I know!
             </div>
           </div>
         </div>

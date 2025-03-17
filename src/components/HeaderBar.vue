@@ -36,7 +36,7 @@
         :setActiveLink="setActiveLink"
       />
       <div class="shop">
-        <fa :icon="['fas', 'bag-shopping']" />
+        <Icon icon="ri:shopping-bag-2-line" class="icon" />
         <HeaderLink
           to="/shop"
           text="shop"
@@ -50,6 +50,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { Icon } from "@iconify/vue";
 import HeaderLink from "@/components/HeaderLink.vue";
 
 const NavBar = () => {
@@ -102,9 +103,17 @@ function setActiveLink(link) {
 }
 
 .shop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   border: 2px solid black;
   border-radius: 32px;
-  padding: 0.4rem 0.8rem;
+  padding: 0.2rem 0.8rem;
   gap: 10px;
+}
+
+.icon {
+  height: 32px;
+  width: 32px;
 }
 </style>
