@@ -8,7 +8,11 @@ $button-hover-bg: transparent;
 $button-hover-text: #d8a0a0;
 $gold-text: #ba8d2e;
 
-// Insta & twt colors
+/*
+==========================================================
+S A S S     M A P S    &    F U N C T I O N S
+==========================================================
+*/
 $colors: (
   instagram: #c13584,
   twitter: #1da1f2,
@@ -23,11 +27,14 @@ $cta-colors: (#af21de, #ffc300, #606060);
   }
 }
 
-// MAIN PAGE
+/*
+==========================================================
+M A I N     P A G E
+==========================================================
+*/
 
 $main-button-bg: #2b424e;
 $main-button-bg-hover: #505e66;
-
 $semibold-weight: 600;
 $xbold-weight: 800;
 
@@ -67,3 +74,14 @@ $xbold-weight: 800;
   flex-direction: column;
   gap: 16px;
 }
+
+/*
+==========================================================
+L O G I N     P A G E
+==========================================================
+*/
+
+$login_bg: #f7f7fb;
+$login_grey: #a3a2a5;
+$login_charcoal: #2e3a4f;
+$login_hg: #2734d3;

@@ -25,7 +25,21 @@
               />
             </div>
           </div>
-          <div class="password"></div>
+          <div class="password">
+            <span>Password *</span>
+            <div class="inputbox">
+              <Icon icon="ion:mail-outline" width="24px" height="24px" />
+              <input
+                ref="passwordField"
+                required
+                class="mail-input"
+                type="password"
+                id="password"
+                placeholder="Password"
+              />
+              <button @click="switchVisibility()" id="show">Show</button>
+            </div>
+          </div>
         </div>
         <span class="forgot">Forgot your password?</span>
       </div>
@@ -51,8 +65,19 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import HeaderLink from "@/components/HeaderLink.vue";
 import { Icon } from "@iconify/vue";
+
+const passwordField = ref(null);
+
+function switchVisibility() {
+  if (passwordField.value.getAttribute("type") === "password") {
+    passwordField.value.setAttribute("type", "text");
+  } else {
+    passwordField.value.setAttribute("type", "password");
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -83,9 +108,11 @@ import { Icon } from "@iconify/vue";
   gap: 3rem;
   justify-content: start;
   align-items: start;
+  color: var.$login_charcoal;
 
   & > h1 {
     @include var.fontAbril(56px, 300, normal);
+    color: var.$login_charcoal;
   }
 }
 
@@ -103,7 +130,8 @@ import { Icon } from "@iconify/vue";
     justify-content: center;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #2734d3;
+    width: 100%;
+    background-color: var.$login_hg;
     border-radius: 20px;
     color: white;
   }
@@ -114,9 +142,41 @@ import { Icon } from "@iconify/vue";
     justify-content: center;
     align-items: center;
     padding: 1rem 1.5rem;
+    width: 100%;
     gap: 1rem;
-    border: 2px solid #2734d3;
+    border: 2px solid var.$login_hg;
     border-radius: 20px;
+  }
+}
+
+.inputbox {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 12px 24px;
+
+  #show {
+    border: none;
+    background-color: rgba(000, 000, 000, 0.25);
+    border-radius: 12px;
+    padding: 4px;
+
+    &:hover {
+      background-color: rgba(000, 000, 000, 0.5);
+    }
+  }
+
+  input {
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
 </style>
