@@ -26,8 +26,8 @@
                 <input
                   required
                   class="mail-input"
-                  type="text"
-                  placeholder="zebra@mail.com"
+                  type="email"
+                  placeholder="vasconselos@gmail.com"
                 />
               </div>
             </div>
@@ -59,20 +59,22 @@
         </div>
         <span class="forgot">Forgot your password?</span>
       </div>
-      <!--sign / google buttons-->
-      <div class="buttons">
-        <div class="sign_btn">Sign in</div>
-        <div class="google_btn">
-          <Icon
-            icon="flat-color-icons:google"
-            width="32"
-            height="32"
-            class="google_icon"
-          />
-          <span>Sign in with Google</span>
+
+      <div class="bottom">
+        <div class="buttons">
+          <div class="sign_btn">Sign in</div>
+          <div class="google_btn">
+            <Icon
+              icon="flat-color-icons:google"
+              width="32"
+              height="32"
+              class="google_icon"
+            />
+            <span>Sign in with Google</span>
+          </div>
         </div>
+        <span>Don't have an account? Sign up!</span>
       </div>
-      <span>Don't have an account? Sign up!</span>
     </div>
     <div class="image">
       <img src="../assets/images/first-first.jpg" alt="fotinha" />
@@ -108,6 +110,8 @@ function switchVisibility() {
   justify-content: space-between;
   align-items: center;
   width: 100dvw;
+  height: 100dvh;
+  background-color: var.$login_bg;
 }
 
 span {
@@ -133,132 +137,149 @@ span {
 .content {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 10%;
   justify-content: start;
   align-items: start;
-  padding: 80px 4rem;
+  padding: 2em 4em;
   width: 45dvw;
-}
+  height: 100dvh;
 
-.top {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  justify-content: start;
-  align-items: start;
-  color: var.$login_charcoal;
-
-  & > h1 {
-    @include var.fontAbril(56px, 300, normal);
-    color: var.$login_charcoal;
-  }
-}
-
-.boxes {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 20px;
-
-  .inputs {
+  .top {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-  }
-}
+    justify-content: start;
+    align-items: start;
+    color: var.$login_charcoal;
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  gap: 1rem;
-  width: 100%;
-
-  .sign_btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 2rem;
-    width: 100%;
-    background-color: var.$login_hg;
-    border-radius: 20px;
-    color: white;
-  }
-
-  .google_btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    width: 100%;
-    gap: 1rem;
-    border: 2px solid var.$login_hg;
-    border-radius: 20px;
-  }
-}
-
-.inputs {
-  gap: 20px;
-}
-
-.inputbox {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  border: 2px solid var.$login_charcoal;
-  border-radius: 12px;
-  padding: 12px 24px;
-
-  #icon_input {
-    color: var.$login_grey;
-  }
-
-  .combo {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    width: 100%;
-    align-items: center;
-  }
-
-  #show {
-    border: none;
-    border-radius: 12px;
-    padding: 4px;
-    background-color: inherit;
-
-    #icon {
-      display: flex;
-      justify-content: center;
-      background-color: inherit;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &:focus {
-        border: none;
-      }
-    }
-  }
-
-  input {
-    border: none;
-    width: 100%;
-
-    &::placeholder {
-      color: var.$login_grey;
-    }
-
-    &:focus {
-      outline: none;
+    & > h1 {
+      @include var.fontAbril(56px, 300, normal);
       color: var.$login_charcoal;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      gap: 1rem;
+      width: 100%;
+
+      .sign_btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 2rem;
+        width: 100%;
+        background-color: var.$login_hg;
+        border-radius: 20px;
+        color: var.$login_bg;
+        box-shadow: 0px 4px 16px rgba(21, 5, 245, 0.5);
+      }
+
+      .google_btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        gap: 1rem;
+        border: 3px solid var.$login_hg;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  .boxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    gap: 20px;
+
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+
+      .mail,
+      .password {
+        span {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+
+      .inputbox {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border: 3px solid var.$login_charcoal;
+        border-radius: 12px;
+        padding: 12px 24px;
+
+        #icon_input {
+          color: var.$login_grey;
+        }
+
+        /* COMBO === password input + left icon */
+        .combo {
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+          width: 100%;
+          align-items: center;
+        }
+
+        #show {
+          border: none;
+          border-radius: 12px;
+          padding: 4px;
+          background-color: inherit;
+
+          #icon {
+            display: flex;
+            justify-content: center;
+            background-color: inherit;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            &:focus {
+              border: none;
+            }
+          }
+        }
+
+        input {
+          border: none;
+          width: 100%;
+
+          &::placeholder {
+            color: var.$login_grey;
+          }
+
+          &:focus {
+            outline: none;
+            color: var.$login_charcoal;
+          }
+        }
+      }
     }
   }
 }
