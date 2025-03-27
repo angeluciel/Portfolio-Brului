@@ -62,7 +62,13 @@
 
       <div class="bottom">
         <div class="buttons">
-          <div class="sign_btn">Sign in</div>
+          <a
+            class="sign_btn btn-6"
+            href="#"
+            @mouseenter="handleMouseEnter"
+            @mouseleave="handleMouseLeave"
+            >Sign in<span ref="ripple"></span
+          ></a>
           <div class="google_btn">
             <Icon
               icon="flat-color-icons:google"
@@ -86,9 +92,42 @@
 import { ref } from "vue";
 import HeaderLink from "@/components/HeaderLink.vue";
 import { Icon } from "@iconify/vue";
+import { gsap } from "gsap";
 
 const passwordField = ref(null);
 const iconName = ref("ri:eye-close-line");
+
+const ripple = ref(null);
+
+const handleMouseEnter = (e) => {
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const relX = e.clientX - rect.left;
+  const relY = e.clientY - rect.top;
+
+  gsap.set(ripple.value, {
+    top: relY + "px",
+    left: relX + "px",
+    width: 0,
+    height: 0,
+  });
+
+  gsap.to(ripple.value, {
+    duration: 0.32,
+    width: "300%",
+    height: "300%",
+    ease: "power1.inOut",
+  });
+};
+
+const handleMouseLeave = () => {
+  gsap.to(ripple.value, {
+    duration: 0.4,
+    width: 0,
+    height: 0,
+    ease: "power1.inOut",
+  });
+};
 
 function switchVisibility() {
   if (passwordField.value.getAttribute("type") === "password") {
@@ -179,10 +218,30 @@ span {
         align-items: center;
         padding: 1rem 2rem;
         width: 100%;
+        color: var.$login_bg;
         background-color: var.$login_hg;
         border-radius: 20px;
-        color: var.$login_bg;
-        box-shadow: 0px 4px 16px rgba(21, 5, 245, 0.5);
+        box-shadow: 0px 4px 16px rgba(17, 14, 61, 0.5);
+
+        position: relative;
+        overflow: hidden;
+
+        & > *:not(span) {
+          position: relative;
+          z-index: 1;
+        }
+
+        span {
+          position: absolute;
+          display: block;
+          width: 0;
+          height: 0;
+          border-radius: 50%;
+          background-color: rgba(248, 211, 43, 0.5);
+          transform: translate(-50%, -50%);
+          z-index: 0;
+          color: var.$login_bg;
+        }
       }
 
       .google_btn {
@@ -269,6 +328,7 @@ span {
         input {
           border: none;
           width: 100%;
+          background-color: inherit;
 
           &::placeholder {
             color: var.$login_grey;
