@@ -16,28 +16,44 @@
           <div class="mail">
             <span>Email *</span>
             <div class="inputbox">
-              <Icon icon="ion:mail-outline" width="24px" height="24px" />
-              <input
-                required
-                class="mail-input"
-                type="text"
-                placeholder="zebra@mail.com"
-              />
+              <div class="combo">
+                <Icon
+                  icon="ion:mail-outline"
+                  width="24px"
+                  height="24px"
+                  id="icon_input"
+                />
+                <input
+                  required
+                  class="mail-input"
+                  type="text"
+                  placeholder="zebra@mail.com"
+                />
+              </div>
             </div>
           </div>
           <div class="password">
             <span>Password *</span>
             <div class="inputbox">
-              <Icon icon="ion:mail-outline" width="24px" height="24px" />
-              <input
-                ref="passwordField"
-                required
-                class="mail-input"
-                type="password"
-                id="password"
-                placeholder="Password"
-              />
-              <button @click="switchVisibility()" id="show">Show</button>
+              <div class="combo">
+                <Icon
+                  icon="ri:door-lock-line"
+                  width="24"
+                  height="24"
+                  id="icon_input"
+                />
+                <input
+                  ref="passwordField"
+                  required
+                  class="mail-input"
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+              <button @click="switchVisibility()" id="show">
+                <Icon :icon="iconName" width="24" height="24" id="icon" />
+              </button>
             </div>
           </div>
         </div>
@@ -49,8 +65,8 @@
         <div class="google_btn">
           <Icon
             icon="flat-color-icons:google"
-            width="46"
-            height="46"
+            width="32"
+            height="32"
             class="google_icon"
           />
           <span>Sign in with Google</span>
@@ -59,7 +75,7 @@
       <span>Don't have an account? Sign up!</span>
     </div>
     <div class="image">
-      <img src="../assets/images/third-second.jpg" alt="fotinha" />
+      <img src="../assets/images/first-first.jpg" alt="fotinha" />
     </div>
   </div>
 </template>
@@ -70,12 +86,15 @@ import HeaderLink from "@/components/HeaderLink.vue";
 import { Icon } from "@iconify/vue";
 
 const passwordField = ref(null);
+const iconName = ref("ri:eye-close-line");
 
 function switchVisibility() {
   if (passwordField.value.getAttribute("type") === "password") {
     passwordField.value.setAttribute("type", "text");
+    iconName.value = "ri:eye-line";
   } else {
     passwordField.value.setAttribute("type", "password");
+    iconName.value = "ri:eye-close-line";
   }
 }
 </script>
@@ -91,15 +110,34 @@ function switchVisibility() {
   width: 100dvw;
 }
 
+span {
+  color: var.$login_charcoal;
+}
+
+.image {
+  box-sizing: border-box;
+  height: 100dvh;
+  width: 55dvw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    object-position: right bottom;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .content {
   display: flex;
   flex-direction: column;
   gap: 5rem;
   justify-content: start;
   align-items: start;
-  padding: 0 4rem;
-  padding-bottom: 160px;
-  width: 100%;
+  padding: 80px 4rem;
+  width: 45dvw;
 }
 
 .top {
@@ -113,6 +151,19 @@ function switchVisibility() {
   & > h1 {
     @include var.fontAbril(56px, 300, normal);
     color: var.$login_charcoal;
+  }
+}
+
+.boxes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
@@ -149,33 +200,65 @@ function switchVisibility() {
   }
 }
 
+.inputs {
+  gap: 20px;
+}
+
 .inputbox {
   display: flex;
   flex-direction: row;
   gap: 8px;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  border: 2px solid black;
+  border: 2px solid var.$login_charcoal;
   border-radius: 12px;
   padding: 12px 24px;
 
+  #icon_input {
+    color: var.$login_grey;
+  }
+
+  .combo {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+  }
+
   #show {
     border: none;
-    background-color: rgba(000, 000, 000, 0.25);
     border-radius: 12px;
     padding: 4px;
+    background-color: inherit;
 
-    &:hover {
-      background-color: rgba(000, 000, 000, 0.5);
+    #icon {
+      display: flex;
+      justify-content: center;
+      background-color: inherit;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        border: none;
+      }
     }
   }
 
   input {
     border: none;
+    width: 100%;
+
+    &::placeholder {
+      color: var.$login_grey;
+    }
 
     &:focus {
       outline: none;
+      color: var.$login_charcoal;
     }
   }
 }
