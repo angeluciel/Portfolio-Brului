@@ -24,7 +24,7 @@
 import { onMounted, ref } from "vue";
 import Swiper from "swiper";
 import "swiper/css";
-import SlideItem from "./SliderItem.vue";
+import SlideItem from "../base/SliderItem.vue";
 
 const slides = ref([
   {
@@ -70,10 +70,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
 
 .swiper-container {
-  /* Ensure the slider occupies 100% of the viewport height */
   width: 100%;
   height: 100vh;
   overflow: hidden;

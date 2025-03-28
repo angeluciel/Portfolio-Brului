@@ -2,15 +2,22 @@
   <div class="screen">
     <div class="content">
       <div class="top">
-        <HeaderLink
-          to="/"
-          text="/ Home"
-          :activeLink="activeLink"
-          :setActiveLink="setActiveLink"
-        />
+        <Breadcrumb :home="home" :model="items">
+          <template #item="{ item, props }">
+            <router-link v-if="item.url" :to="item.url">
+              <span>{{ item.label }}</span>
+            </router-link>
+            <span v-else v-bind="props.action">
+              <span>{{ item.label }}</span>
+            </span>
+          </template>
+
+          <template #separator> / </template>
+        </Breadcrumb>
+
         <h1>Sign In</h1>
       </div>
-      <!--text boxes for mail/password-->
+
       <div class="boxes">
         <div class="inputs">
           <div class="mail">
@@ -83,19 +90,25 @@
       </div>
     </div>
     <div class="image">
-      <img src="../assets/images/first-first.jpg" alt="fotinha" />
+      <img src="@/assets/images/first-first.jpg" alt="fotinha" />
     </div>
   </div>
 </template>
 
 <script setup>
+import Breadcrumb from "primevue/breadcrumb";
 import { ref } from "vue";
-import HeaderLink from "@/components/HeaderLink.vue";
 import { Icon } from "@iconify/vue";
 import { gsap } from "gsap";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const passwordField = ref(null);
 const iconName = ref("ri:eye-close-line");
+
+const home = ref({
+  url: "/",
+  label: "/ home",
+});
 
 const ripple = ref(null);
 
@@ -113,7 +126,7 @@ const handleMouseEnter = (e) => {
   });
 
   gsap.to(ripple.value, {
-    duration: 0.32,
+    duration: 0.2,
     width: "300%",
     height: "300%",
     ease: "power1.inOut",
@@ -141,7 +154,11 @@ function switchVisibility() {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
+
+.link span:hover {
+  color: var.$login_hg;
+}
 
 .screen {
   display: flex;
@@ -151,6 +168,15 @@ function switchVisibility() {
   width: 100dvw;
   height: 100dvh;
   background-color: var.$login_bg;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+  color: var.$login_grey;
+}
+
+.mx-2 {
+  margin-inline: 0.5rem;
 }
 
 span {

@@ -33,7 +33,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
 @use "sass:list";
 
 .swiper-slide {

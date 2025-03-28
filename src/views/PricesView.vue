@@ -1,7 +1,7 @@
 <script setup>
-import CardTemplateVue from "@/components/CardTemplate.vue";
-import HeaderBar from "../components/HeaderBar.vue";
-import FooterBar from "@/components/FooterBar.vue";
+import CardTemplateVue from "@/components/base/CardTemplate.vue";
+import HeaderBar from "../components/layout/HeaderBar.vue";
+import FooterBar from "@/components/layout/FooterBar.vue";
 </script>
 
 <template>

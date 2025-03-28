@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img src="./icons/icon.png" alt="bruna" class="pfp_image" />
+    <img src="@/components/icons/icon.png" alt="bruna" class="pfp_image" />
     <div class="options">
       <HeaderLink
         to="/"
@@ -51,7 +51,7 @@
 <script setup>
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
-import HeaderLink from "@/components/HeaderLink.vue";
+import HeaderLink from "@/components/base/HeaderLink.vue";
 
 const NavBar = () => {
   useState;
@@ -65,7 +65,7 @@ function setActiveLink(link) {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
 
 .pfp_image {
   width: 100px;

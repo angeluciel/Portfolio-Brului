@@ -1,7 +1,7 @@
 <template>
   <HeaderBar class="HeaderBar"></HeaderBar>
   <div class="body">
-    <img src="../assets/images/last-last.jpg" alt="image" />
+    <img src="@/assets/images/last-last.jpg" alt="image" />
     <div class="right">
       <div class="top">
         <div class="title">
@@ -74,9 +74,9 @@
 </template>
 
 <script setup>
-import HeaderBar from "../components/HeaderBar.vue";
-import FooterBar from "@/components/FooterBar.vue";
-import SliderComponent from "@/components/SliderComponent.vue";
+import HeaderBar from "@/components/layout/HeaderBar.vue";
+import FooterBar from "@/components/layout/FooterBar.vue";
+import SliderComponent from "@/components/layout/SliderComponent.vue";
 import { Icon } from "@iconify/vue";
 import { ref, watch } from "vue";
 
@@ -118,7 +118,7 @@ watch(isDarkMode, (newVal) => {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
 
 // variables for byvtl button
 $white: #fff;

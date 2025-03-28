@@ -5,20 +5,20 @@
       <div class="footer_links">
         <div class="footer_ig">
           <a href="https://www.instagram.com/bru__lui/" class="footer_image">
-            <img src="./icons/instaIcon.svg" alt="insta" />
+            <img src="@/components/icons/instaIcon.svg" alt="insta" />
           </a>
           <span href="https://www.instagram.com/bru__lui/">@bru_lui</span>
         </div>
         <div class="footer_x">
           <a href="https://twitter.com/Bru__Lui" class="footer_image">
-            <img src="./icons/twtIcon.svg" alt="x" />
+            <img src="@/components/icons/twtIcon.svg" alt="x" />
           </a>
           <span href="https://twitter.com/Bru__Lui">@Bru_Lui</span>
         </div>
       </div>
       <div class="design-by">
         <span>Design and Code by @medeirosjpmi</span>
-        <img src="./icons/instaIcon.svg" />
+        <img src="@/components/icons/instaIcon.svg" />
       </div>
     </div>
   </div>

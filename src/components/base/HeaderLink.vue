@@ -36,7 +36,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
 
 .header-link {
   padding: 10px;

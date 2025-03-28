@@ -32,8 +32,8 @@
 </template>
 
 <script setup>
-import HeaderBar from "../components/HeaderBar.vue";
-import FooterBar from "@/components/FooterBar.vue";
+import HeaderBar from "../components/layout/HeaderBar.vue";
+import FooterBar from "@/components/layout/FooterBar.vue";
 </script>
 <style lang="scss" scoped>
 @use "../assets/variables" as var;

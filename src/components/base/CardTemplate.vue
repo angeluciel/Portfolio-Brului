@@ -49,7 +49,7 @@ const variantClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/variables.scss" as var;
+@use "@/assets/variables.scss" as var;
 
 .card {
   @extend %card-style;
