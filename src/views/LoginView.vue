@@ -69,11 +69,12 @@
 
       <div class="bottom">
         <div class="buttons">
-          <baseButton variant="filled" text="Sign in" />
+          <baseButton variant="filled" text="Sign in" color="login" />
           <baseButton
             variant="outline"
             :icon="`flat-color-icons:google`"
             text="Sign in with Google"
+            color="login"
           />
           <!--<a
             class="sign_btn btn-6"
