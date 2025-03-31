@@ -87,7 +87,6 @@ function setActiveLink(link) {
   align-items: center;
   padding: 0 100px;
   width: 100%;
-  margin-top: 32px;
 
   .direita {
     display: flex;

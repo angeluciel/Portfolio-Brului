@@ -69,7 +69,13 @@
 
       <div class="bottom">
         <div class="buttons">
-          <a
+          <baseButton variant="filled" text="Sign in" />
+          <baseButton
+            variant="outline"
+            :icon="`flat-color-icons:google`"
+            text="Sign in with Google"
+          />
+          <!--<a
             class="sign_btn btn-6"
             href="#"
             @mouseenter="handleMouseEnter"
@@ -85,7 +91,9 @@
             />
             <span>Sign in with Google</span>
           </div>
+          -->
         </div>
+        <router-link :to="to">Don't have an account?</router-link>
         <span>Don't have an account? Sign up!</span>
       </div>
     </div>
@@ -97,50 +105,22 @@
 
 <script setup>
 import Breadcrumb from "primevue/breadcrumb";
+import { RouterLink, useRoute } from "vue-router";
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
-import { gsap } from "gsap";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import baseButton from "../components/base/baseButton.vue";
 
 const passwordField = ref(null);
 const iconName = ref("ri:eye-close-line");
+
+const props = defineProps({
+  to: { type: String, required: true },
+});
 
 const home = ref({
   url: "/",
   label: "/ home",
 });
-
-const ripple = ref(null);
-
-const handleMouseEnter = (e) => {
-  const btn = e.currentTarget;
-  const rect = btn.getBoundingClientRect();
-  const relX = e.clientX - rect.left;
-  const relY = e.clientY - rect.top;
-
-  gsap.set(ripple.value, {
-    top: relY + "px",
-    left: relX + "px",
-    width: 0,
-    height: 0,
-  });
-
-  gsap.to(ripple.value, {
-    duration: 0.2,
-    width: "300%",
-    height: "300%",
-    ease: "power1.inOut",
-  });
-};
-
-const handleMouseLeave = () => {
-  gsap.to(ripple.value, {
-    duration: 0.4,
-    width: 0,
-    height: 0,
-    ease: "power1.inOut",
-  });
-};
 
 function switchVisibility() {
   if (passwordField.value.getAttribute("type") === "password") {
