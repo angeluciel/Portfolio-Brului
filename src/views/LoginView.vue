@@ -20,6 +20,7 @@
 
       <div class="boxes">
         <div class="inputs">
+          <baseInput title="" />
           <div class="mail">
             <span>Email *</span>
             <div class="inputbox">
@@ -110,6 +111,7 @@ import { RouterLink, useRoute } from "vue-router";
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import baseButton from "../components/base/baseButton.vue";
+import baseInput from "@/components/base/baseInput.vue";
 
 const passwordField = ref(null);
 const iconName = ref("ri:eye-close-line");
