@@ -27,23 +27,12 @@
         :setActiveLink="setActiveLink"
       />
     </div>
-    <div class="direita">
-      <HeaderLink
-        class="loginBtn"
-        to="/login"
-        text="login"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-      <div class="shop">
-        <Icon icon="ri:shopping-bag-2-line" class="icon" />
-        <HeaderLink
-          to="/shop"
-          text="shop"
-          :activeLink="activeLink"
-          :setActiveLink="setActiveLink"
-        />
-      </div>
+    <div class="direita"> <!- direita -->
+      <span v-if="userLoggedIn">João</span>
+      <router-link v-else to="/Login">sign in</router-link>
+
+      <img v-if="pfpLoaded" src="#" alt="#"class="rounded-full width-[68px]"/>
+      <Icon v-else icon="codicon:account" width="36" height="36" />
     </div>
   </div>
 </template>
@@ -52,6 +41,9 @@
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import HeaderLink from "@/components/base/HeaderLink.vue";
+
+const userLoggedIn = ref(false);
+const pfpLoaded = ref(false);
 
 const NavBar = () => {
   useState;

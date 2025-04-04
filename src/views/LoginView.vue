@@ -20,8 +20,10 @@
 
       <div class="boxes">
         <div class="inputs">
-          <baseInput title="" />
-          <div class="mail">
+          <baseInput title="Email *" leftIcon="ion:mail-outline" placeholder="vasconcelos@gmail.com" variant="login"/>
+          <baseInput title="Password *" leftIcon="ri:door-lock-line" placeholder="Password Here" variant="login"
+                     type="password"/>
+          <!--<div class="mail">
             <span>Email *</span>
             <div class="inputbox">
               <div class="combo">
@@ -39,8 +41,8 @@
                 />
               </div>
             </div>
-          </div>
-          <div class="password">
+          </div> --> <!--email-->
+          <!--<div class="password">
             <span>Password *</span>
             <div class="inputbox">
               <div class="combo">
@@ -63,7 +65,7 @@
                 <Icon :icon="iconName" width="24" height="24" id="icon" />
               </button>
             </div>
-          </div>
+          </div>  --> <!--password-->
         </div>
         <span class="forgot">Forgot your password?</span>
       </div>
@@ -77,26 +79,12 @@
             text="Sign in with Google"
             color="login"
           />
-          <!--<a
-            class="sign_btn btn-6"
-            href="#"
-            @mouseenter="handleMouseEnter"
-            @mouseleave="handleMouseLeave"
-            >Sign in<span ref="ripple"></span
-          ></a>
-          <div class="google_btn">
-            <Icon
-              icon="flat-color-icons:google"
-              width="32"
-              height="32"
-              class="google_icon"
-            />
-            <span>Sign in with Google</span>
-          </div>
-          -->
+
         </div>
-        <router-link :to="to">Don't have an account?</router-link>
-        <span>Don't have an account? Sign up!</span>
+        <router-link to="/login/createAccount" class=""><span class="hover:text-gray-200">Don't have an account? Sign
+          Up</span>
+          </router-link>
+
       </div>
     </div>
     <div class="image">
@@ -253,17 +241,7 @@ span {
         }
       }
 
-      .google_btn {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 1.5rem;
-        width: 100%;
-        gap: 1rem;
-        border: 3px solid var.$login_hg;
-        border-radius: 20px;
-      }
+
     }
   }
 
@@ -281,74 +259,7 @@ span {
       gap: 20px;
       width: 100%;
 
-      .mail,
-      .password {
-        span {
-          font-size: 20px;
-          font-weight: 600;
-        }
-      }
 
-      .inputbox {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        border: 3px solid var.$login_charcoal;
-        border-radius: 12px;
-        padding: 12px 24px;
-
-        #icon_input {
-          color: var.$login_grey;
-        }
-
-        /* COMBO === password input + left icon */
-        .combo {
-          display: flex;
-          flex-direction: row;
-          gap: 8px;
-          width: 100%;
-          align-items: center;
-        }
-
-        #show {
-          border: none;
-          border-radius: 12px;
-          padding: 4px;
-          background-color: inherit;
-
-          #icon {
-            display: flex;
-            justify-content: center;
-            background-color: inherit;
-
-            &:hover {
-              cursor: pointer;
-            }
-
-            &:focus {
-              border: none;
-            }
-          }
-        }
-
-        input {
-          border: none;
-          width: 100%;
-          background-color: inherit;
-
-          &::placeholder {
-            color: var.$login_grey;
-          }
-
-          &:focus {
-            outline: none;
-            color: var.$login_charcoal;
-          }
-        }
-      }
     }
   }
 }

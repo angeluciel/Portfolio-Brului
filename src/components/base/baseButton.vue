@@ -17,7 +17,7 @@ const props = defineProps({
 });
 
 const baseClasses =
-  "flex flex-row py-2 px-2 justify-center items-center w-full h-12 rounded-xl gap-4 font-semibold";
+  "flex flex-row py-2 px-2 justify-center items-center w-full h-12 rounded-xl gap-4 font-semibold cursor-pointer";
 
 const filledColors = {
   login: "bg-login-hg text-login-bg hover:bg-indigo-600",

@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <h1>Create Account</h1>
 </template>
 
 <script setup></script>

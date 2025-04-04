@@ -9,6 +9,8 @@
   --color-charcoal: #2e3a4f;
   --color-login-grey: #a3a2a5;
   --color-login-bg: #f7f7fb;
+  --color-charcoal-10: rgba(0,0,0,0.1);
+  --color-charcoal-50: rgba(0,0,0,0.5);
 }
 
 * {
