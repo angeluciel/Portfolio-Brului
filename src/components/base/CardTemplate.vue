@@ -23,7 +23,7 @@
       </div>
       <div class="comission-now flex justify-center items-center text-center">
         <router-link to="/prices/newComission" class="button"
-          >Comission Now</router-link
+          >Order now!</router-link
         >
       </div>
     </div>
