@@ -7,6 +7,7 @@
 @theme {
   --color-login-hg: #2734d3;
   --color-login-hg-10: rgba(39, 52, 211, 0.1);
+  --color-login-hg-50: rgba(42, 56, 219, 1);
   --color-charcoal: #2e3a4f;
   --color-login-grey: #a3a2a5;
   --color-login-bg: #f7f7fb;

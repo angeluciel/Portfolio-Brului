@@ -16,7 +16,7 @@
         <input
           :placeholder="placeholder"
           :type="currentType"
-          v-model="inputValue"
+          v-model="inputModel"
           class="g-8 focus:outline-none text-lg"
         />
       </div>
@@ -46,19 +46,28 @@ const props = defineProps({
   placeholder: String,
   type: { type: String, default: "Text" },
   isPasswordVisible: { type: Boolean, default: false },
+  modelValue: { type: String, default: "" },
 });
 
-const inputValue = ref("");
+const emit = defineEmits(["update:modelValue"]);
+const inputModel = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
 
 const baseClasses =
-  "flex flex-row gap-4 w-full !py-1 !px-4 items-center  rounded-[12px] border-[2px] border-charcoal-50";
+  "flex flex-row gap-4 w-full !py-1 !px-4 items-center  rounded-[12px] border-[2px] ";
 
 const divClass = computed(() => {
   let variantClasses = "";
   if (props.variant === "login") {
-    variantClasses = "";
+    variantClasses = "border-charcoal-50";
   } else if (props.variant === "forms") {
-    variantClasses = "";
+    variantClasses = "border-charcoal-10";
   }
 
   return `${baseClasses} ${variantClasses}`;

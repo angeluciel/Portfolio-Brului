@@ -28,27 +28,39 @@
       />
     </div>
     <div class="direita">
-      <span v-if="userLoggedIn" class="hover:text-gray-500">João</span>
+      <span v-if="userStore.isLoggedIn" class="hover:text-gray-500">{{
+        userStore.username
+      }}</span>
       <router-link v-else to="/login">sign in</router-link>
 
       <img
-        v-if="pfpLoaded"
+        v-if="userStore.hasProfilePicutre"
         src="@/components/icons/icon.png"
-        alt="#"
+        alt="profile"
         class="rounded-full w-[68px] h-[68px]"
       />
-      <Icon v-else icon="codicon:account" width="36" height="36" />
+      <Icon v-else icon="codicon:account" width="32" height="32" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useUserStore } from "@/stores/userStore";
 import { Icon } from "@iconify/vue";
 import HeaderLink from "@/components/base/HeaderLink.vue";
 
-const userLoggedIn = ref(false);
-const pfpLoaded = ref(false);
+const userStore = useUserStore();
+
+function handleLogin() {
+  userStore.logIn(
+    "João",
+    "https://media.tenor.com/4MJy0Q1rejAAAAAe/guts-pfp.png"
+  );
+}
+function handleLogout() {
+  userStore.logOut();
+}
 
 const NavBar = () => {
   useState;

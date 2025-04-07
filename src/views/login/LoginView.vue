@@ -1,6 +1,7 @@
 <template>
   <div
     class="flex flex-row justify-between items-center w-dvw h-dvh bg-login-bg"
+    @keyup.enter="handleLogin"
   >
     <div class="content">
       <div class="flex flex-row gap-2">
@@ -19,9 +20,10 @@
           <baseInput
             title="Email *"
             leftIcon="ion:mail-outline"
-            placeholder="Your email here"
+            placeholder="Email or username"
             variant="login"
             type="email"
+            v-model="username"
           />
           <baseInput
             title="Password *"
@@ -29,6 +31,7 @@
             placeholder="Password Here"
             variant="login"
             type="password"
+            v-model="password"
           />
         </div>
         <router-link to="/login/resetPassword" class=""
@@ -42,13 +45,25 @@
         <div
           class="flex flex-col justify-start items-start gap-4 w-full max-w-md"
         >
-          <baseButton variant="filled" text="Sign in" color="login" />
+          <baseButton
+            variant="filled"
+            text="Sign in"
+            color="login"
+            @click="handleLogin"
+          />
           <baseButton
             variant="outline"
             :icon="`flat-color-icons:google`"
             text="Sign in with Google"
             color="login"
+            @click="handleGoogle"
           />
+          <div v-if="loginError" class="text-red-500">
+            Incorrect username or password!
+          </div>
+          <div v-else-if="googleError" class="text-red-500">
+            Google sign-in not implemented!
+          </div>
         </div>
         <router-link to="/login/createAccount" class=""
           ><span class="hover:text-gray-400"
@@ -68,12 +83,35 @@
 </template>
 
 <script setup>
-import Breadcrumb from "primevue/breadcrumb";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import baseButton from "../../components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
+
+const router = useRouter();
+const userStore = useUserStore();
+
+const username = ref("");
+const password = ref("");
+const loginError = ref(false);
+const googleError = ref(false);
+
+function handleLogin() {
+  if (username.value === "joao" && password.value === "banana1234") {
+    userStore.logIn(username.value);
+    loginError.value = false;
+    router.push("/");
+  } else {
+    loginError.value = true;
+  }
+}
+
+function handleGoogle() {
+  googleError.value = true;
+  loginError.value = false;
+}
 
 const passwordField = ref(null);
 const iconName = ref("ri:eye-close-line");
