@@ -17,7 +17,7 @@
           :placeholder="placeholder"
           :type="currentType"
           v-model="inputModel"
-          class="g-8 focus:outline-none text-lg"
+          class="g-8 focus:outline-none text-lg w-full"
         />
       </div>
       <div class="w-100dvw flex flex-row justify-end cursor-pointer">

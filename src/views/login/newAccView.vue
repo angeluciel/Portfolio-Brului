@@ -11,7 +11,7 @@
     </div>
 
     <div
-      class="flex flex-col justify-between !px-[60px] !py-[80px] h-dvh w-full items-end"
+      class="flex flex-col justify-between !px-[60px] !py-[80px] md:!py-[50px] h-dvh w-full items-end"
     >
       <!--top-->
       <div
