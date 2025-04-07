@@ -21,8 +21,10 @@
           </li>
         </ul>
       </div>
-      <div class="comission-now">
-        <button>Comission Now</button>
+      <div class="comission-now flex justify-center items-center text-center">
+        <router-link to="/prices/newComission" class="button"
+          >Comission Now</router-link
+        >
       </div>
     </div>
   </div>
@@ -125,7 +127,7 @@ const variantClass = computed(() => {
     background: var.$secondary-bg;
     height: 524px;
 
-    button {
+    .button {
       @include var.button-style(#d8a0a0, #fefefe, #d8a0a0);
     }
   }
@@ -145,7 +147,7 @@ const variantClass = computed(() => {
       }
     }
 
-    button {
+    .button {
       @include var.button-style(#fefefe, var.$secondary-hg-bg, #fefefe);
     }
   }

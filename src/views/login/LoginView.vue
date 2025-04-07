@@ -1,0 +1,135 @@
+<template>
+  <div
+    class="flex flex-row justify-between items-center w-dvw h-dvh bg-login-bg"
+  >
+    <div class="content">
+      <div class="flex flex-row gap-2">
+        <router-link to="/" class=""
+          ><span class="font-normal text-gray-400 hover:text-gray-500"
+            >home</span
+          ></router-link
+        >
+        <div class="cursor-alias">/</div>
+
+        <span class="text-charcoal font-semibold">login</span>
+      </div>
+
+      <div class="flex flex-col justify-start items-start w-full gap-5">
+        <div class="flex flex-col gap-5 w-full max-w-md">
+          <baseInput
+            title="Email *"
+            leftIcon="ion:mail-outline"
+            placeholder="Your email here"
+            variant="login"
+            type="email"
+          />
+          <baseInput
+            title="Password *"
+            leftIcon="ri:door-lock-line"
+            placeholder="Password Here"
+            variant="login"
+            type="password"
+          />
+        </div>
+        <router-link to="/login/resetPassword" class=""
+          ><span class="text-gray-600 hover:text-gray-800"
+            >Forgot your password?</span
+          ></router-link
+        >
+      </div>
+
+      <div class="bottom">
+        <div
+          class="flex flex-col justify-start items-start gap-4 w-full max-w-md"
+        >
+          <baseButton variant="filled" text="Sign in" color="login" />
+          <baseButton
+            variant="outline"
+            :icon="`flat-color-icons:google`"
+            text="Sign in with Google"
+            color="login"
+          />
+        </div>
+        <router-link to="/login/createAccount" class=""
+          ><span class="hover:text-gray-400"
+            >Don't have an account? Sign Up</span
+          >
+        </router-link>
+      </div>
+    </div>
+    <div class="box-border h-dvh w-[55dvw] p-0 m-0 overflow-hidden">
+      <img
+        src="@/assets/images/first-first.jpg"
+        alt="fotinha"
+        class="object-cover object-right-bottom h-full w-full"
+      />
+    </div>
+  </div>
+</template>
+
+<script setup>
+import Breadcrumb from "primevue/breadcrumb";
+import { RouterLink, useRoute } from "vue-router";
+import { ref } from "vue";
+import { Icon } from "@iconify/vue";
+import baseButton from "../../components/base/baseButton.vue";
+import baseInput from "@/components/base/baseInput.vue";
+
+const passwordField = ref(null);
+const iconName = ref("ri:eye-close-line");
+
+const props = defineProps({
+  to: { type: String, required: true },
+});
+
+const home = ref({
+  url: "/",
+  label: "/ home",
+});
+
+function switchVisibility() {
+  if (passwordField.value.getAttribute("type") === "password") {
+    passwordField.value.setAttribute("type", "text");
+    iconName.value = "ri:eye-line";
+  } else {
+    passwordField.value.setAttribute("type", "password");
+    iconName.value = "ri:eye-close-line";
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@use "@/assets/variables.scss" as var;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  justify-content: start;
+  align-items: start;
+  padding: 2em 4em;
+  width: 45dvw;
+  height: 100dvh;
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    color: var.$login_charcoal;
+
+    & > h1 {
+      @include var.fontAbril(56px, 300, normal);
+      color: var.$login_charcoal;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+}
+</style>

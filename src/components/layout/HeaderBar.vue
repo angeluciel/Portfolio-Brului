@@ -27,11 +27,16 @@
         :setActiveLink="setActiveLink"
       />
     </div>
-    <div class="direita"> <!- direita -->
-      <span v-if="userLoggedIn">João</span>
-      <router-link v-else to="/Login">sign in</router-link>
+    <div class="direita">
+      <span v-if="userLoggedIn" class="hover:text-gray-500">João</span>
+      <router-link v-else to="/login">sign in</router-link>
 
-      <img v-if="pfpLoaded" src="#" alt="#"class="rounded-full width-[68px]"/>
+      <img
+        v-if="pfpLoaded"
+        src="@/components/icons/icon.png"
+        alt="#"
+        class="rounded-full w-[68px] h-[68px]"
+      />
       <Icon v-else icon="codicon:account" width="36" height="36" />
     </div>
   </div>

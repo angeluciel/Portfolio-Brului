@@ -17,10 +17,11 @@ const props = defineProps({
 });
 
 const baseClasses =
-  "flex flex-row py-2 px-2 justify-center items-center w-full h-12 rounded-xl gap-4 font-semibold cursor-pointer";
+  "flex flex-row py-2 px-2 justify-center items-center w-full max-w-2xl mx-auto h-12 rounded-xl gap-4 font-semibold cursor-pointer";
 
 const filledColors = {
-  login: "bg-login-hg text-login-bg hover:bg-indigo-600",
+  login:
+    "bg-login-hg text-login-bg hover:bg-indigo-600 shadow-[4px_4px_32px_rgba(39,52,211,0.5)]",
   forms: "bg-red-200 text-white hover:bg-red-300",
 };
 

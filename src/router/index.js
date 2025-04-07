@@ -30,12 +30,22 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
-      component: () => import("../views/LoginView.vue"),
+      component: () => import("../views/login/LoginView.vue"),
     },
     {
       path: "/login/createAccount",
       name: "createAccount",
-      component: () => import("../views/newAccView.vue"),
+      component: () => import("../views/login/newAccView.vue"),
+    },
+    {
+      path: "/login/resetPassword",
+      name: "resetPassword",
+      component: () => import("../views/login/passwordReset.vue"),
+    },
+    {
+      path: "/prices/newComission",
+      name: "newComission",
+      component: () => import("../views/user/formsView.vue"),
     },
   ],
 });
