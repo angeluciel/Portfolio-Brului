@@ -41,15 +41,15 @@ import { ref, computed } from "vue";
 
 // Example images array with a type for each image
 const images = ref([
-  { id: 1, src: "./src/assets/images/first-first.jpg", type: "tall" },
-  { id: 2, src: "./src/assets/images/first-second.jpg", type: "tall" },
-  { id: 3, src: "./src/assets/images/wallpaper1.png", type: "wide" },
-  { id: 1, src: "./src/assets/images/second-first.jpg", type: "tall" },
-  { id: 2, src: "./src/assets/images/second-second.jpg", type: "tall" },
-  { id: 3, src: "./src/assets/images/wallpaper2.png", type: "wide" },
-  { id: 1, src: "./src/assets/images/third-first.jpg", type: "tall" },
-  { id: 2, src: "./src/assets/images/third-second.jpg", type: "tall" },
-  { id: 3, src: "./src/assets/images/wallpaper3.jpeg", type: "wide" },
+  { id: 1, src: "@/src/assets/images/first-first.jpg", type: "tall" },
+  { id: 2, src: "@/src/assets/images/first-second.jpg", type: "tall" },
+  { id: 3, src: "@/src/assets/images/wallpaper1.png", type: "wide" },
+  { id: 1, src: "@/src/assets/images/second-first.jpg", type: "tall" },
+  { id: 2, src: "@/src/assets/images/second-second.jpg", type: "tall" },
+  { id: 3, src: "@/src/assets/images/wallpaper2.png", type: "wide" },
+  { id: 1, src: "@/src/assets/images/third-first.jpg", type: "tall" },
+  { id: 2, src: "@/src/assets/images/third-second.jpg", type: "tall" },
+  { id: 3, src: "@/src/assets/images/wallpaper3.jpeg", type: "wide" },
 ]);
 
 const groupedImages = computed(() => {

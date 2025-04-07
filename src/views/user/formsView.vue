@@ -111,6 +111,7 @@
 import { ref } from "vue";
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
+import step1Page from "@/components/forms/step1Page.vue";
 </script>
 
 <style lang="scss" scoped>
