@@ -50,12 +50,12 @@ const router = createRouter({
     {
       path: "/prices/newComission",
       name: "newComission",
-      component: () => import("../views/user/formsView.vue"),
+      component: () => import("../views/user/wizardForm.vue"),
     },
     {
-      path: "/prices/newComission/page2",
-      name: "newComission2",
-      component: () => import("../views/user/formsView2.vue"),
+      path: "/profile",
+      name: "userProfile",
+      component: () => import("../views/user/profileView.vue"),
     },
   ],
 });

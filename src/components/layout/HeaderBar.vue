@@ -28,9 +28,12 @@
       />
     </div>
     <div class="direita">
-      <span v-if="userStore.isLoggedIn" class="hover:text-gray-500">{{
-        userStore.username
-      }}</span>
+      <router-link
+        to="/profile"
+        v-if="userStore.isLoggedIn"
+        class="hover:text-gray-500"
+        >{{ userStore.username }}</router-link
+      >
       <router-link v-else to="/login">sign in</router-link>
 
       <img

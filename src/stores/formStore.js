@@ -1,50 +1,17 @@
 import { defineStore } from "pinia";
 
-export const useFormStore = defineStore("formStore", {
+export const useFormStore = defineStore("form", {
   state: () => ({
-    step1: {
-      phone: "",
-      email: "",
-      twitter: "",
-      instagram: "",
-    },
-    step2: {
-      colorPalette: "",
-      physicalTraits: "",
-      pane: "",
-      referenceImages: [],
-    },
-    step3: {
-      pose: "",
-      emotion: "",
-      extraDetails: "",
-      referenceImages: "",
-    },
-    step4: {
-      mainDetails: "",
-      warning: "",
-      extraPreferences: "",
-      extraComments: "",
-    },
+    // Hold the  answers keyed by form identifier
+    answers: {},
   }),
-  getters: {
-    isStep1Complete: (state) => {
-      return state.step1.email !== "";
-    },
-  },
-
   actions: {
-    setStep1(data) {
-      this.step1 = data;
+    // Save or update an answer for a specific form
+    updateAnswer(formId, answer) {
+      this.answers[formId] = answer;
     },
-    setStep2(data) {
-      this.step2 = data;
-    },
-    setStep3(data) {
-      this.step3 = data;
-    },
-    setStep4(data) {
-      this.step4 = data;
+    getAnswer(formId) {
+      return this.answers[formId] || "";
     },
   },
 });

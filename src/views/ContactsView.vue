@@ -15,11 +15,17 @@
           <li>emailExample@mail.com</li>
           <li>
             <fa :icon="['fab', 'instagram']" id="icon" />
-            <span>@bru__lui</span>
+            <a
+              href="https://www.instagram.com/bru__lui/"
+              class="hover:!text-gray-400"
+              >@bru__lui</a
+            >
           </li>
           <li>
             <fa :icon="['fab', 'x-twitter']" id="icon" />
-            <span>@Bru__Lui</span>
+            <a href="https://twitter.com/Bru__Lui" class="hover:!text-gray-400"
+              >@Bru__Lui</a
+            >
           </li>
         </ul>
       </div>

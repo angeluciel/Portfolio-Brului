@@ -1,50 +1,37 @@
 <template>
-  <!-- F O R M S-->
-  <div class="w-dvw h-dvh !gap-10">
-    <!-- C O N T E N T -->
+  <div class="flex flex-row gap-10 !p-5 justify-start items-center h-dvh w-dvw">
+    <!-- E V E R Y T H I NG -->
     <div
-      class="w-full h-full flex flex-col items-start justify-between !py-20 !px-11"
+      class="flex flex-col w-full h-full !py-2 !px-5 justify-evenly items-center shadow-[4px_4px_32px_rgba(0,0,0,0.2)] rounded-[20px] bg-[#E9E9E2] gap-2"
     >
-      <!-- breadcrumbs, heading and input-->
-      <div class="flex flex-col items-start justify-start !gap-4">
-        <!-- B R E A D C R U M B S -->
-        <div class="flex flex-row gap-2">
-          <router-link to="/prices" class=""
-            ><span class="text-gray-400 font-normal hover:text-gray-500"
-              >prices</span
-            ></router-link
-          >
-          <div class="cursor-alias">/</div>
-          <span class="text-charcoal font-semibold">contacts</span>
+      <!-- C H I L D  C O M P O N E N T -->
+      <component :is="tabs[currentTab]"></component>
+
+      <!-- B U T T O N  &  P R O G R E S S B A R-->
+      <div class="flex flex-col gap-4 w-full">
+        <!-- P R O G R E S S    B A R -->
+        <div class="flex flex-row gap-6 justify-center">
+          <div
+            v-for="(form, index) in tabs"
+            :key="index"
+            class="w-18 h-4 md:h-2 rounded-full"
+            :class="{
+              'bg-[#D69093]': currentTab === index,
+              'bg-[rgba(35,34,36,0.4)]': currentTab !== index,
+            }"
+          ></div>
         </div>
-        <!-- S T E P S -->
-        <div class="">
-          <h1 class="font-extrabold !text-2xl text-charcoal">
-            Can you help me contact you so we can work together?
-          </h1>
-          <!-- S U B H E A D I N G-->
-          <span class="!text-xl text-[#C89396]"
-            >Feel free to share any form of contact you use so that I can
-            contact you with the initial steps.</span
-          >
-          <!-- I N P U T S -->
-          <form>
-            <baseInput
-              title="Phone Number"
-              placeholder="+1 (000) 000-0000"
-              variant="forms"
-              type="text"
-            />
-            <baseInput
-              title="Phone Number"
-              placeholder="+1 (000) 000-0000"
-              variant="forms"
-              type="text"
-            />
-          </form>
+        <div class="w-full h-full px-6 py-5">
+          <baseButton
+            variant="filled"
+            text="Next"
+            color="forms"
+            @click="nextTab"
+          />
         </div>
       </div>
     </div>
+
     <!-- I M A G E -->
     <div class="flex h-full !w-[100dvw]">
       <img
@@ -57,7 +44,31 @@
 </template>
 
 <script setup>
-import baseInput from "@/components/base/baseInput.vue";
+import { ref } from "vue";
+import form1 from "@/components/forms/form1.vue";
+import form2 from "@/components/forms/form2.vue";
+import form3 from "@/components/forms/form3.vue";
+import form4 from "@/components/forms/form4.vue";
+import baseButton from "@/components/base/baseButton.vue";
+
+const currentTab = ref(0);
+
+// Array of form components
+const tabs = [form1, form2, form3, form4];
+
+function nextTab() {
+  if (currentTab.value < tabs.length - 1) {
+    currentTab.value++;
+  } else {
+    console.log("All answers:", formStore.answers);
+  }
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media (max-height: 1000px) {
+  .heightQuery {
+    gap: 0;
+  }
+}
+</style>
