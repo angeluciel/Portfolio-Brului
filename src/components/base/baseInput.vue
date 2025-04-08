@@ -1,9 +1,11 @@
 <template>
   <div
-    class="flex flex-col justify-start items-start max-w-2xl gap-2 w-full mx-auto"
+    class="flex flex-col justify-start items-start max-w-2xl gap-2 w-full mx-auto md:gap-0"
     v-bind="$attrs"
   >
-    <span v-if="title" class="text-xl font-semibold">{{ title }}</span>
+    <span v-if="title" class="text-xl font-semibold md:!text-lg">{{
+      title
+    }}</span>
     <div :class="divClass">
       <div class="flex flex-row gap-2 w-full items-center justify-start">
         <Icon
@@ -17,7 +19,7 @@
           :placeholder="placeholder"
           :type="currentType"
           v-model="inputModel"
-          class="g-8 focus:outline-none text-lg w-full"
+          class="focus:outline-none !text-lg w-full md:!text-base"
         />
       </div>
       <div class="w-100dvw flex flex-row justify-end cursor-pointer">
@@ -60,7 +62,7 @@ const inputModel = computed({
 });
 
 const baseClasses =
-  "flex flex-row gap-4 w-full !py-1 !px-4 items-center  rounded-[12px] border-[2px] ";
+  "flex flex-row gap-4 w-full !py-1 !px-4 items-center md:!py-0 rounded-[12px] border-[2px] ";
 
 const divClass = computed(() => {
   let variantClasses = "";

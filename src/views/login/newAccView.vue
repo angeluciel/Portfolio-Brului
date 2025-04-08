@@ -2,7 +2,7 @@
   <div
     class="flex flex-row justify-between items-center w-dvw h-dvh bg-login-bg"
   >
-    <div class="box-border h-dvh w-[55dvw] p-0 m-0 overflow-hidden">
+    <div class="box-border h-dvh w-[45dvw] p-0 m-0 overflow-hidden">
       <img
         src="@/assets/images/third-first.jpg"
         alt="fotinha"
@@ -11,7 +11,7 @@
     </div>
 
     <div
-      class="flex flex-col justify-between !px-[60px] !py-[80px] md:!py-[50px] h-dvh w-full items-end"
+      class="flex flex-col justify-between !px-[60px] !py-[80px] md:!py-[50px] h-dvh w-fit items-start"
     >
       <!--top-->
       <div
@@ -19,20 +19,24 @@
       >
         <div class="flex flex-row gap-2">
           <router-link to="/" class=""
-            ><span class="font-normal text-gray-400 hover:text-gray-500"
+            ><span
+              class="font-normal text-gray-400 hover:text-gray-600 !text-lg"
               >home</span
             ></router-link
           >
           <div class="cursor-alias">/</div>
           <router-link to="/login" class=""
-            ><span class="text-gray-400 font-normal hover:text-gray-500"
+            ><span
+              class="text-gray-400 font-normal hover:text-gray-600 !text-lg"
               >login</span
             ></router-link
           >
           <div class="cursor-alias">/</div>
-          <span class="text-charcoal font-semibold">create account</span>
+          <span class="text-charcoal font-semibold !text-lg"
+            >create account</span
+          >
         </div>
-        <h1 class="flex justify-start">Complete your account</h1>
+        <h1 class="flex justify-start md:!text-4xl">Complete your account</h1>
       </div>
       <!--boxes-->
       <div class="flex flex-col gap-5 max-w-md">
@@ -83,7 +87,7 @@
         </div>
       </div>
       <!--bottom-->
-      <div class="flex flex-col gap-[80px] max-w-md w-full">
+      <div class="flex flex-col gap-20 max-w-md w-full md:gap-10">
         <baseButton
           variant="filled"
           text="Sign in"

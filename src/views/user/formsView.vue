@@ -34,7 +34,7 @@
           <!-- I N P U T S -->
           <baseInput
             title="Phone Number"
-            placeholder="+1 (00) 000-0000"
+            placeholder="+1 (000) 000-0000"
             variant="forms"
             type="text"
           />

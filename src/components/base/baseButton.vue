@@ -17,7 +17,7 @@ const props = defineProps({
 });
 
 const baseClasses =
-  "flex flex-row py-2 px-2 justify-center items-center w-full max-w-2xl mx-auto h-12 rounded-xl gap-4 font-semibold cursor-pointer transition-all duration-100";
+  "flex flex-row py-2 px-2 justify-center items-center w-full max-w-2xl mx-auto h-12 rounded-xl gap-4 font-semibold cursor-pointer transition-all duration-100 md:!h-10";
 
 const filledColors = {
   login:

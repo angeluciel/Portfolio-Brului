@@ -1,19 +1,21 @@
 <template>
-  <div class="flex flex-row justify-start items-center !gap-10 !p-10 h-dvh">
+  <div class="flex flex-row justify-start items-center !gap-10 !p-8 h-dvh">
     <!-- E V E R Y T H I N G-->
-    <div class="flex flex-col justify-between !px-11 !py-20 items-start h-full">
+    <div class="flex flex-col justify-between !px-11 !py-10 items-start h-full">
       <!-- T O P -->
       <div class="flex flex-col gap-4 justify-start items-start">
         <!-- B R E A D C R U M B S -->
         <div class="flex flex-row gap-2">
           <router-link to="/" class=""
-            ><span class="font-normal text-gray-400 hover:text-gray-500"
+            ><span
+              class="font-normal text-gray-400 hover:text-gray-500 !text-lg"
               >home</span
             ></router-link
           >
           <div class="cursor-alias">/</div>
           <router-link to="/login" class=""
-            ><span class="text-gray-400 font-normal hover:text-gray-500"
+            ><span
+              class="text-gray-400 font-normal hover:text-gray-500 !text-lg"
               >login</span
             ></router-link
           >
@@ -25,7 +27,7 @@
           Forgot your password?
         </h1>
         <!-- S U B H E A D I N G-->
-        <span class="!text-2xl text-[#C89396]"
+        <span class="!text-xl text-[#C89396]"
           >Please enter your email so that we can send a link for the password
           reset.</span
         >

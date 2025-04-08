@@ -6,13 +6,13 @@
     <div class="content">
       <div class="flex flex-row gap-2">
         <router-link to="/" class=""
-          ><span class="font-normal text-gray-400 hover:text-gray-500"
+          ><span class="font-normal text-gray-400 hover:text-gray-500 !text-lg"
             >home</span
           ></router-link
         >
         <div class="cursor-alias">/</div>
 
-        <span class="text-charcoal font-semibold">login</span>
+        <span class="text-charcoal font-semibold !text-lg">login</span>
       </div>
 
       <div class="flex flex-col justify-start items-start w-full gap-5">
@@ -76,7 +76,7 @@
       <img
         src="@/assets/images/first-first.jpg"
         alt="fotinha"
-        class="object-cover object-right-bottom h-full w-full"
+        class="object-right-bottom h-full w-full object-cover"
       />
     </div>
   </div>
