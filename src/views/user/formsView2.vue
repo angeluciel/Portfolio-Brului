@@ -95,7 +95,7 @@
               variant="filled"
               text="Next"
               color="forms"
-              @click="this.$router.push('/prices/newComission/page2')"
+              @click="this.$router.push('/prices/newComission/page3')"
             />
           </div>
         </div>
@@ -117,7 +117,7 @@ import { ref } from "vue";
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
 
-const currentStep = 1;
+const currentStep = 2;
 </script>
 
 <style lang="scss" scoped>

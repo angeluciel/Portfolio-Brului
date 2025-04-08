@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-row justify-start items-center !gap-10 !p-8 h-dvh">
+  <div
+    class="flex flex-row justify-start items-center !gap-10 !p-8 h-dvh"
+    @keyup.enter="handleReset"
+  >
     <!-- E V E R Y T H I N G-->
     <div class="flex flex-col justify-between !px-11 !py-10 items-start h-full">
       <!-- T O P -->
@@ -38,11 +41,17 @@
           placeholder="Email here"
           variant="login"
           type="email"
+          v-model="email"
         />
       </div>
       <!-- B O T T O M -->
       <div class="flex flex-col w-full">
-        <baseButton variant="filled" text="Sign in" color="login" />
+        <baseButton
+          variant="filled"
+          text="Sign in"
+          color="login"
+          @click="handleReset"
+        />
       </div>
     </div>
     <div class="flex justify-between items-center h-full !w-[70dvw]">
@@ -56,8 +65,20 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import baseButton from "../../components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
+import { useRouter } from "vue-router";
+import { useMailStore } from "@/stores/mailStore";
+
+const router = useRouter();
+const mailStore = useMailStore();
+const email = ref("");
+
+function handleReset() {
+  mailStore.setEmail(email.value);
+  router.push({ path: "/login/confirm-email" });
+}
 </script>
 
 <style lang="scss" scoped>

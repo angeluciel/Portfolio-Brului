@@ -34,7 +34,7 @@
             v-model="password"
           />
         </div>
-        <router-link to="/login/resetPassword" class=""
+        <router-link to="/login/forgot-password" class=""
           ><span class="text-gray-600 hover:text-gray-800"
             >Forgot your password?</span
           ></router-link

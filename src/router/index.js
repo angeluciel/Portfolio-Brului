@@ -38,14 +38,24 @@ const router = createRouter({
       component: () => import("../views/login/newAccView.vue"),
     },
     {
-      path: "/login/resetPassword",
+      path: "/login/forgot-password",
       name: "resetPassword",
       component: () => import("../views/login/passwordReset.vue"),
+    },
+    {
+      path: "/login/confirm-email",
+      name: "confirmEmail",
+      component: () => import("../views/login/confirmEmail.vue"),
     },
     {
       path: "/prices/newComission",
       name: "newComission",
       component: () => import("../views/user/formsView.vue"),
+    },
+    {
+      path: "/prices/newComission/page2",
+      name: "newComission2",
+      component: () => import("../views/user/formsView2.vue"),
     },
   ],
 });
