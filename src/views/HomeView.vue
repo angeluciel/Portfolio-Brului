@@ -27,7 +27,9 @@
               <span class="circle" aria-hidden="true">
                 <span class="icon arrow"></span>
               </span>
-              <span class="button-text">Bring your visions to life</span>
+              <router-link to="/prices" class="button-text"
+                >Bring your visions to life</router-link
+              >
             </button>
             <!-- end of byvtl button -->
           </div>

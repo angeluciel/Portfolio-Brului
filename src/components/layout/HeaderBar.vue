@@ -1,6 +1,9 @@
 <template>
   <div class="header">
-    <img src="@/components/icons/icon.png" alt="bruna" class="pfp_image" />
+    <router-link to="/">
+      <img src="@/components/icons/icon.png" alt="bruna" class="pfp_image" />
+    </router-link>
+
     <div class="options">
       <HeaderLink
         to="/"
@@ -36,13 +39,16 @@
       >
       <router-link v-else to="/login">sign in</router-link>
 
-      <img
-        v-if="userStore.hasProfilePicutre"
-        src="@/components/icons/icon.png"
-        alt="profile"
-        class="rounded-full w-[68px] h-[68px]"
-      />
-      <Icon v-else icon="codicon:account" width="32" height="32" />
+      <router-link to="/profile"
+        ><img
+          v-if="userStore.hasProfilePictre"
+          src="@/components/icons/icon.png"
+          alt="profile"
+          class="rounded-full w-[68px] h-[68px]"
+        />
+
+        <Icon v-else icon="codicon:account" width="32" height="32" />
+      </router-link>
     </div>
   </div>
 </template>

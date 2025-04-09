@@ -10,12 +10,23 @@
     <div class="content">
       <p class="title">{{ title }}</p>
       <span class="caption">{{ caption }}</span>
-      <button class="cta-button">See more</button>
+      <button @click="handleRouting" class="cta-button">See more</button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function handleRouting() {
+  router.push("/gallery");
+  then(() => {
+    window.scrollTo(0, 0);
+  });
+}
+
 defineProps({
   background: {
     type: String,
