@@ -17,8 +17,18 @@
         </div>
       </div>
       <div class="design-by">
-        <span>Design and Code by @medeirosjpmi</span>
-        <img src="@/components/icons/instaIcon.svg" />
+        <span
+          >Design and Code by
+          <a
+            class="hover:!text-gray-500"
+            href="https://www.instagram.com/medeirosjpmi"
+            target="_blank"
+            >@medeirosjpmi</a
+          ></span
+        >
+        <a href="https://www.instagram.com/medeirosjpmi" target="_blank">
+          <img src="@/components/icons/instaIcon.svg" />
+        </a>
       </div>
     </div>
   </div>
