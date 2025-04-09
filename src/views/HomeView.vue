@@ -32,16 +32,22 @@
             <!-- end of byvtl button -->
           </div>
           <div class="socials">
-            <div class="instagram slide">
+            <a
+              class="instagram slide"
+              href="https://www.instagram.com/bru__lui/"
+              target="_blank"
+            >
               <fa :icon="['fab', 'instagram']" />
-            </div>
-            <div
+            </a>
+            <a
+              href="https://twitter.com/Bru__Lui"
               :class="{ darkMode: isDarkMode }"
               @click="toggleDarkMode"
               class="twitter slide"
+              target="_blank"
             >
               <fa :icon="['fab', 'x-twitter']" />
-            </div>
+            </a>
           </div>
         </div>
         <div class="stats">
