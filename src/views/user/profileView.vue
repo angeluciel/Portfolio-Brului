@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-dvw gap-8">
+  <div class="flex flex-col w-dvw gap-8 bg-blue-100">
     <HeaderBar />
     <!-- M A I N -->
     <div class="flex flex-row items-start justify-between w-full !p-10">

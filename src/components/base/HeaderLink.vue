@@ -44,7 +44,9 @@ watch(
   position: relative;
   transition: all 0.3s ease;
   color: black;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .header-link.active {

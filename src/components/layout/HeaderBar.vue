@@ -1,10 +1,29 @@
 <template>
-  <div class="header">
-    <router-link to="/">
-      <img src="@/components/icons/icon.png" alt="bruna" class="pfp_image" />
-    </router-link>
-
-    <div class="options">
+  <div
+    class="flex flex-row justify-between items-center !px-12 !py-8 w-full bg-white"
+  >
+    <div class="flex flex-row gap-4 justify-center items-center">
+      <router-link
+        to="/"
+        class="w-[48px] h-[48px] overflow-hidden rounded-full"
+      >
+        <img
+          src="../../assets/images/first-second.jpg"
+          alt="bruna"
+          class="size-[68px] object-cover object-[80%_-90%] scale-200"
+        />
+      </router-link>
+      <router-link
+        to="/prices"
+        class="flex flex-row gap-2 items-center !py-2 !px-6 rounded-4xl bg-red-300 shadow-[0px_0px_16px_1px_rgba(163,22,16,0.5)] hover:scale-90 transition-all active:bg-red-200 active:!text-white active:shadow-none duration-200"
+      >
+        <span class="uppercase font-medium tracking-wide !text-sm">prices</span>
+        <Icon icon="tabler:chevron-right" width="24" height="24" />
+      </router-link>
+    </div>
+    <!--O P T I O N S-->
+    <div class="flex flex-row gap-8 items-start justify-center"></div>
+    <div class="flex flex-row items-center justify-end gap-4">
       <HeaderLink
         to="/"
         text="Home"
@@ -29,15 +48,20 @@
         :activeLink="activeLink"
         :setActiveLink="setActiveLink"
       />
-    </div>
-    <div class="direita">
       <router-link
         to="/profile"
         v-if="userStore.isLoggedIn"
-        class="hover:text-gray-500"
+        class="hover:text-gray-500 font-medium text-base"
         >{{ userStore.username }}</router-link
       >
-      <router-link v-else to="/login">sign in</router-link>
+      <router-link
+        v-else
+        to="/login"
+        class="hover:text-gray-500 font-medium text-base"
+        ><span class="hover:text-gray-500 !font-medium !text-[16px] uppercase"
+          >sign in</span
+        ></router-link
+      >
 
       <router-link to="/profile"
         ><img
@@ -82,55 +106,4 @@ function setActiveLink(link) {
 }
 </script>
 
-<style lang="scss" scoped>
-@use "@/assets/variables.scss" as var;
-
-.pfp_image {
-  width: 100px;
-  border-radius: 100%;
-}
-
-.options {
-  display: flex;
-  flex-direction: row;
-  gap: 43px;
-  align-items: start;
-  justify-content: center;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 100px;
-  width: 100%;
-
-  .direita {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    gap: 16px;
-
-    > .loginBtn {
-      color: #646464;
-    }
-  }
-}
-
-.shop {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 2px solid black;
-  border-radius: 32px;
-  padding: 0.2rem 0.8rem;
-  gap: 10px;
-}
-
-.icon {
-  height: 32px;
-  width: 32px;
-}
-</style>
+<style lang="scss" scoped></style>
