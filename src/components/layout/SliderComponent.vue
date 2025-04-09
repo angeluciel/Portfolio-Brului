@@ -28,18 +28,18 @@ import SlideItem from "../base/SliderItem.vue";
 
 const slides = ref([
   {
-    background: "/src/assets/images/wallpaper1.png",
+    background: "../../src/assets/images/wallpaper1.png",
     title: "Empower your Vision",
     caption: "Step into a World where creativity knows no bounds.",
   },
   {
-    background: "/src/assets/images/wallpaper2.png",
+    background: "../../src/assets/images/wallpaper2.png",
     title: "Ignite your story",
     caption:
       "Let your ideas take flight with a custom piece that translates your emotions and will into an illustration.",
   },
   {
-    background: "/src/assets/images/wallpaper3.jpg",
+    background: "../../src/assets/images/wallpaper3.jpg",
     title: "Slide 3",
     caption:
       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
