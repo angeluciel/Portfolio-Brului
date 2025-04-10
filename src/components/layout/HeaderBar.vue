@@ -42,33 +42,28 @@
         :activeLink="activeLink"
         :setActiveLink="setActiveLink"
       />
+
       <HeaderLink
-        to="/prices"
-        text="Prices"
+        to="/profile"
+        v-if="userStore.isLoggedIn"
+        :text="userStore.username"
         :activeLink="activeLink"
         :setActiveLink="setActiveLink"
       />
-      <router-link
-        to="/profile"
-        v-if="userStore.isLoggedIn"
-        class="hover:text-gray-500 font-medium text-base"
-        >{{ userStore.username }}</router-link
-      >
-      <router-link
-        v-else
-        to="/login"
-        class="hover:text-gray-500 font-medium text-base"
-        ><span class="hover:text-gray-500 !font-medium !text-[16px] uppercase"
+
+      <router-link v-else to="/login" class=""
+        ><span
+          class="hover:text-gray-500 !font-medium !text-base uppercase p-[10px]"
           >sign in</span
         ></router-link
       >
 
       <router-link to="/profile"
         ><img
-          v-if="userStore.hasProfilePictre"
-          src="@/components/icons/icon.png"
+          v-if="userStore.isLoggedIn"
+          src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
           alt="profile"
-          class="rounded-full w-[68px] h-[68px]"
+          class="rounded-full w-[48px] h-[48px]"
         />
 
         <Icon v-else icon="codicon:account" width="32" height="32" />

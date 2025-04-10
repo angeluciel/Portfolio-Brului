@@ -45,7 +45,7 @@ watch(
   transition: all 0.3s ease;
   color: black;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1rem;
   text-transform: uppercase;
 }
 
