@@ -2,7 +2,7 @@
   <RouterLink
     :to="to"
     :class="{ active: isActive }"
-    class="header-link"
+    class="header-item"
     @click="setActive"
   >
     {{ text }}

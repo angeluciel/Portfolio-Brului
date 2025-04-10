@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row justify-between items-center !px-12 !py-8 w-full bg-white"
+    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white"
   >
     <div class="flex flex-row gap-4 justify-center items-center">
       <router-link
@@ -36,27 +36,14 @@
         :activeLink="activeLink"
         :setActiveLink="setActiveLink"
       />
-      <HeaderLink
-        to="/contacts"
-        text="Contacts"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-
-      <HeaderLink
-        to="/profile"
+      <router-link to="/contacts" class="header-item">contacts</router-link>
+      <router-link
         v-if="userStore.isLoggedIn"
-        :text="userStore.username"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-
-      <router-link v-else to="/login" class=""
-        ><span
-          class="hover:text-gray-500 !font-medium !text-base uppercase p-[10px]"
-          >sign in</span
-        ></router-link
+        to="/profile"
+        class="header-item"
+        >{{ userStore.username }}</router-link
       >
+      <router-link v-else to="/login" class="header-item">sign in</router-link>
 
       <router-link to="/profile"
         ><img
@@ -73,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useUserStore } from "@/stores/userStore";
 import { Icon } from "@iconify/vue";
 import HeaderLink from "@/components/base/HeaderLink.vue";

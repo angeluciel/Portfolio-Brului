@@ -13,6 +13,16 @@
   --color-login-bg: #f7f7fb;
   --color-charcoal-10: rgba(0, 0, 0, 0.1);
   --color-charcoal-50: rgba(0, 0, 0, 0.5);
+  --color-gold-500: #ba8d2e;
+}
+
+@layer components {
+  .header-item {
+    @apply !p-1.5 cursor-pointer relative transition-all text-charcoal font-medium !text-base uppercase active:!text-gold-500 active:font-bold active:hover:after:bg-gold-500 hover:after:w-full after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-charcoal after:transition-all after:duration-300 after:ease-in-out;
+  }
+  .header-after {
+    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-charcoal transition-all duration-300 ease-in-out;
+  }
 }
 
 * {
