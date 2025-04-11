@@ -2,31 +2,7 @@
   <!-- T O T A L   H E A D I N G-->
   <div class="w-full bg-home-bg-500">
     <!-- TOP CONTENT -->
-    <div
-      class="flex flex-col w-full justify-between items-center h-[35rem] !py-32 bg-home-bg-200 rounded-b-[64px]"
-    >
-      <!-- heading & subheading -->
-      <div class="flex flex-col w-full items-center gap-2 text-home-blue">
-        <h1 class="!text-[5em] !font-abril">Let's paint your feelings!</h1>
-        <span class="!text-[1.5em]"
-          >Bring your imagination to life with a custom piece that speaks YOUR
-          truth</span
-        >
-      </div>
-      <!-- buttons -->
-      <div class="flex gap-24">
-        <router-link
-          to="/prices"
-          class="rounded-full !py-4 !px-8 bg-home-blue !text-home-bg-600 !font-semibold"
-          >View Prices</router-link
-        >
-        <button
-          class="rounded-full !py-4 !px-8 border-2 !font-semibold !text-home-blue"
-        >
-          Talk to me
-        </button>
-      </div>
-    </div>
+
     <!-- BOTTOM CONTENT-->
     <div class="flex flex-col w-full h-[38rem] top-2 z-10">
       <!--fint your way-->
@@ -88,7 +64,7 @@
           <div class="flex flex-col items-top !text-home-blue gap-5">
             <button
               @click="scrollToTop"
-              class="flex relative gap-3 justify-center items-center rounded-lg border-2 border-home-blue cursor-pointer button-anim group hover:border-gold-500"
+              class="flex relative gap-3 justify-center items-center rounded-lg border-2 border-home-blue cursor-pointer button-anim group active:border-gold-500"
             >
               <span class="button-anim-text">back to top</span>
               <Icon
