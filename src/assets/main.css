@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
 @import "tailwindcss";
 
@@ -11,12 +12,23 @@
   --color-login-bg: #f7f7fb;
   --color-charcoal-10: rgba(0, 0, 0, 0.1);
   --color-charcoal-50: rgba(0, 0, 0, 0.5);
+  --color-gold-200: #f3c463;
   --color-gold-500: #ba8d2e;
+  --color-gold-600: #866115;
+
+  --color-home-blue: #c6d1e6;
+  --color-home-bg-200: #454456;
+  --color-home-bg-500: #252438;
+  --color-home-bg-600: #1d1d2c;
+  --color-home-mute: #2b2b32;
+
+  --font-abril: "Abril Fatface", "serif";
+  --font-space: "Space Grotesk", "sans-serif";
 }
 
 @layer components {
   .header-item {
-    @apply !p-1.5 cursor-pointer relative transition-all text-charcoal font-medium !text-base uppercase 
+    @apply !p-1.5 cursor-pointer relative transition-all text-charcoal font-medium !text-[1.12em] uppercase 
       active:!text-gold-500 active:font-bold active:hover:after:bg-gold-500 
       hover:after:w-full 
       after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-charcoal after:transition-all after:duration-300 after:ease-in-out;
@@ -29,13 +41,23 @@
   .header-after {
     @apply absolute bottom-0 left-0 h-0.5 w-0 bg-charcoal transition-all duration-300 ease-in-out;
   }
+
+  .button-anim {
+    @apply relative overflow-hidden !px-6 !py-2 font-semibold text-home-blue;
+  }
+  .button-anim-text {
+    @apply relative z-10 transition-colors duration-300 group-hover:text-gold-500 active:text-gold-200;
+  }
+  .button-anim-slide {
+    @apply absolute inset-0 translate-y-full bg-[rgba(69,69,86,.5)] transition-transform duration-300 group-hover:translate-y-0 active:bg-[rgba(69,69,86,.7)];
+  }
 }
 
 * {
   padding: 0;
   margin: 0;
   list-style: none;
-  font-size: 1.2rem;
+
   font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;

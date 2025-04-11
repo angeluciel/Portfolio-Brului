@@ -17,12 +17,14 @@
         to="/prices"
         class="flex flex-row gap-2 items-center !py-2 !px-6 rounded-4xl bg-red-300 shadow-[0px_0px_16px_1px_rgba(163,22,16,0.5)] hover:scale-90 transition-all active:bg-red-200 active:!text-white active:shadow-none duration-200"
       >
-        <span class="uppercase font-medium tracking-wide !text-sm">prices</span>
+        <span class="uppercase font-medium tracking-wide text-[1.1em]"
+          >prices</span
+        >
         <Icon icon="tabler:chevron-right" width="24" height="24" />
       </router-link>
     </div>
     <!--O P T I O N S-->
-    <div class="flex flex-row gap-8 items-start justify-center"></div>
+
     <div class="flex flex-row items-center justify-end gap-4">
       <router-link
         to="/"

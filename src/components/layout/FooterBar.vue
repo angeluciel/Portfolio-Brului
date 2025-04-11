@@ -1,115 +1,174 @@
 <template>
-  <div class="footer">
-    <div class="footer_text">
-      <span class="Follow_me">Follow me on Social Media!</span>
-      <div class="footer_links">
-        <div class="footer_ig">
-          <a href="https://www.instagram.com/bru__lui/" class="footer_image">
-            <img src="@/components/icons/instaIcon.svg" alt="insta" />
-          </a>
-          <span href="https://www.instagram.com/bru__lui/">@bru_lui</span>
+  <!-- T O T A L   H E A D I N G-->
+  <div class="w-full bg-home-bg-500">
+    <!-- TOP CONTENT -->
+    <div
+      class="flex flex-col w-full justify-between items-center h-[35rem] !py-32 bg-home-bg-200 rounded-b-[64px]"
+    >
+      <!-- heading & subheading -->
+      <div class="flex flex-col w-full items-center gap-2 text-home-blue">
+        <h1 class="!text-[5em] !font-abril">Let's paint your feelings!</h1>
+        <span class="!text-[1.5em]"
+          >Bring your imagination to life with a custom piece that speaks YOUR
+          truth</span
+        >
+      </div>
+      <!-- buttons -->
+      <div class="flex gap-24">
+        <router-link
+          to="/prices"
+          class="rounded-full !py-4 !px-8 bg-home-blue !text-home-bg-600 !font-semibold"
+          >View Prices</router-link
+        >
+        <button
+          class="rounded-full !py-4 !px-8 border-2 !font-semibold !text-home-blue"
+        >
+          Talk to me
+        </button>
+      </div>
+    </div>
+    <!-- BOTTOM CONTENT-->
+    <div class="flex flex-col w-full h-[38rem] top-2 z-10">
+      <!--fint your way-->
+      <div
+        class="flex w-full bg-home-bg-500 h-full !py-16 !px-32 justify-between"
+      >
+        <!-- teste -->
+        <div class="flex gap-8 items-start justify-start">
+          <!--column 1-->
+          <div class="flex flex-col gap-10 justify-start items-start">
+            <h1 class="text-[2em] text-home-blue font-semibold !font-space">
+              Site Map
+            </h1>
+            <ul>
+              <li v-for="item in siteMap" :key="item.label" class="!pb-2">
+                <router-link
+                  :to="item.to"
+                  class="!font-semibold !text-[1.2em] header-item !text-[#cccccc]"
+                  >{{ item.label }}</router-link
+                >
+              </li>
+            </ul>
+          </div>
+          <!--column 2-->
+          <div class="flex flex-col gap-10 justify-start items-start">
+            <h1 class="text-[2em] text-home-blue font-semibold !font-space">
+              Legal
+            </h1>
+            <ul>
+              <li v-for="item in legalMap" :key="item.label">
+                <router-link
+                  :to="item.to"
+                  class="font-semibold !text-[1.2em] !text-[#cccccc]"
+                  >{{ item.label }}</router-link
+                >
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="footer_x">
-          <a href="https://twitter.com/Bru__Lui" class="footer_image">
-            <img src="@/components/icons/twtIcon.svg" alt="x" />
-          </a>
-          <span href="https://twitter.com/Bru__Lui">@Bru_Lui</span>
+        <!--right-->
+        <div class="flex flex-col gap-8 justify-start items-start w-[35%]">
+          <!--about heading-->
+          <div class="flex justify-between items-center w-full">
+            <h1 class="!text-gold-500 !text-[3rem] font-bold !font-space">
+              About
+            </h1>
+            <img
+              src="/src/components/icons/icon.png"
+              alt="icon"
+              class="w-[80px] h-[80px] rounded-full"
+            />
+          </div>
+          <!--Introduction-->
+          <span class="!text-home-blue text-[1.3em]"
+            >Hi, I'm Bruna! I'm a freelance artist and I can't wait to meet you.
+            Let's illustrate your mind!</span
+          >
+          <!--button and social medias-->
+          <div class="flex flex-col items-top !text-home-blue gap-5">
+            <button
+              @click="scrollToTop"
+              class="flex relative gap-3 justify-center items-center rounded-lg border-2 border-home-blue cursor-pointer button-anim group hover:border-gold-500"
+            >
+              <span class="button-anim-text">back to top</span>
+              <Icon
+                class="button-anim-text"
+                icon="typcn:arrow-up"
+                width="32"
+                height="32"
+              />
+              <span class="button-anim-slide"></span>
+            </button>
+
+            <!--social medias-->
+            <div class="flex gap-8 !text-gold-500">
+              <a
+                href="https://twitter.com/Bru__Lui"
+                target="_blank"
+                class="hover:!text-gold-600 active:!text-gold-200"
+              >
+                <Icon icon="fa6-brands:x-twitter" width="24" height="24" />
+              </a>
+              <a
+                href="https://www.instagram.com/bru__lui/"
+                target="_blank"
+                class="hover:!text-gold-600 active:!text-gold-200"
+              >
+                <Icon icon="ri:instagram-fill" width="24" height="24"
+              /></a>
+            </div>
+            <div></div>
+          </div>
         </div>
       </div>
-      <div class="design-by">
-        <span
-          >Design and Code by
-          <a
-            class="hover:!text-gray-500"
-            href="https://www.instagram.com/medeirosjpmi"
-            target="_blank"
-            >@medeirosjpmi</a
-          ></span
+      <!--social media-->
+      <div
+        class="flex justify-center items-center gap-14 !px-20 !py-6 bg-home-bg-200 border-t-6 border-home-bg-600"
+      >
+        <!--left-->
+        <span class="gap-8 font-semibold text-[1.2em] !text-home-bg-600"
+          >© 2025 bru__lui. Todos os direitos reservados.</span
         >
-        <a href="https://www.instagram.com/medeirosjpmi" target="_blank">
-          <img src="@/components/icons/instaIcon.svg" />
-        </a>
+        <img
+          src="/src/components/icons/icon.png"
+          alt="icon"
+          class="w-[60px] h-[60px] rounded-full"
+        />
+        <!-- meus direitos!!! -->
+        <div class="flex gap-8 !text-home-mute font-semibold text-[1.2em]">
+          <span>developed and designed by:</span>
+          <div class="flex gap-4 justify-center">
+            <Icon icon="ri:instagram-fill" width="24" height="24" /><span
+              >@medeirosjpmi</span
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import { Icon } from "@iconify/vue";
 
-<style lang="scss" scoped>
-.footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 1rem 0 1rem;
-  background: #f3e9d4;
+const siteMap: { label: string; to: string }[] = [
+  { label: "Home", to: "/" },
+  { label: "Prices", to: "/prices" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Contacts", to: "/contacts" },
+];
 
-  .footer_text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2.7rem;
+const legalMap: { label: string; to: string }[] = [
+  { label: "Terms of Service", to: "/prices" },
+  { label: "Terms of Privacy", to: "/" },
+];
 
-    .Follow_me {
-      font-family: "Abril Fatface", serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 48px;
-    }
-
-    .footer_links {
-      display: flex;
-      gap: 128px;
-      color: #655d4c;
-
-      .footer_ig,
-      .footer_x {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        justify-content: center;
-        align-items: center;
-
-        span {
-          font-size: 44px;
-        }
-      }
-
-      .footer_image {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        border: 3px solid #655d4c;
-        cursor: pointer;
-        transition: 0.3s ease-in;
-
-        &:hover {
-          background: rgba(114, 109, 109, 0.5);
-        }
-
-        img {
-          max-width: 32px;
-        }
-      }
-    }
-
-    .design-by {
-      display: flex;
-      color: #aba088;
-      gap: 1rem;
-      align-items: center;
-      padding: 0 0 2rem 0;
-
-      img {
-        height: 40px;
-        cursor: pointer;
-      }
-    }
-  }
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 }
-</style>
+</script>
+
+<style scoped></style>

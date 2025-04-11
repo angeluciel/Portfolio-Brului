@@ -186,20 +186,20 @@ $black: #282936;
         }
 
         .beyond_box > span {
-          font-family: "Poppins", sans-serif;
           text-transform: uppercase;
-          font-size: 48px;
+          font-size: 3em;
           font-weight: bold;
           font-style: italic;
         }
 
         .the {
-          font-size: 32px !important;
+          font-size: 2em !important;
         }
       }
 
       .subtitle {
-        font-size: 20px;
+        font-size: 1.5em;
+        font-weight: 500;
 
         b {
           font-style: italic;
