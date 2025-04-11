@@ -2,7 +2,7 @@
   <RouterLink
     :to="to"
     :class="{ active: isActive }"
-    class="header-link"
+    class="header-item"
     @click="setActive"
   >
     {{ text }}
@@ -44,7 +44,9 @@ watch(
   position: relative;
   transition: all 0.3s ease;
   color: black;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .header-link.active {

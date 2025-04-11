@@ -1,50 +1,68 @@
 <template>
-  <div class="header">
-    <router-link to="/">
-      <img src="@/components/icons/icon.png" alt="bruna" class="pfp_image" />
-    </router-link>
-
-    <div class="options">
-      <HeaderLink
-        to="/"
-        text="Home"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-      <HeaderLink
-        to="/gallery"
-        text="Gallery"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-      <HeaderLink
-        to="/contacts"
-        text="Contacts"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-      <HeaderLink
-        to="/prices"
-        text="Prices"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-    </div>
-    <div class="direita">
+  <div
+    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white"
+  >
+    <div class="flex flex-row gap-4 justify-center items-center">
       <router-link
-        to="/profile"
+        to="/"
+        class="w-[48px] h-[48px] overflow-hidden rounded-full"
+      >
+        <img
+          src="../../assets/images/first-second.jpg"
+          alt="bruna"
+          class="size-[68px] object-cover object-[80%_-90%] scale-200"
+        />
+      </router-link>
+      <router-link
+        to="/prices"
+        class="flex flex-row gap-2 items-center !py-2 !px-6 rounded-4xl bg-red-300 shadow-[0px_0px_16px_1px_rgba(163,22,16,0.5)] hover:scale-90 transition-all active:bg-red-200 active:!text-white active:shadow-none duration-200"
+      >
+        <span class="uppercase font-medium tracking-wide !text-sm">prices</span>
+        <Icon icon="tabler:chevron-right" width="24" height="24" />
+      </router-link>
+    </div>
+    <!--O P T I O N S-->
+    <div class="flex flex-row gap-8 items-start justify-center"></div>
+    <div class="flex flex-row items-center justify-end gap-4">
+      <router-link
+        to="/"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/' }"
+        >home</router-link
+      >
+      <router-link
+        to="/gallery"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/gallery' }"
+        >gallery</router-link
+      >
+      <router-link
+        to="/contacts"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/contacts' }"
+        >contacts</router-link
+      >
+      <router-link
         v-if="userStore.isLoggedIn"
-        class="hover:text-gray-500"
+        to="/profile"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/profile' }"
         >{{ userStore.username }}</router-link
       >
-      <router-link v-else to="/login">sign in</router-link>
+      <router-link
+        v-else
+        to="/login"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/login' }"
+        >sign in</router-link
+      >
 
       <router-link to="/profile"
         ><img
-          v-if="userStore.hasProfilePictre"
-          src="@/components/icons/icon.png"
+          v-if="userStore.isLoggedIn"
+          src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
           alt="profile"
-          class="rounded-full w-[68px] h-[68px]"
+          class="rounded-full w-[48px] h-[48px]"
         />
 
         <Icon v-else icon="codicon:account" width="32" height="32" />
@@ -57,9 +75,12 @@
 import { ref } from "vue";
 import { useUserStore } from "@/stores/userStore";
 import { Icon } from "@iconify/vue";
-import HeaderLink from "@/components/base/HeaderLink.vue";
 
 const userStore = useUserStore();
+
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 function handleLogin() {
   userStore.logIn(
@@ -82,55 +103,4 @@ function setActiveLink(link) {
 }
 </script>
 
-<style lang="scss" scoped>
-@use "@/assets/variables.scss" as var;
-
-.pfp_image {
-  width: 100px;
-  border-radius: 100%;
-}
-
-.options {
-  display: flex;
-  flex-direction: row;
-  gap: 43px;
-  align-items: start;
-  justify-content: center;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 100px;
-  width: 100%;
-
-  .direita {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    gap: 16px;
-
-    > .loginBtn {
-      color: #646464;
-    }
-  }
-}
-
-.shop {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 2px solid black;
-  border-radius: 32px;
-  padding: 0.2rem 0.8rem;
-  gap: 10px;
-}
-
-.icon {
-  height: 32px;
-  width: 32px;
-}
-</style>
+<style lang="scss" scoped></style>
