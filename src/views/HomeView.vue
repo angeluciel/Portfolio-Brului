@@ -84,7 +84,7 @@
     >
       <!-- heading & subheading -->
       <div class="flex flex-col w-full items-center gap-2 text-home-blue">
-        <h1 class="!text-[5em] !font-abril">Let's paint your feelings!</h1>
+        <h1 class="!text-[5em] !font-abril">Let us paint your feelings!</h1>
         <span class="!text-[1.5em]"
           >Bring your imagination to life with a custom piece that speaks YOUR
           truth</span
