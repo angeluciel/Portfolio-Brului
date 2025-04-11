@@ -24,26 +24,38 @@
     <!--O P T I O N S-->
     <div class="flex flex-row gap-8 items-start justify-center"></div>
     <div class="flex flex-row items-center justify-end gap-4">
-      <HeaderLink
+      <router-link
         to="/"
-        text="Home"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-      <HeaderLink
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/' }"
+        >home</router-link
+      >
+      <router-link
         to="/gallery"
-        text="Gallery"
-        :activeLink="activeLink"
-        :setActiveLink="setActiveLink"
-      />
-      <router-link to="/contacts" class="header-item">contacts</router-link>
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/gallery' }"
+        >gallery</router-link
+      >
+      <router-link
+        to="/contacts"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/contacts' }"
+        >contacts</router-link
+      >
       <router-link
         v-if="userStore.isLoggedIn"
         to="/profile"
         class="header-item"
+        :class="{ 'header-item-active': route.path === '/profile' }"
         >{{ userStore.username }}</router-link
       >
-      <router-link v-else to="/login" class="header-item">sign in</router-link>
+      <router-link
+        v-else
+        to="/login"
+        class="header-item"
+        :class="{ 'header-item-active': route.path === '/login' }"
+        >sign in</router-link
+      >
 
       <router-link to="/profile"
         ><img
@@ -60,12 +72,15 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useUserStore } from "@/stores/userStore";
 import { Icon } from "@iconify/vue";
-import HeaderLink from "@/components/base/HeaderLink.vue";
 
 const userStore = useUserStore();
+
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 function handleLogin() {
   userStore.logIn(
