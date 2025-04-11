@@ -3,7 +3,7 @@ import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
-    return { top: 0 };
+    return { top: 0, behavior: "smooth" };
   },
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

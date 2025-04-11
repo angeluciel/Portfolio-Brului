@@ -78,6 +78,33 @@
   <section class="slider">
     <SliderComponent />
   </section>
+  <section class="w-full !bg-home-bg-500">
+    <div
+      class="flex flex-col w-full justify-between items-center h-[35rem] !py-32 bg-home-bg-200 rounded-b-[64px]"
+    >
+      <!-- heading & subheading -->
+      <div class="flex flex-col w-full items-center gap-2 text-home-blue">
+        <h1 class="!text-[5em] !font-abril">Let's paint your feelings!</h1>
+        <span class="!text-[1.5em]"
+          >Bring your imagination to life with a custom piece that speaks YOUR
+          truth</span
+        >
+      </div>
+      <!-- buttons -->
+      <div class="flex gap-24">
+        <router-link
+          to="/prices"
+          class="rounded-full !py-4 !px-8 bg-home-blue !text-home-bg-600 !font-semibold"
+          >View Prices</router-link
+        >
+        <button
+          class="rounded-full !py-4 !px-8 border-2 !font-semibold !text-home-blue"
+        >
+          Talk to me
+        </button>
+      </div>
+    </div>
+  </section>
   <FooterBar></FooterBar>
 </template>
 
@@ -186,20 +213,20 @@ $black: #282936;
         }
 
         .beyond_box > span {
-          font-family: "Poppins", sans-serif;
           text-transform: uppercase;
-          font-size: 48px;
+          font-size: 3em;
           font-weight: bold;
           font-style: italic;
         }
 
         .the {
-          font-size: 32px !important;
+          font-size: 2em !important;
         }
       }
 
       .subtitle {
-        font-size: 20px;
+        font-size: 1.5em;
+        font-weight: 500;
 
         b {
           font-style: italic;
