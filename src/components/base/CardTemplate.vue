@@ -107,6 +107,7 @@ const variantClass = computed(() => {
       justify-content: center;
       align-items: end;
       height: 82px;
+      text-align: center;
 
       .subtext {
         display: flex;
