@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 @import "tailwindcss";
 
@@ -17,6 +18,8 @@
   --color-gold-600: #866115;
 
   --color-home-blue: #c6d1e6;
+  --color-home-blue-100: #b2bccf;
+  --color-home-blue-300: #a3b5d6;
   --color-home-bg-200: #454456;
   --color-home-bg-500: #252438;
   --color-home-bg-600: #1d1d2c;
@@ -24,6 +27,7 @@
 
   --font-abril: "Abril Fatface", "serif";
   --font-space: "Space Grotesk", "sans-serif";
+  --font-josefin: "Josefin Sans", "sans-serif";
 }
 
 @layer components {
