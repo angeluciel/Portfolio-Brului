@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white h-[10dvh]"
+    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white h-[10dvh] z-900"
   >
     <div class="flex flex-row gap-4 justify-center items-center">
       <router-link
@@ -17,7 +17,7 @@
         to="/gallery"
         class="flex flex-row gap-2 items-center !py-2 !px-6 rounded-4xl bg-red-300 shadow-[0px_0px_16px_1px_rgba(163,22,16,0.5)] hover:scale-90 transition-all active:bg-red-200 active:!text-white active:shadow-none duration-200"
       >
-        <span class="uppercase font-medium tracking-wide text-[1.1em]"
+        <span class="uppercase font-medium tracking-wide text-[1.1em] z-90"
           >gallery</span
         >
         <Icon icon="tabler:chevron-right" width="24" height="24" />

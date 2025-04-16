@@ -1,13 +1,13 @@
 <template>
-  <HeaderBar></HeaderBar>
+  <HeaderBar class="z-900"></HeaderBar>
   <div
-    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh]"
+    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80"
   >
-    <div class="lg:!h-[650px] w-full max-w-[40dvw] md:!h-[450px] xl:!h-[800px]">
+    <div class="lg:!h-[650px] w-full max-w-[40dvw] md:!h-[450px] z-80">
       <img
         src="@/assets/images/last-last.jpg"
         alt="image"
-        class="!h-full w-auto"
+        class="!h-full w-auto z-80"
       />
     </div>
 
