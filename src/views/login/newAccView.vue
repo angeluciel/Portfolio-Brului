@@ -93,7 +93,12 @@
           text="Sign in"
           color="login"
           type="submit"
+          @click="loginError = !loginError"
         />
+
+        <div v-if="loginError" class="text-red-500">
+          Not implemented yet! s2
+        </div>
         <router-link to="/login" class=""
           ><span class="hover:text-gray-400"
             >Already have an account? Sign in
@@ -116,6 +121,7 @@ import baseInput from "@/components/base/baseInput.vue";
 const passwordField = ref(null);
 const iconName = ref("ri:eye-close-line");
 const checked = ref(false);
+const loginError = ref(false);
 
 const items = ref([{ label: "Home" }]);
 
