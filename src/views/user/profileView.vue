@@ -102,8 +102,38 @@
 <script setup lang="ts">
 import HeaderBar from "@/components/layout/HeaderBar.vue"; //nvm the error it means nothing
 import FooterBar from "@/components/layout/FooterBar.vue";
-import { Icon } from "@iconify/vue";
-import { ref } from "vue";
+import { Icon, loadIcons } from "@iconify/vue";
+import { ref, onMounted } from "vue";
+
+const iconList = [
+  "ri:bank-card-line",
+  "ri:bank-card-fill",
+  "ri:lock-2-line",
+  "ri:lock-2-fill",
+  "ri:user-4-line",
+  "ri:user-4-fill",
+  "ri:artboard-line",
+  "ri:artboard-fill",
+  "ri:heart-3-line",
+  "ri:heart-3-fill",
+  "ri:door-open-line",
+  "ri:door-open-fill",
+  "ri:camera-fill",
+];
+
+async function preloadIcons(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    loadIcons(iconList, (loaded, missing, pending) => {
+      if (pending.length) return; // Wait for the callback to finish
+      if (missing.length) {
+        console.error("Failed to load icons:", missing);
+        reject({ loaded, missing });
+      } else {
+        resolve();
+      }
+    });
+  });
+}
 
 interface MenuOption {
   title: string;
@@ -146,6 +176,15 @@ const menuOptions: MenuOption[] = [
     route: "/gallery",
   },
 ];
+
+onMounted(async () => {
+  try {
+    await preloadIcons();
+    console.log("All icons preloaded!");
+  } catch (err) {
+    console.error("Error preloading icons:", err);
+  }
+});
 </script>
 
 <style lang="scss" scoped></style>
