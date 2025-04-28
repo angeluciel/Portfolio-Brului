@@ -55,6 +55,10 @@
   .button-anim-slide {
     @apply absolute inset-0 translate-y-full bg-[rgba(69,69,86,.5)] transition-transform duration-300 group-hover:translate-y-0 active:bg-[rgba(69,69,86,.7)];
   }
+
+  .gallery-image {
+    @apply w-[300px] h-auto block transition-transform duration-150 ease-in-out hover:scale-104 cursor-pointer;
+  }
 }
 
 * {
