@@ -1,5 +1,11 @@
 <template>
   <HeaderBar />
+  <!-- A D M I N -->
+  <div class="flex justify-end w-dvw !px-20">
+    <div>
+      <div>upload new image</div>
+    </div>
+  </div>
   <!--C O N T E N T-->
   <div class="flex gap-4 !px-5 items-top justify-center w-full !py-12">
     <div
@@ -20,37 +26,40 @@
   <FooterBar />
   <div
     v-if="isModalOpen"
-    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50"
+    class="fixed w-dvw h-dvh inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50"
+    @click="closeModal"
   >
-    <div class="relative">
+    <div
+      class="flex justify-center items-center relative bg-rgba[0,0,0,0.5]"
+      @click.stop
+    >
       <img
         :src="currentImage"
         alt="Current Image"
         class="max-w-full max-h-[90vh] rounded-lg"
       />
-
-      <!-- Close Button -->
-      <button
-        @click="closeModal"
-        class="absolute top-2 right-2 text-white text-3xl font-bold"
-      >
-        ×
-      </button>
-
-      <!-- Navigation -->
-      <button
-        @click="prevImage"
-        class="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-4xl"
-      >
-        ‹
-      </button>
-      <button
-        @click="nextImage"
-        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-4xl"
-      >
-        ›
-      </button>
     </div>
+    <!-- Close Button -->
+    <button
+      @click="closeModal"
+      class="absolute top-10 right-10 text-white text-4xl font-bold hover:text-gray-400 hover:bg-gray-900 cursor-pointer w-12 h-12 bg-gray-700 rounded-full"
+    >
+      ×
+    </button>
+
+    <!-- Navigation -->
+    <button
+      @click.stop="prevImage"
+      class="absolute left-1 top-1/2 transform -translate-y-1/2 text-white text-4xl w-32 h-32 hover:text-gray-400 cursor-pointer"
+    >
+      ‹
+    </button>
+    <button
+      @click.stop="nextImage"
+      class="absolute right-1 top-1/2 transform -translate-y-1/2 text-white text-4xl w-32 h-32 hover:text-gray-400 cursor-pointer"
+    >
+      ›
+    </button>
   </div>
 </template>
 
@@ -76,6 +85,10 @@ const columns = [
     "../../src/assets/images/second-first.jpg",
   ],
 ];
+
+// ############ MOCK
+const user = ref("admin");
+// ############ MOCK_END
 
 // Modal controls
 const isModalOpen = ref(false);
