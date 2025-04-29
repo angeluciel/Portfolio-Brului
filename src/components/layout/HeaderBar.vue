@@ -1,49 +1,49 @@
 <template>
   <div
-    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white h-[10dvh] z-900"
+    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white h-[10dvh] z-90"
   >
-    <div class="flex flex-row gap-4 justify-center items-center">
-      <router-link
-        to="/"
-        class="w-[48px] h-[48px] overflow-hidden rounded-full"
-      >
-        <img
-          src="/images/first-second.jpg"
-          alt="bruna"
-          class="size-[68px] object-cover object-[80%_-90%] scale-200"
-        />
-      </router-link>
-      <router-link
-        to="/gallery"
-        class="flex flex-row gap-2 items-center !py-2 !px-6 rounded-4xl bg-red-300 shadow-[0px_0px_16px_1px_rgba(163,22,16,0.5)] hover:scale-90 transition-all active:bg-red-200 active:!text-white active:shadow-none duration-200"
-      >
-        <span class="uppercase font-medium tracking-wide text-[1.1em] z-90"
-          >gallery</span
-        >
-        <Icon icon="tabler:chevron-right" width="24" height="24" />
-      </router-link>
-    </div>
     <!--O P T I O N S-->
 
     <div class="flex flex-row items-center justify-end gap-4">
       <router-link
         to="/"
-        class="header-item"
+        class="w-[48px] h-[48px] overflow-hidden rounded-full z-90"
+      >
+        <img
+          src="/images/gostosao_ouro.jpg"
+          alt="bruna"
+          class="size-[68px] object-cover object-[60%_50%] scale-120"
+        />
+      </router-link>
+      <router-link
+        to="/"
+        class="header-item z-90"
         :class="{ 'header-item-active': route.path === '/' }"
         >home</router-link
       >
       <router-link
         to="/prices"
-        class="header-item"
+        class="header-item z-90"
         :class="{ 'header-item-active': route.path === '/prices' }"
         >prices</router-link
       >
       <router-link
         to="/contacts"
-        class="header-item"
+        class="header-item z-90"
         :class="{ 'header-item-active': route.path === '/contacts' }"
         >contacts</router-link
       >
+    </div>
+    <div class="flex flex-row gap-4 justify-center items-center">
+      <router-link
+        to="/gallery"
+        class="flex flex-row gap-2 items-center !py-2 !px-6 rounded-4xl [&>*]:text-white bg-[#597DA1] shadow-[0px_0px_8px_1px_rgba(89,125,161,0.5)] hover:scale-90 transition-all active:bg-[#395C83] active:!text-white active:shadow-none duration-200"
+      >
+        <span class="uppercase font-medium tracking-wide text-[1.1em] z-40"
+          >gallery</span
+        >
+        <Icon icon="tabler:chevron-right" width="24" height="24" />
+      </router-link>
       <router-link
         v-if="userStore.isLoggedIn"
         to="/profile"

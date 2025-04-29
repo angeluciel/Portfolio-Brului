@@ -1,5 +1,5 @@
 <template>
-  <HeaderBar class="z-900"></HeaderBar>
+  <HeaderBar class="z-90"></HeaderBar>
   <div
     class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80"
   >
