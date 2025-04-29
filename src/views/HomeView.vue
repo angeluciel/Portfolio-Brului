@@ -5,7 +5,7 @@
   >
     <div class="lg:!h-[650px] w-full max-w-[40dvw] md:!h-[450px] z-80">
       <img
-        src="@/assets/images/last-last.jpg"
+        src="/images/last-last.jpg"
         alt="image"
         class="!h-full w-auto z-80"
       />

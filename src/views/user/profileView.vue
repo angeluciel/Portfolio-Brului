@@ -1,137 +1,190 @@
 <template>
-  <div class="flex flex-col w-dvw gap-8 bg-blue-100">
+  <div class="bg-[#C6C5D4]">
     <HeaderBar />
-    <!-- M A I N -->
-    <div class="flex flex-row items-start justify-between w-full !p-10">
-      <!-- L E F T  C O N T A I N E R-->
-      <div class="flex flex-col gap-9 !py-12 !px-9 bg-[#E5E5D9] rounded-3xl">
-        <!-- profile infos -->
-        <div class="flex flex-col w-full gap-1">
-          <!-- top infos -->
-          <div class="flex flex-row gap-2 w-full">
-            <!-- left part -->
-            <div class="flex flex-row gap-5 justify-start items-end w-full">
-              <img
-                src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
-                alt="profile"
-                class="rounded-full w-[80px] h-[80px] border-2 border-black !p-[2px]"
-              />
-              <!-- nomes -->
-              <div class="flex flex-col">
-                <h1 class="!text-lg font-bold tracking-wide">Joãozin</h1>
-                <span class="!text-base">Joãozin o Bacana da Silva</span>
-              </div>
-            </div>
-            <!-- edit part -->
-            <div class="flex flex-col items-center justify-start">
+    <!-- Content -->
+    <div class="flex flex-col w-full justify-center items-center !py-20 gap-5">
+      <!--top content-->
+      <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
+        <!--head-->
+        <div
+          class="flex !px-24 items-center gap-5 !py-2 w-full bg-white rounded-xl"
+        >
+          <div class="relative flex justify-center items-center group">
+            <img
+              src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
+              alt="pfp"
+              class="w-20 rounded-full group-hover:opacity-70"
+            />
+            <div
+              class="text-center rounded-full ease-in opacity-0 duration-100 absolute group-hover:opacity-100"
+            >
               <button
-                class="w-[60px] h-[60px] bg-gray-500 rounded-2xl"
-              ></button>
-              <span class="!text-sm !text-gray-500">editar</span>
-            </div>
-          </div>
-        </div>
-        <!-- user infos -->
-        <div class="flex flex-col !px-2 w-full">
-          <span v-for="info in userinfo" :key="info.label">
-            <span class="!text-sm">{{ info.label }}: {{ info.value }}</span>
-          </span>
-        </div>
-        <!-- favorites -->
-        <div class="flex flex-col gap-12 w-full">
-          <!-- header -->
-          <div
-            class="w-full flex flex-row gap-3 items-center !p-2 border-b-2 border-black"
-          >
-            <span>Favorite Artworks</span>
-            <Icon icon="ri:heart-3-fill" width="24" height="24" />
-          </div>
-          <!-- images -->
-          <div class="flex flex-wrap gap-8 justify-start items-start">
-            <!-- img container -->
-            <div class="relative lg:max-w-[150px] md:max-w-[100px]">
-              <img src="../../assets/images/third-first.jpg" alt="image" />
-              <button class="absolute top-2 right-2">
-                <Icon
-                  icon="ri:heart-3-fill"
-                  width="24"
-                  height="24"
-                  class="text-red-500"
-                />
+                class="bg-white opacity-75 text-gray-600 rounded-full !p-1 hover:opacity-100"
+              >
+                <Icon icon="ri:camera-fill" width="32" height="32" />
               </button>
             </div>
-            <div class="relative lg:max-w-[150px] md:max-w-[100px]">
-              <img src="../../assets/images/third-first.jpg" alt="image" />
-              <button class="absolute top-2 right-2">
-                <Icon
-                  icon="ri:heart-3-fill"
-                  width="24"
-                  height="24"
-                  class="text-red-500"
-                />
-              </button>
-            </div>
+          </div>
+
+          <div class="flex flex-col justify-start items-start">
+            <h2 class="text-2xl text-gray-800 font-semibold">
+              Joãozinho Bacano da Silva Sauro
+            </h2>
+            <span class="text-xl font-bold text-gray-400"
+              >jao.bacano@silva.tv</span
+            >
           </div>
         </div>
       </div>
-      <!-- R I G H T  C O N T A I N E R -->
-      <div class="flex flex-col gap-3 !py-10 !px-5 bg-[#E5E5D9] rounded-3xl">
-        <h1 class="text-2xl font-bold !px-4">Order History</h1>
-        <span class="!px-4">Comission: {{ userinfo[1].value }}</span>
-        <!-- comission description -->
-        <div
-          class="flex flex-row w-full items-start justify-start !p-6 gap-6 border-b-2 border-black"
+      <!-- mid content -->
+      <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
+        <!-- head -->
+        <div class="flex flex-col w-full bg-white rounded-xl overflow-hidden">
+          <ul class="gap-4">
+            <li
+              v-for="(item, index) in menuOptions"
+              :key="item.route"
+              @mouseenter="hoveredIndex = index"
+              @mouseleave="hoveredIndex = null"
+            >
+              <router-link
+                :to="item.route"
+                class="flex items-start justify-start gap-3 !px-16 !py-5 w-full hover:bg-gray-300 group active:bg-[#B7B7C3]"
+              >
+                <div
+                  class="text-gray-400 rounded-full border-2 border-gray-400 !p-3 group-hover:text-purple-700 group-hover:border-purple-800 group-active:text-white group-active:border-white"
+                >
+                  <Icon
+                    :icon="
+                      hoveredIndex === index
+                        ? item.icon.replace('-line', '-fill')
+                        : item.icon
+                    "
+                    width="32"
+                    height="32"
+                  />
+                </div>
+                <!--text-->
+                <div class="flex flex-col">
+                  <h3
+                    class="text-2xl text-charcoal font-medium group-active:text-white"
+                  >
+                    {{ item.title }}
+                  </h3>
+                  <span
+                    class="text-gray-500 text-xl font-medium group-active:text-gray-200"
+                    >{{ item.description }}</span
+                  >
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
+        <button
+          class="flex items-center gap-5 justify-start text-gray-500 group"
         >
-          <img
-            src="../../assets/images/last-last.jpg"
-            alt="comission"
-            class="max-w-[200px] rounded-3xl"
+          <Icon
+            icon="ri:door-open-line"
+            width="32"
+            height="32"
+            class="group-hover:text-red-400"
           />
-          <!-- descriptions -->
-          <div class="flex flex-col">
-            <div v-for="info in comInfo" :key="info.label" class="!text-sm">
-              {{ info.label }}: {{ info.value }}
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-row w-full items-start justify-start !p-6 gap-6">
-          <img
-            src="../../assets/images/last-last.jpg"
-            alt="comission"
-            class="max-w-[200px] rounded-3xl"
-          />
-          <!-- descriptions -->
-          <div class="flex flex-col">
-            <div v-for="info in comInfo" :key="info.label" class="!text-sm">
-              {{ info.label }}: {{ info.value }}
-            </div>
-          </div>
-        </div>
+          <span class="font-semibold group-hover:text-gray-600">Logoff</span>
+        </button>
       </div>
     </div>
     <FooterBar />
   </div>
 </template>
 
-<script setup>
-import HeaderBar from "@/components/layout/HeaderBar.vue";
+<script setup lang="ts">
+import HeaderBar from "@/components/layout/HeaderBar.vue"; //nvm the error it means nothing
 import FooterBar from "@/components/layout/FooterBar.vue";
-import { Icon } from "@iconify/vue";
+import { Icon, loadIcons } from "@iconify/vue";
+import { ref, onMounted } from "vue";
 
-const joindate = "21/03/2025";
-const userinfo = [
-  { label: "Joined in", value: "21/03/2025" },
-  { label: "First Comission", value: "24/03/2025" },
-  { label: "Contacts", value: "joaozin@gmail.com" },
+const iconList = [
+  "ri:bank-card-line",
+  "ri:bank-card-fill",
+  "ri:lock-2-line",
+  "ri:lock-2-fill",
+  "ri:user-4-line",
+  "ri:user-4-fill",
+  "ri:artboard-line",
+  "ri:artboard-fill",
+  "ri:heart-3-line",
+  "ri:heart-3-fill",
+  "ri:door-open-line",
+  "ri:door-open-fill",
+  "ri:camera-fill",
 ];
 
-const comInfo = [
-  { label: "First Contact", value: "21/03/2025" },
-  { label: "Delivered", value: "24/03/2025" },
-  { label: "Size", value: "Face" },
-  { label: "Package", value: "Premium" },
-  { label: "Price", value: "R$150.00" },
+async function preloadIcons(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    loadIcons(iconList, (loaded, missing, pending) => {
+      if (pending.length) return; // Wait for the callback to finish
+      if (missing.length) {
+        console.error("Failed to load icons:", missing);
+        reject({ loaded, missing });
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+interface MenuOption {
+  title: string;
+  description: string;
+  icon: string;
+  route: string;
+}
+
+const hoveredIndex = ref<number | null>(null);
+
+const menuOptions: MenuOption[] = [
+  {
+    title: "Suas informações",
+    description: "Suas preferências de contato e perfil",
+    icon: "ri:bank-card-line",
+    route: "/profile",
+  },
+  {
+    title: "Segurança",
+    description: "Suas medidas de segurança",
+    icon: "ri:lock-2-line",
+    route: "/profile",
+  },
+  {
+    title: "Privacidade",
+    description: "Quais conteúdos mostrar ou não mostrar",
+    icon: "ri:user-4-line",
+    route: "/profile",
+  },
+  {
+    title: "Comissões",
+    description: "Histórico de envios de Comissões",
+    icon: "ri:artboard-line",
+    route: "/profile",
+  },
+  {
+    title: "Artes Favoritas",
+    description: "Artes favoritas em 'Galeria'",
+    icon: "ri:heart-3-line",
+    route: "/gallery",
+  },
 ];
+
+onMounted(async () => {
+  try {
+    await preloadIcons();
+    console.log("All icons preloaded!");
+  } catch (err) {
+    console.error("Error preloading icons:", err);
+  }
+});
 </script>
 
 <style lang="scss" scoped></style>

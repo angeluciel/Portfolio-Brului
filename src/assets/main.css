@@ -13,6 +13,8 @@
   --color-login-bg: #f7f7fb;
   --color-charcoal-10: rgba(0, 0, 0, 0.1);
   --color-charcoal-50: rgba(0, 0, 0, 0.5);
+
+  --color-gold-100: #ba8d2e;
   --color-gold-200: #f3c463;
   --color-gold-500: #ba8d2e;
   --color-gold-600: #866115;
@@ -55,6 +57,10 @@
   .button-anim-slide {
     @apply absolute inset-0 translate-y-full bg-[rgba(69,69,86,.5)] transition-transform duration-300 group-hover:translate-y-0 active:bg-[rgba(69,69,86,.7)];
   }
+
+  .gallery-image {
+    @apply w-[300px] h-auto block transition-transform duration-150 ease-in-out hover:scale-104 cursor-pointer;
+  }
 }
 
 * {
@@ -71,4 +77,42 @@
 
 a {
   color: inherit;
+}
+
+@layer utilities {
+  .animate {
+    @apply bg-black;
+  }
+}
+
+@utility utils {
+  @layer utilities {
+    .header-link {
+      @apply relative text-black no-underline;
+    }
+    .header-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0%;
+      background-color: black;
+      transition: width 0.3s ease;
+    }
+
+    .header-link:hover::after {
+      width: 100%;
+    }
+
+    .header-link.active {
+      color: var(--color-gold-100);
+      font-weight: 700;
+    }
+
+    .header-link.active:hover::after {
+      background-color: var(--color-gold-100);
+      width: 100%;
+    }
+  }
 }

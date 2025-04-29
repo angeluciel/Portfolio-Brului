@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="sage-image">
-      <img src="../assets/images/Sage.jpg" alt="pfp" />
+      <img src="/images/Sage.jpg" alt="pfp" />
     </div>
   </div>
   <FooterBar></FooterBar>

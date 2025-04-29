@@ -8,7 +8,7 @@
         class="w-[48px] h-[48px] overflow-hidden rounded-full"
       >
         <img
-          src="../../assets/images/first-second.jpg"
+          src="/images/first-second.jpg"
           alt="bruna"
           class="size-[68px] object-cover object-[80%_-90%] scale-200"
         />

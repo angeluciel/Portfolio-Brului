@@ -74,7 +74,7 @@
     </div>
     <div class="box-border h-dvh w-[55dvw] p-0 m-0 overflow-hidden">
       <img
-        src="@/assets/images/first-first.jpg"
+        src="/images/first-first.jpg"
         alt="fotinha"
         class="object-right-bottom h-full w-full object-cover"
       />
