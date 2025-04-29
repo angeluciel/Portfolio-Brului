@@ -80,21 +80,21 @@ const toggleZoom = () => {
 
 const columns = [
   [
-    "../../src/assets/images/gostosao_ouro.jpg",
-    "../../src/assets/images/first-first.jpg",
-    "../../src/assets/images/third-first.jpg",
-    "../../src/assets/images/gostosao_loiro.jpg",
+    "/images/gostosao_ouro.jpg",
+    "/images/first-first.jpg",
+    "/images/third-first.jpg",
+    "/images/gostosao_loiro.jpg",
   ],
   [
-    "../../src/assets/images/cultivador_branco.jpg",
-    "../../src/assets/images/wallpaper1.png",
-    "../../src/assets/images/second-first.jpg",
-    "../../src/assets/images/OC_big.jpg",
+    "/images/cultivador_branco.jpg",
+    "/images/wallpaper1.png",
+    "/images/second-first.jpg",
+    "/images/OC_big.jpg",
   ],
   [
-    "../../src/assets/images/second-second.jpg",
-    "../../src/assets/images/first-second.jpg",
-    "../../src/assets/images/last-last.jpg",
+    "/images/second-second.jpg",
+    "/images/first-second.jpg",
+    "/images/last-last.jpg",
   ],
 ];
 

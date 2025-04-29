@@ -35,7 +35,7 @@
     <!-- I M A G E -->
     <div class="flex h-full !w-[100dvw]">
       <img
-        src="../../assets/images/second-first.jpg"
+        src="/images/second-first.jpg"
         alt="drawing"
         class="object-cover object-right-top h-full w-full rounded-4xl"
       />

@@ -4,7 +4,7 @@
   >
     <div class="box-border h-dvh w-[45dvw] p-0 m-0 overflow-hidden">
       <img
-        src="@/assets/images/third-first.jpg"
+        src="/images/third-first.jpg"
         alt="fotinha"
         class="object-cover object-right-top h-full w-full"
       />
