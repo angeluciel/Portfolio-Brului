@@ -1,11 +1,7 @@
 <template>
   <HeaderBar />
   <!-- A D M I N -->
-  <div class="flex justify-end w-dvw !px-20">
-    <div>
-      <div>upload new image</div>
-    </div>
-  </div>
+  <div class="w-dvw"></div>
   <!--C O N T E N T-->
   <div class="flex gap-4 !px-5 items-top justify-center w-full !py-12">
     <div
@@ -26,7 +22,7 @@
   <FooterBar />
   <div
     v-if="isModalOpen"
-    class="fixed w-dvw h-dvh inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50"
+    class="fixed w-dvw h-dvh inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50 !px-12"
     @click="closeModal"
   >
     <div
@@ -36,7 +32,12 @@
       <img
         :src="currentImage"
         alt="Current Image"
-        class="max-w-full max-h-[90vh] rounded-lg"
+        class="rounded-lg transition-transform duration-300 cursor-zoom-in"
+        :class="{
+          'max-w-full max-h-[90vh]': !isZoomed,
+          'scale-150 cursor-zoom-out': isZoomed,
+        }"
+        @click.stop="toggleZoom"
       />
     </div>
     <!-- Close Button -->
@@ -68,21 +69,32 @@ import { ref, computed } from "vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
 
+// Z O O M 🔎
+const isZoomed = ref(false);
+
+const toggleZoom = () => {
+  isZoomed.value = !isZoomed.value;
+};
+
+// Z O O M 🔎❌ E N D
+
 const columns = [
   [
+    "../../src/assets/images/gostosao_ouro.jpg",
     "../../src/assets/images/first-first.jpg",
-    ".../../src/assets/images/first-second.jpg",
-    "../../src/assets/images/second-first.jpg",
+    "../../src/assets/images/third-first.jpg",
+    "../../src/assets/images/gostosao_loiro.jpg",
   ],
   [
-    "../../src/assets/images/third-first.jpg",
-    "../../src/assets/images/last-last.jpg",
-    "../../src/assets/images/third-first.jpg",
-  ],
-  [
+    "../../src/assets/images/cultivador_branco.jpg",
     "../../src/assets/images/wallpaper1.png",
-    "../../src/assets/images/first-second.jpg",
     "../../src/assets/images/second-first.jpg",
+    "../../src/assets/images/OC_big.jpg",
+  ],
+  [
+    "../../src/assets/images/second-second.jpg",
+    "../../src/assets/images/first-second.jpg",
+    "../../src/assets/images/last-last.jpg",
   ],
 ];
 
