@@ -9,7 +9,15 @@
         <div
           class="flex !px-24 items-center gap-5 !py-2 w-full bg-white rounded-xl"
         >
-          <div class="relative flex justify-center items-center group">
+          <div v-if="loading">
+            <div
+              class="flex justify-center items-center !h-16 !w-16 rounded-full bg-gray-400"
+            ></div>
+          </div>
+          <div
+            v-else-if="user"
+            class="relative flex justify-center items-center group"
+          >
             <img
               src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
               alt="pfp"
@@ -26,13 +34,24 @@
             </div>
           </div>
 
-          <div class="flex flex-col justify-start items-start">
-            <h2 class="text-2xl text-gray-800 font-semibold">
-              Joãozinho Bacano da Silva Sauro
+          <div
+            class="flex flex-col w-full justify-start items-start gap-2"
+            v-if="loading"
+          >
+            <div class="w-80 h-8 bg-gray-800 opacity-50 rounded-full"></div>
+            <div class="w-40 h-5 bg-gray-400 opacity-50 rounded-full"></div>
+          </div>
+          <div
+            v-else
+            class="flex flex-col w-full justify-start items-start gap-2"
+          >
+            <h2 v-if="error">{{ error }}</h2>
+            <h2 v-else-if="user" class="text-2xl text-gray-800 font-semibold">
+              {{ user.name }}
             </h2>
-            <span class="text-xl font-bold text-gray-400"
-              >jao.bacano@silva.tv</span
-            >
+            <span class="text-xl font-bold text-gray-400">{{
+              user.email
+            }}</span>
           </div>
         </div>
       </div>
@@ -100,10 +119,65 @@
 </template>
 
 <script setup lang="ts">
-import HeaderBar from "@/components/layout/HeaderBar.vue"; //nvm the error it means nothing
+import HeaderBar from "@/components/layout/HeaderBar.vue"; // nvm the error it means nothing
 import FooterBar from "@/components/layout/FooterBar.vue";
 import { Icon, loadIcons } from "@iconify/vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+
+interface User {
+  name: string;
+  email: string;
+  bio?: string;
+}
+
+const route = useRoute();
+
+const user = ref<User | null>(null);
+const loading = ref<boolean>(true);
+const error = ref<string | null>(null);
+
+async function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchUserProfile(): Promise<void> {
+  loading.value = true;
+  error.value = null;
+
+  try {
+    await sleep(2000);
+
+    if (route.params.id) {
+      // usuário simulado
+      // const response = await axios.get(`/api/user/${route.params.id}`)
+      // user.value = response.data
+      user.value = {
+        name: "Usuário Público",
+        email: "publico@email.com",
+        bio: "Perfil público carregado via ID.",
+      };
+    } else {
+      // usuario dono
+      // const response = await axios.get('/api/user/me')
+      // user.value = response.data
+      user.value = {
+        name: "João Bacanildo da Silva Sauro",
+        email: "jao@bacano@silva.tv",
+        bio: "Esse é o perfil pessoal.",
+      };
+    }
+  } catch (err: unknown) {
+    error.value = "Erro ao carregar perfil.";
+  } finally {
+    loading.value = false;
+  }
+}
+
+onMounted(fetchUserProfile);
+watch(() => route.params.id, fetchUserProfile);
+
+// ======================================
 
 const iconList = [
   "ri:bank-card-line",
