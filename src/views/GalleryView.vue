@@ -37,6 +37,7 @@
           'max-w-full max-h-[90vh]': !isZoomed,
           'scale-150 cursor-zoom-out': isZoomed,
         }"
+        :style="isZoomed ? { transformOrigin: zoomOrigin } : {}"
         @click.stop="toggleZoom"
       />
     </div>
@@ -72,7 +73,17 @@ import FooterBar from "@/components/layout/FooterBar.vue";
 // Z O O M 🔎
 const isZoomed = ref(false);
 
-const toggleZoom = () => {
+const zoomOrigin = ref("center center");
+
+const toggleZoom = (event) => {
+  if (!isZoomed.value) {
+    const img = event.target;
+    const rect = img.getBoundingClientRect();
+    const offsetX = ((event.clientX - rect.left) / rect.width) * 100;
+    const offsetY = ((event.clientY - rect.top) / rect.height) * 100;
+
+    zoomOrigin.value = `${offsetX}% ${offsetY}%`;
+  }
   isZoomed.value = !isZoomed.value;
 };
 
