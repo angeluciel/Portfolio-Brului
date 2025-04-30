@@ -39,8 +39,14 @@ const slides = ref([
       "Let your ideas take flight with a custom piece that translates your emotions and will into an illustration.",
   },
   {
-    background: "/images/wallpaper3.jpg",
+    background: "/images/OC_big.jpg",
     title: "Slide 3",
+    caption:
+      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
+  {
+    background: "/images/gostosao_loiro.jpg",
+    title: "Slide 4",
     caption:
       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
   },

@@ -7,7 +7,7 @@
     <div class="flex flex-row items-center justify-end gap-4">
       <router-link
         to="/"
-        class="w-[48px] h-[48px] overflow-hidden rounded-full z-90"
+        class="w-[48px] h-[48px] overflow-hidden rounded-full z-40"
       >
         <img
           src="/images/gostosao_ouro.jpg"
@@ -17,19 +17,19 @@
       </router-link>
       <router-link
         to="/"
-        class="header-item z-90"
+        class="header-item z-40"
         :class="{ 'header-item-active': route.path === '/' }"
         >home</router-link
       >
       <router-link
         to="/prices"
-        class="header-item z-90"
+        class="header-item z-40"
         :class="{ 'header-item-active': route.path === '/prices' }"
         >prices</router-link
       >
       <router-link
         to="/contacts"
-        class="header-item z-90"
+        class="header-item z-40"
         :class="{ 'header-item-active': route.path === '/contacts' }"
         >contacts</router-link
       >
