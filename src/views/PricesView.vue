@@ -17,52 +17,12 @@ import FooterBar from "@/components/layout/FooterBar.vue";
       </div>
     </div>
     <div class="card_section">
-      <!-- Card da esquerda -->
-      <CardTemplateVue
-        title="Lineart + Color"
-        subtitle="For an affordable luxury."
-        price="R$25 ~ R$70"
-        :topics="[
-          'Colored Pieces',
-          'Impeccable Lineart',
-          'Choose your Size:',
-          'Full Body / Half Body',
-          'Face Frame',
-        ]"
-        variant="regular"
-      />
-
-      <!-- Card do meio (maior e com estilo especial) -->
-      <CardTemplateVue
-        title="Complete Render"
-        subtitle="For the best you can get"
-        price="R$46 ~ R$100"
-        :topics="[
-          'Fully Rendered Art',
-          'Detailed Pieces',
-          'Choose your Size:',
-          'Full Body / Half Body',
-          'Face Frame',
-        ]"
-        variant="main"
-      />
-
-      <!-- Card da direita -->
-      <CardTemplateVue
-        title="Other"
-        subtitle="For different Ideas"
-        price="R$5 ~ R$100"
-        :topics="[
-          'Scenery',
-          'Complex Background',
-          'Base Color Backgrounds',
-          'Icons',
-        ]"
-        variant="regular"
-      />
+      <CardTemplateVue />
     </div>
   </main>
-  <FooterBar />
+  <div class="hidden sm:block">
+    <FooterBar />
+  </div>
 </template>
 
 <style lang="scss" scoped>

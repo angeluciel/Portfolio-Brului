@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white h-[10dvh] z-90"
+    class="flex flex-row justify-between items-center !px-5 sm:!px-20 !py-8 w-full bg-white h-[10dvh] z-90"
   >
     <!--O P T I O N S-->
 

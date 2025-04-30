@@ -1,196 +1,60 @@
 <template>
-  <div :class="['card', variantClass]">
-    <div class="top">
-      <div class="title">{{ title }}</div>
-      <div class="price">
-        <div class="price-tags">
-          <span>Starting Price</span>
-          <h3>{{ price }}</h3>
+  <div class="mobile-card sm:!min-w-auto sm:h-auto">
+    <!-- T I T L E -->
+    <div class="flex flex-col items-start text-charcoal">
+      <h1 class="text-4xl !font-abril">Complete Piece</h1>
+      <h2 class="text-2xl !font-abril">(Full body)</h2>
+    </div>
+    <!-- M I D   S E C T I O N -->
+    <div class="flex gap-3 items-center">
+      <!-- left -->
+      <div class="flex flex-col">
+        <!-- TITLE -->
+        <div
+          class="flex justify-center items-center gap-4 !px-3 !py-1 bg-[#BF953D] rounded-t-xl"
+        >
+          <h3 class="!font-abril text-white text-xl text-nowrap">
+            Premium Package
+          </h3>
+          <Icon
+            icon="ri:star-line"
+            width="24"
+            height="24"
+            style="color: #ffffff"
+          />
         </div>
+
+        <img
+          class="border-2 border-[#BF953D] rounded-b-xl md:w-[300px]"
+          src="/images/last-last.jpg"
+          alt="fullbody"
+        />
       </div>
-      <div class="subtitle">
-        <div class="subtext">{{ subtitle }}</div>
+      <!-- right -->
+      <div class="hidden md:flex flex-col max-w-28 items-start !pt-5">
+        <img src="/images/discount.png" alt="discount" class="" />
       </div>
     </div>
-    <div class="bottom">
-      <div class="topics">
-        <ul class="list">
-          <li v-for="(topic, index) in topics" :key="index">
-            <span class="plus">+</span>
-            <span>{{ topic }}</span>
-          </li>
-        </ul>
+    <!--B O T T O M -->
+    <div class="flex w-full justify-between items-center">
+      <!-- text -->
+      <div class="flex flex-wrap gap-1 items-end justify-start w-full">
+        <span class="text-base text-charcoal font-bold">From R$120.00 for</span>
+        <span class="text-2xl text-[#BF953D] font-bold">R$100</span>
       </div>
-      <div class="comission-now flex justify-center items-center text-center">
-        <router-link to="/prices/newComission" class="button"
-          >Order now!</router-link
-        >
-      </div>
+      <!-- button -->
+      <router-link
+        to="/prices/newComission"
+        class="flex justify-end bg-amber-950 rounded-2xl !p-3 w-auto"
+      >
+        <span class="text-[#F5C1C0] font-bold text-nowrap">Get Yours</span>
+      </router-link>
     </div>
   </div>
 </template>
 
-<script setup>
-import { computed } from "vue";
-import { defineProps } from "vue";
-
-const props = defineProps({
-  title: String,
-  subtitle: String,
-  price: String,
-  topics: Array,
-  variant: {
-    type: String,
-    default: "regular", // aceita "regular" ou "main"
-  },
-});
-
-const variantClass = computed(() => {
-  return props.variant === "main" ? "card-main" : "card-regular";
-});
+<script setup lang="ts">
+import { Icon } from "@iconify/vue";
 </script>
 
-<style lang="scss" scoped>
-@use "@/assets/variables.scss" as var;
-
-.card {
-  @extend %card-style;
-  background: var.$secondary-bg;
-  height: 524px;
-
-  .top {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    .title {
-      display: flex;
-      font-weight: var.$xbold-weight;
-      flex-direction: column;
-      align-items: center;
-      justify-content: end;
-      position: relative;
-      height: 74px;
-      font-size: 22px;
-      width: 100%;
-    }
-
-    .price {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-
-      .price-tags {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-
-        span {
-          opacity: 50%;
-          font-weight: var.$xbold-weight;
-          font-size: 16px;
-        }
-
-        h3 {
-          font-size: 36px;
-          font-weight: var.$xbold-weight;
-        }
-      }
-    }
-
-    .subtitle {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      align-items: end;
-      height: 82px;
-      text-align: center;
-
-      .subtext {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding: 12px;
-        border-bottom: 1px solid var.$text-color;
-        gap: 12px;
-        font-size: 22px;
-        font-weight: var.$semibold-weight;
-      }
-    }
-  }
-
-  &.card-regular {
-    @extend %card-style;
-    background: var.$secondary-bg;
-    height: 524px;
-
-    .button {
-      @include var.button-style(#d8a0a0, #fefefe, #d8a0a0);
-    }
-  }
-
-  &.card-main {
-    @extend %card-style;
-    background: var.$secondary-hg-bg;
-    height: 560px;
-
-    .bottom {
-      .topics {
-        .list {
-          .plus {
-            color: #f9e9c9;
-          }
-        }
-      }
-    }
-
-    .button {
-      @include var.button-style(#fefefe, var.$secondary-hg-bg, #fefefe);
-    }
-  }
-}
-
-.bottom {
-  display: flex;
-  flex-direction: column;
-  height: 287px;
-  gap: 8px;
-  align-items: center;
-  justify-content: end;
-
-  .topics {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    width: fit-content;
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      justify-content: start;
-      width: fit-content;
-
-      .plus {
-        color: #ba8d2e;
-        font-weight: var.$xbold-weight;
-      }
-    }
-  }
-
-  .comission-now {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    gap: 12px;
-    padding: 24px 16px;
-  }
-}
-</style>
+<style scoped></style>
