@@ -33,6 +33,10 @@
 }
 
 @layer components {
+  .no-scrollbar {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  }
+
   .header-item {
     @apply hidden sm:flex !p-1.5 cursor-pointer relative transition-all text-charcoal font-medium !text-[1.12em] uppercase 
       active:!text-gold-500 active:font-bold active:hover:after:bg-gold-500 

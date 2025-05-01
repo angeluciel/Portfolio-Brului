@@ -6,6 +6,7 @@
       <h2 class="text-2xl !font-abril">(Full body)</h2>
     </div>
     <!-- M I D   S E C T I O N -->
+    <!--TODO: MAKE IT SMALLER, MOBILE CANT SEE THE CARD WHEN THEY OPEN THE VIEW-->
     <div class="flex gap-3 items-center">
       <!-- left -->
       <div class="flex flex-col">
