@@ -34,7 +34,7 @@
 
 @layer components {
   .header-item {
-    @apply !p-1.5 cursor-pointer relative transition-all text-charcoal font-medium !text-[1.12em] uppercase 
+    @apply hidden sm:flex !p-1.5 cursor-pointer relative transition-all text-charcoal font-medium !text-[1.12em] uppercase 
       active:!text-gold-500 active:font-bold active:hover:after:bg-gold-500 
       hover:after:w-full 
       after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-charcoal after:transition-all after:duration-300 after:ease-in-out;
@@ -62,7 +62,7 @@
     @apply w-[300px] h-auto block transition-transform duration-150 ease-in-out hover:scale-104 cursor-pointer;
   }
   .mobile-card {
-    @apply flex flex-col justify-between !py-4 !px-3 bg-[linear-gradient(to_top,_#F5BDBD,_#EBE5D6)] rounded-2xl gap-5 min-w-[90dvw] shadow-[1px_1px_8px_2px_rgba(71,69,69,0.25)];
+    @apply flex flex-col justify-between !py-4 !px-3 bg-[linear-gradient(to_top,_#F5BDBD,_#EBE5D6)] rounded-2xl gap-5 min-w-[90dvw] shadow-[1px_1px_8px_2px_rgba(71,69,69,0.25)] hover:scale-101 transition-all duration-250 hover:shadow-[1px_1px_16px_2px_rgba(71,69,69,0.3)];
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <HeaderBar />
+  <HeaderBar_mobile />
   <!-- A D M I N -->
   <div class="w-dvw"></div>
   <!--C O N T E N T-->
@@ -69,6 +69,7 @@
 import { ref, computed } from "vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
+import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 
 // Z O O M 🔎
 const isZoomed = ref(false);

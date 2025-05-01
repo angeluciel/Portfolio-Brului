@@ -1,12 +1,13 @@
 <script setup>
 import CardTemplateVue from "@/components/base/CardTemplate.vue";
 import HeaderBar from "../components/layout/HeaderBar.vue";
+import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
 </script>
 
 <template>
   <main>
-    <HeaderBar />
+    <HeaderBar_mobile class="sm:hidden" />
     <div class="text">
       <div class="header_comission">WANT TO COMISSION?</div>
       <div class="bottom_text">

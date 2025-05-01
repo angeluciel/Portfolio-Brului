@@ -90,19 +90,8 @@ function handleLogin() {
     "https://media.tenor.com/4MJy0Q1rejAAAAAe/guts-pfp.png"
   );
 }
-function handleLogout() {
-  userStore.logOut();
-}
-
-const NavBar = () => {
-  useState;
-};
 
 const activeLink = ref("home");
-
-function setActiveLink(link) {
-  activeLink.value = link;
-}
 </script>
 
 <style lang="scss" scoped></style>
