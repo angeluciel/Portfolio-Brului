@@ -1,47 +1,52 @@
 <template>
-  <div class="mobile-card sm:!min-w-auto sm:h-auto">
+  <div class="mobile-card sm:!min-w-[300px] sm:h-auto w-[320px]">
     <!-- T I T L E -->
-    <div class="flex flex-col items-start text-charcoal">
-      <h1 class="text-4xl !font-abril">Complete Piece</h1>
-      <h2 class="text-2xl !font-abril">(Full body)</h2>
+    <div class="flex flex-col items-start text-charcoal w-full">
+      <h1 class="text-3xl !font-abril">{{ title }}</h1>
+      <h2 class="text-xl !font-abril">{{ subtitle }}</h2>
     </div>
     <!-- M I D   S E C T I O N -->
     <!--TODO: MAKE IT SMALLER, MOBILE CANT SEE THE CARD WHEN THEY OPEN THE VIEW-->
-    <div class="flex gap-3 items-center">
+    <div
+      class="flex gap-3 justify-between items-center max-h-[320px] sm:max-h-[320px] w-full"
+    >
       <!-- left -->
-      <div class="flex flex-col">
-        <!-- TITLE -->
-        <div
-          class="flex justify-center items-center gap-4 !px-3 !py-1 bg-[#BF953D] rounded-t-xl"
-        >
-          <h3 class="!font-abril text-white text-xl text-nowrap">
-            Premium Package
-          </h3>
-          <Icon
-            icon="ri:star-line"
-            width="24"
-            height="24"
-            style="color: #ffffff"
+      <div class="flex flex-col w-full items-start max-h-[280px]">
+        <!-- container that aligns image + title -->
+        <div class="flex flex-col w-[200px] h-fit">
+          <!-- TITLE -->
+          <div
+            class="flex justify-center sm:full items-center gap-2 !px-3 !py-1 bg-[#BF953D] rounded-t-xl w-full"
+          >
+            <h3 class="text-white text-base font-semibold text-nowrap">
+              {{ packageTitle }}
+            </h3>
+            <Icon
+              icon="ri:star-line"
+              width="16"
+              height="16"
+              style="color: #ffffff"
+            />
+          </div>
+
+          <img
+            class="border-2 border-[#BF953D] rounded-b-xl w-full h-[240px] object-cover object-[100%_0%]"
+            :src="imageSrc"
+            alt="fullbody"
           />
         </div>
-
-        <img
-          class="border-2 border-[#BF953D] rounded-b-xl md:w-[300px]"
-          src="/images/last-last.jpg"
-          alt="fullbody"
-        />
-      </div>
-      <!-- right -->
-      <div class="hidden md:flex flex-col max-w-28 items-start !pt-5">
-        <img src="/images/discount.png" alt="discount" class="" />
       </div>
     </div>
     <!--B O T T O M -->
-    <div class="flex w-full justify-between items-center">
+    <div class="flex w-full gap-8 justify-between items-center">
       <!-- text -->
-      <div class="flex flex-wrap gap-1 items-end justify-start w-full">
-        <span class="text-base text-charcoal font-bold">From R$120.00 for</span>
-        <span class="text-2xl text-[#BF953D] font-bold">R$100</span>
+      <div class="flex flex-col gap-1 items-start justify-start w-fit">
+        <span class="text-sm text-gray-600 font-bold"
+          >From R${{ oldPrice }} /piece</span
+        >
+        <span class="text-base text-charcoal font-bold"
+          >for R${{ actualPrice }}</span
+        >
       </div>
       <!-- button -->
       <router-link
@@ -56,6 +61,15 @@
 
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+
+defineProps<{
+  title: string;
+  subtitle: string;
+  packageTitle: string;
+  imageSrc: string;
+  oldPrice: string;
+  actualPrice: string;
+}>();
 </script>
 
 <style scoped></style>
