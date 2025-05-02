@@ -139,6 +139,8 @@ import SliderComponent from "@/components/layout/SliderComponent.vue";
 import { Icon } from "@iconify/vue";
 import { ref, watch } from "vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
+
+const count = ref(0);
 </script>
 
 <style lang="scss" scoped>

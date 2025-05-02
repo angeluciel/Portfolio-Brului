@@ -80,6 +80,7 @@
         />
 
         <Icon
+          v-else
           icon="ri:user-3-line"
           width="32"
           height="32"
