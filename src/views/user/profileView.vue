@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#C6C5D4]">
-    <HeaderBar />
+    <HeaderBar_mobile />
     <!-- Content -->
     <div class="flex flex-col w-full justify-center items-center !py-20 gap-5">
       <!--top content-->
@@ -119,11 +119,12 @@
 </template>
 
 <script setup lang="ts">
-import HeaderBar from "@/components/layout/HeaderBar.vue"; // nvm the error it means nothing
+// nvm the error it means nothing
 import FooterBar from "@/components/layout/FooterBar.vue";
 import { Icon, loadIcons } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
+import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 
 interface User {
   name: string;

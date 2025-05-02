@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row justify-between items-center !px-20 !py-8 w-full bg-white h-[10dvh] z-90"
+    class="flex flex-row justify-between items-center !px-5 sm:!px-20 !py-8 w-full bg-white h-[10dvh] z-90"
   >
     <!--O P T I O N S-->
 
@@ -90,19 +90,8 @@ function handleLogin() {
     "https://media.tenor.com/4MJy0Q1rejAAAAAe/guts-pfp.png"
   );
 }
-function handleLogout() {
-  userStore.logOut();
-}
-
-const NavBar = () => {
-  useState;
-};
 
 const activeLink = ref("home");
-
-function setActiveLink(link) {
-  activeLink.value = link;
-}
 </script>
 
 <style lang="scss" scoped></style>
