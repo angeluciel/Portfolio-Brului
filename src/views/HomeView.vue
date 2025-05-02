@@ -1,7 +1,7 @@
 <template>
   <HeaderBar_mobile class="z-90"></HeaderBar_mobile>
   <div
-    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80"
+    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80 md:!pt-[120px]"
   >
     <div
       class="hidden sm:flex lg:!h-[650px] w-full max-w-[40dvw] md:!h-[450px] z-80"

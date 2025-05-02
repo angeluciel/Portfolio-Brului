@@ -68,6 +68,10 @@
   .mobile-card {
     @apply flex flex-col justify-between items-center !py-4 !px-3 bg-[linear-gradient(to_top,_#F5BDBD,_#EBE5D6)] rounded-2xl gap-3 min-w-[80dvw] shadow-[1px_1px_8px_2px_rgba(71,69,69,0.25)] hover:scale-101 transition-all duration-250 hover:shadow-[1px_1px_16px_2px_rgba(71,69,69,0.3)];
   }
+
+  .floating-navbar {
+    @apply bg-black rounded-lg border text-white !px-4;
+  }
 }
 
 * {

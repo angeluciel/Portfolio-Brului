@@ -73,9 +73,9 @@ const showButtons = ref(false);
 
 <template>
   <main>
-    <HeaderBar_mobile class="sm:hidden" />
+    <HeaderBar_mobile />
 
-    <div class="flex flex-col gap-4 w-dvw !pt-[10%] md:!pt-12">
+    <div class="flex flex-col gap-4 w-dvw !pt-[10%] md:!pt-[120px]">
       <div
         class="relative flex flex-col justify-between gap-4 items-center w-full !pl-6 sm:!px-24"
       >

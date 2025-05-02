@@ -2,7 +2,9 @@
   <div class="bg-[#C6C5D4]">
     <HeaderBar_mobile />
     <!-- Content -->
-    <div class="flex flex-col w-full justify-center items-center !py-20 gap-5">
+    <div
+      class="flex flex-col w-full justify-center items-center !py-20 gap-5 md:!pt-[120px]"
+    >
       <!--top content-->
       <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
         <!--head-->
