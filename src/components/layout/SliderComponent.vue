@@ -29,7 +29,7 @@ import SlideItem from "../base/SliderItem.vue";
 const slides = ref([
   {
     background: "/images/wallpaper1.png",
-    title: "Empower your Vision",
+    title: "Empower your vision",
     caption: "Step into a World where creativity knows no bounds.",
   },
   {
@@ -40,15 +40,15 @@ const slides = ref([
   },
   {
     background: "/images/OC_big.jpg",
-    title: "Slide 3",
+    title: "Unleash your colors",
     caption:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "Discover the power of personalized art that reflects your identity.",
   },
   {
     background: "/images/gostosao_loiro.jpg",
-    title: "Slide 4",
+    title: "Shape your imagination",
     caption:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "Bring to life the scenes you've always envisioned, now on canvas.",
   },
 ]);
 
