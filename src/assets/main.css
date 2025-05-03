@@ -38,7 +38,15 @@
   }
 
   .floating-nav {
-    @apply bg-black rounded-lg border text-white;
+    @apply bg-black rounded-lg border [&_*]:!text-violet-50;
+  }
+
+  .contacts_heading {
+    @apply !font-abril text-5xl md:text-8xl;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
   }
 
   .header-item {
@@ -74,25 +82,23 @@
   }
 }
 
-* {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+@layer base {
+  * {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  text-decoration: none;
-  box-sizing: border-box;
-}
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
 
-a {
-  color: inherit;
-}
-
-@layer utilities {
-  .animate {
-    @apply bg-black;
+  @layer utilities {
+    .animate {
+      @apply bg-black;
+    }
   }
 }
 

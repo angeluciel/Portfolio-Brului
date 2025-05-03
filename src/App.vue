@@ -15,4 +15,5 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
+// thank you javascript mastery for the design ideas and inspirations.
 </style>
