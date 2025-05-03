@@ -1,7 +1,7 @@
 <template>
   <HeaderBar_mobile class="z-90"></HeaderBar_mobile>
   <div
-    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80"
+    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80 !py-16"
   >
     <div
       class="hidden sm:flex lg:!h-[650px] w-full max-w-[40dvw] md:!h-[450px] z-80"
@@ -133,12 +133,12 @@
 </template>
 
 <script setup>
-import HeaderBar from "@/components/layout/HeaderBar.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
 import SliderComponent from "@/components/layout/SliderComponent.vue";
 import { Icon } from "@iconify/vue";
 import { ref, watch } from "vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
+import gsap from "gsap";
 </script>
 
 <style lang="scss" scoped>

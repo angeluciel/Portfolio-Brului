@@ -1,13 +1,15 @@
-import { ref, watch } from "vue";
-import { useFormStore } from "@/stores/formStore";
+import { ref, readonly } from "vue";
 
-export function useFormField(fieldKey) {
-  const formStore = useFormStore();
-  const fieldValue = ref(formStore.getAnswer(fieldKey) || "");
+function useState(initialValue) {
+  const state = ref(initialValue);
 
-  watch(fieldValue, (newVal) => {
-    formStore.updateAnswer(fieldKey, newVal);
-  });
+  const setState = (newValue) => {
+    if (typeof newValue === "function") {
+      state.value = newValue(state.value);
+    } else {
+      state.value = newValue;
+    }
+  };
 
-  return { fieldValue };
+  return [readonly(state), setState];
 }
