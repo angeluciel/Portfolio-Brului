@@ -3,7 +3,7 @@
   <!-- A D M I N -->
   <div class="w-dvw"></div>
   <!--C O N T E N T-->
-  <div class="flex gap-4 !px-5 items-top justify-center w-full !py-12">
+  <div class="flex gap-4 !px-5 items-top justify-center w-full !py-20">
     <div
       v-for="(col, colIndex) in columns"
       :key="colIndex"
@@ -22,7 +22,7 @@
   <FooterBar />
   <div
     v-if="isModalOpen"
-    class="fixed w-dvw h-dvh inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50 !px-12"
+    class="fixed w-dvw h-dvh inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-999 !px-12"
     @click="closeModal"
   >
     <div

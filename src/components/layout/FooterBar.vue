@@ -1,28 +1,30 @@
 <template>
   <!-- T O T A L   H E A D I N G-->
-  <div class="w-full bg-home-bg-500">
-    <!-- TOP CONTENT -->
-
+  <div class="w-dvw h-fit bg-home-bg-500">
     <!-- BOTTOM CONTENT-->
-    <div class="flex flex-col w-full h-[38rem] top-2 z-10">
-      <!--fint your way-->
+    <div class="flex flex-col w-full md?h-[38rem]">
+      <!--find your way-->
       <div
-        class="flex w-full bg-home-bg-500 h-full !py-16 !px-32 justify-between"
+        class="flex w-full bg-home-bg-500 h-full !py-16 !px-5 md:!px-32 md:justify-between flex-col-reverse md:flex-row md:flex-nowrap"
       >
         <!-- teste -->
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8 h-fit w-full">
           <!-- topics -->
-          <div class="flex gap-8 items-start justify-start">
+          <div
+            class="flex gap-8 items-start justify-between md:justify-start w-full"
+          >
             <!--column 1-->
             <div class="flex flex-col gap-10 justify-start items-start">
-              <h1 class="text-[2em] text-home-blue font-semibold !font-space">
+              <h1
+                class="text-[1.5em] md:text-[2em] text-home-blue font-semibold !font-space"
+              >
                 Site Map
               </h1>
               <ul>
-                <li v-for="item in siteMap" :key="item.label" class="!pb-2">
+                <li v-for="item in siteMap" :key="item.label" class="md:!pb-2">
                   <router-link
                     :to="item.to"
-                    class="!font-semibold !text-[1.2em] header-item !text-[#cccccc]"
+                    class="!font-semibold !text-[1.2em] header-item !text-[#cccccc] block"
                     >{{ item.label }}</router-link
                   >
                 </li>
@@ -30,7 +32,9 @@
             </div>
             <!--column 2-->
             <div class="flex flex-col gap-10 justify-start items-start">
-              <h1 class="text-[2em] text-home-blue font-semibold !font-space">
+              <h1
+                class="text-[1.5em] md:text-[2em] text-home-blue font-semibold !font-space"
+              >
                 Legal
               </h1>
               <ul>
@@ -47,7 +51,7 @@
           <!-- scroll button -->
           <button
             @click="scrollToTop"
-            class="flex relative gap-3 justify-center items-center rounded-lg border-2 border-home-blue cursor-pointer button-anim group active:border-gold-500"
+            class="flex relative gap-3 max-w-[360px] justify-center items-center rounded-lg border-2 border-home-blue cursor-pointer button-anim group active:border-gold-500"
           >
             <span class="button-anim-text text-[1.2em]">back to top</span>
             <Icon
@@ -60,13 +64,15 @@
           </button>
         </div>
 
-        <!--right-->
+        <!-- content -->
         <div
-          class="flex flex-col gap-8 justify-start items-start w-[35%] relative"
+          class="flex flex-col gap-8 justify-start items-start w-full md:w-[35%] relative"
         >
           <!--about heading-->
           <div class="flex justify-between items-center w-full">
-            <h1 class="!text-gold-500 !text-[3rem] font-bold !font-space">
+            <h1
+              class="!text-gold-500 !text-[2em] md:!text-[3rem] font-bold !font-space"
+            >
               About
             </h1>
             <img
@@ -76,7 +82,7 @@
             />
           </div>
           <!--Introduction-->
-          <span class="!text-home-blue text-[1.3em]"
+          <span class="!text-home-blue !text-[1.2em] md:!text-[1.3em]"
             >Hi, I'm Bruna! I'm a freelance artist and I can't wait to meet you.
             Let's illustrate your mind!</span
           >
@@ -105,19 +111,22 @@
       </div>
       <!--social media-->
       <div
-        class="flex justify-between items-center gap-14 !px-14 !py-6 bg-home-bg-200 border-t-6 border-home-bg-600 relative"
+        class="flex-center flex-wrap md:flex-nowrap md:justify-between gap-14 !px-5 md:!px-14 !py-6 bg-home-bg-200 border-t-6 border-home-bg-600 relative"
       >
         <!--left-->
-        <span class="gap-8 font-semibold text-[1.2em] !text-home-bg-600"
+        <span
+          class="gap-8 font-semibold text-[0.9em] md:text-[1.2em] !text-home-bg-600"
           >© 2025 bru__lui. Todos os direitos reservados.</span
         >
         <img
           src="/src/components/icons/icon.png"
           alt="icon"
-          class="w-[60px] h-[60px] rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+          class="md:size-[60px] size-[40px] rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
         />
         <!-- meus direitos!!! -->
-        <div class="flex gap-8 !text-home-mute font-semibold text-[1.2em]">
+        <div
+          class="flex gap-8 !text-home-mute font-semibold text-[0.9em] md:text-[1.2em]"
+        >
           <span>developed and designed by:</span>
           <div class="flex gap-4 justify-center">
             <Icon icon="ri:instagram-fill" width="24" height="24" /><span

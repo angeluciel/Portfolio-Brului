@@ -173,7 +173,7 @@ const showButtons = ref(false);
     </div>
   </main>
 
-  <div class="hidden sm:block">
+  <div>
     <FooterBar />
   </div>
 </template>

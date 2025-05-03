@@ -30,8 +30,8 @@
               class="header-item"
               :class="{ 'header-item-active': route.path === '/' }"
             >
-              home</router-link
-            >
+              home
+            </router-link>
             <router-link
               to="/contacts"
               class="header-item"
@@ -132,7 +132,7 @@ function showMobileMenu() {
 }
 // 🔴 MOBILE MENU HANDLER
 
-// USESTATE
+// 🟢 NAVBAR SCROLL
 const lastScrollY = ref(0);
 const isNavVisible = ref(true);
 const navContainerRef = ref(null);
@@ -165,6 +165,7 @@ watch(isNavVisible, (newVal) => {
     duration: 0.2,
   });
 });
+// 🔴 NAVBAR SCROLL
 </script>
 
 <style lang="scss" scoped></style>
