@@ -3,15 +3,15 @@
   <div
     class="flex flex-col sm:flex-row justify-center !py-16 !px-6 text-charcoal"
   >
-    <div class="main flex flex-col gap-20 items-start justify-start">
-      <div class="top">
-        <div class="top_text">
-          <h1>Bring your visions to life</h1>
+    <div class="flex flex-col gap-20 items-start justify-start">
+      <div class="flex flex-col gap-1 uppercase">
+        <div class="flex !py-6">
+          <h1 class="contacts_heading max-w-2xl">Bring your visions to life</h1>
         </div>
         <span>Contact me to get your very own art!</span>
       </div>
-      <div class="bottom">
-        <h3>Contacts</h3>
+      <div class="flex flex-col gap-1">
+        <h3 class="font-bold text-2xl">Contacts</h3>
         <ul class="contacts_list">
           <li>+55 (00) 9 9999-9999</li>
           <li>emailExample@mail.com</li>
@@ -46,58 +46,32 @@ import FooterBar from "@/components/layout/FooterBar.vue";
 <style lang="scss" scoped>
 @use "../assets/variables" as var;
 
-.top {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 48rem;
-  text-transform: uppercase;
+span {
+  font-size: 24px;
+}
 
-  .top_text {
+.contacts_list {
+  display: block;
+  margin: 12px 0;
+
+  li {
     display: flex;
-    padding: 24px 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    color: var.$text-color;
 
-    h1 {
-      font-family: "Abril Fatface", serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 96px;
+    #icon {
+      fill: white !important;
     }
   }
-
-  span {
-    font-size: 24px;
+  img {
+    max-width: 25px;
   }
 }
 
-.bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  .contacts_list {
-    display: block;
-    margin: 12px 0;
-
-    li {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.4rem;
-      color: var.$text-color;
-
-      #icon {
-        fill: white !important;
-      }
-    }
-    img {
-      max-width: 25px;
-    }
-  }
-
-  h3 {
-    text-transform: uppercase;
-  }
+h3 {
+  text-transform: uppercase;
 }
 
 .sage-image {
