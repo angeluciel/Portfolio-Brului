@@ -1,5 +1,5 @@
 <script setup>
-import HeaderBar from "@/components/layout/HeaderBar.vue";
+import { gsap } from "gsap";
 </script>
 
 <template>
