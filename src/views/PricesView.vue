@@ -75,7 +75,7 @@ const showButtons = ref(false);
   <main>
     <HeaderBar_mobile />
 
-    <div class="flex flex-col gap-4 w-dvw !py-24">
+    <div class="flex flex-col gap-4 w-dvw !py-24 bg-violet-50">
       <div
         class="relative flex flex-col justify-between gap-4 items-center w-full !pl-6 sm:!px-24"
       >

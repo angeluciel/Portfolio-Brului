@@ -3,7 +3,9 @@
   <!-- A D M I N -->
   <div class="w-dvw"></div>
   <!--C O N T E N T-->
-  <div class="flex gap-4 !px-5 items-top justify-center w-full !py-20">
+  <div
+    class="flex gap-4 !px-5 items-top justify-center w-full !py-20 bg-violet-50"
+  >
     <div
       v-for="(col, colIndex) in columns"
       :key="colIndex"

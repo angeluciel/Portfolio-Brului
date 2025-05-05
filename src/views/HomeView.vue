@@ -1,305 +1,242 @@
 <template>
-  <HeaderBar_mobile class="z-90"></HeaderBar_mobile>
+  <!-- L O A D I N G -->
   <div
-    class="body flex flex-row justify-center items-center gap-4 !px-4 h-[90dvh] z-80 !py-16"
+    v-if="isLoading"
+    class="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50"
   >
-    <div
-      class="hidden sm:flex lg:!h-[650px] w-full max-w-[40dvw] md:!h-[450px] z-80"
-    >
-      <img
-        src="/images/last-last.jpg"
-        alt="image"
-        class="!h-full w-auto z-80"
-      />
-    </div>
-
-    <div
-      class="right flex flex-col justify-between items-start !w-full h-full !py-5"
-    >
-      <!--T O P-->
-      <div class="flex flex-col">
-        <!--T I T L E-->
-        <div class="flex flex-col">
-          <!--B E Y O N D-->
-          <div class="beyond_box !text-charcoal relative">
-            <span class="uppercase !text-[3em] !font-bold !italic !font-josefin"
-              >Beyond The
-            </span>
-          </div>
-          <span class="uppercase !text-[8em] !font-abril leading-none"
-            >Canvas</span
-          >
-        </div>
-        <!--S U B T I T L E-->
-        <div class="flex !py-3 font-medium !text-[1.3em]">
-          <span>
-            Step into a world where your <b class="bold !italic">ideas</b> can
-            come to life,
-            <br />
-            transformed into art that goes
-            <i class="!bold text-gold-500 !italic">beyond imagination.</i>
-          </span>
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="socials">
-          <div id="container">
-            <!-- bring your visions to life button "byvtl" for short -->
-            <button class="learn-more">
-              <span class="circle" aria-hidden="true">
-                <span class="icon arrow"></span>
-              </span>
-              <router-link to="/prices" class="button-text"
-                >Bring your visions to life</router-link
-              >
-            </button>
-            <!-- end of byvtl button -->
-          </div>
-          <div class="socials">
-            <a
-              class="instagram slide"
-              href="https://www.instagram.com/bru__lui/"
-              target="_blank"
-            >
-              <fa :icon="['fab', 'instagram']" />
-            </a>
-            <a
-              href="https://twitter.com/Bru__Lui"
-              :class="{ darkMode: isDarkMode }"
-              @click="toggleDarkMode"
-              class="twitter slide"
-              target="_blank"
-            >
-              <fa :icon="['fab', 'x-twitter']" />
-            </a>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="bottom_left">
-            <div class="year_plus">
-              <Icon icon="ic:round-plus" class="icon" />
-              <div class="bottom_title text-[3em] !font-bold !italic">
-                10 years
-              </div>
-            </div>
-            <div class="!py-4 !px-8 text-[1.2em] font-semibold">
-              Of experience making my own, as well as clients' projects.
-            </div>
-          </div>
-          <div class="bottom_right">
-            <div class="year_plus">
-              <Icon icon="ic:round-plus" class="icon" />
-              <div class="bottom_title text-[3em] !font-bold !italic">200k</div>
-            </div>
-            <div class="!py-4 !px-8 text-[1.2em] font-semibold">
-              Hours of practice, studying every aspect of art I know!
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="three-body">
+      <div class="three-body__dot" />
+      <div class="three-body__dot" />
+      <div class="three-body__dot" />
     </div>
   </div>
-  <section class="slider">
-    <SliderComponent />
-  </section>
-  <section class="w-full !bg-home-bg-500">
+  <!-- P A G E -->
+
+  <div>
+    <HeaderBar_mobile />
     <div
-      class="flex flex-col w-full justify-between items-center h-[35rem] !py-32 bg-home-bg-200 rounded-b-[64px]"
+      class="relative h-dvh w-screen overflow-x-hidden bg-violet-50 overflow-y-hidden"
     >
-      <!-- heading & subheading -->
-      <div class="flex flex-col w-full items-center gap-2 text-home-blue">
-        <h1 class="!text-[5em] !font-abril">Let's paint your feelings!</h1>
-        <span class="!text-[1.5em]"
-          >Bring your imagination to life with a custom piece that speaks YOUR
-          truth</span
+      <div
+        class="relative z-10 h-full w-full overflow-hidden rounded-lg bg-blue-75"
+        ref="bgFrame"
+      >
+        <!-- background -->
+        <div>
+          <img
+            src="/images/gostosao_ouro.jpg"
+            alt="bg"
+            class="absolute inset-0 size-full object-cover object-center"
+          />
+          <div
+            class="absolute left-0 top-0 size-full object-cover object-center bg-[rgba(0,0,0,0.5)]"
+          ></div>
+        </div>
+        <h1
+          class="home-heading !font-abril absolute bottom-5 right-5 !text-violet-100 z-40 text-blue-75"
         >
+          DECIDE.
+        </h1>
+        <div class="absolute left-0 top-0 z-40 size-full">
+          <div class="mt-24 px-5 sm:px-10">
+            <h1 class="home-heading text-violet-100">
+              YOU. <br />
+              GET TO.
+            </h1>
+            <!-- B O T T O M -->
+            <div class="relative h-24">
+              <p
+                class="!mb-5 absolute max-w-xl text-black top-[2px] left-[2px] font-josefin text-[1em] md:text-[1.5em] !w-screen"
+              >
+                Step into a world where your <b>ideas</b> can come to life. Make
+                art that goes <b>beyond imagination</b>.
+              </p>
+              <p
+                class="!mb-5 absolute max-w-xl text-[#A12ED7] top-[1px] left-[1px] font-josefin text-[1em] md:text-[1.5em] !w-screen"
+              >
+                Step into a world where your <b>ideas</b> can come to life. Make
+                art that goes <b>beyond imagination</b>.
+              </p>
+              <p
+                class="!mb-5 absolute max-w-xl text-[#91E7EF] font-josefin text-[1em] md:text-[1.5em] !w-screen"
+              >
+                Step into a world where your <b>ideas</b> can come to life. Make
+                art that goes <b>beyond imagination</b>.
+              </p>
+            </div>
+            <!-- buttons -->
+            <div
+              class="flex items-center w-full justify-between md:justify-start md:gap-8 max-w-lg"
+            >
+              <buttonComponent></buttonComponent>
+              <div class="flex gap-4 md:gap-8">
+                <a
+                  class="instagram slide"
+                  href="https://www.instagram.com/bru__lui/"
+                  target="_blank"
+                >
+                  <fa :icon="['fab', 'instagram']" />
+                </a>
+                <a
+                  href="https://twitter.com/Bru__Lui"
+                  class="twitter slide"
+                  target="_blank"
+                >
+                  <fa :icon="['fab', 'x-twitter']" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- buttons -->
-      <div class="flex gap-24">
-        <router-link
-          to="/prices"
-          class="rounded-full !py-4 !px-8 bg-home-blue border-2 border-home-blue !text-home-bg-600 !font-semibold hover:bg-transparent hover:border-2 hover:border-home-blue hover:rounded-none hover:!text-home-blue transition-all ease-in-out"
-          >View Prices</router-link
-        >
-        <button
-          class="rounded-full !py-4 !px-8 !border-2 !font-semibold !text-home-blue"
-        >
-          Talk to me
-        </button>
-      </div>
+      <!-- O U T S I D E   T E X T -->
+      <h1 class="home-heading !font-abril absolute bottom-5 right-5 text-black">
+        DECIDE.
+      </h1>
     </div>
-  </section>
-  <FooterBar></FooterBar>
+    <section class="relative h-screen bg-violet-50"></section>
+    <FooterBar class="hidden" />
+  </div>
 </template>
 
 <script setup>
-import FooterBar from "@/components/layout/FooterBar.vue";
-import SliderComponent from "@/components/layout/SliderComponent.vue";
-import { Icon } from "@iconify/vue";
-import { ref, watch } from "vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
+import FooterBar from "@/components/layout/FooterBar.vue";
+import buttonComponent from "@/components/base/buttonComponent.vue";
+import { Icon } from "@iconify/vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const bgFrame = ref(null);
+const isLoading = ref(false);
+
+onMounted(() => {
+  gsap.set(bgFrame.value, {
+    clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
+    borderRadius: "0 0 40% 10%",
+  });
+
+  gsap.from(bgFrame.value, {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    borderRadius: "0 0 0 0",
+    ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: bgFrame.value,
+      start: "center center",
+      end: "bottom center",
+      scrub: true,
+    },
+  });
+});
 </script>
 
 <style lang="scss" scoped>
 @use "@/assets/variables.scss" as var;
-
-// variables for byvtl button
-$white: #fff;
-$black: #282936;
-
-@mixin transition(
-  $property: all,
-  $duration: 0.45s,
-  $ease: cubic-bezier(0.65, 0, 0.076, 1)
-) {
-  transition: $property $duration $ease;
-}
-
-.slider {
-  height: 100vh;
-}
-
-.bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-
-  .socials {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .stats {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-
-    .bottom_left {
-      border-right: 4px solid #98a3c1;
-    }
-
-    .bottom_left,
-    .bottom_right {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-
-      .year_plus {
-        display: flex;
-        align-items: center;
-        margin-left: 1rem;
-
-        .icon {
-          width: 36px;
-          height: 36px;
-        }
-      }
-    }
-  }
-}
-
-button {
+/* From Uiverse.io by G4b413l */
+/* https://uiverse.io/G4b413l/tidy-walrus-92 */
+.three-body {
+  --uib-size: 35px;
+  --uib-speed: 0.8s;
+  --uib-color: #5d3fd3;
   position: relative;
   display: inline-block;
-  cursor: pointer;
-  outline: none;
-  border: 0;
-  vertical-align: middle;
-  text-decoration: none;
-  background: transparent;
-  padding: 0;
-  font-size: inherit;
-  font-family: inherit;
-  &.learn-more {
-    width: 20rem;
-    height: auto;
-    .circle {
-      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-      position: relative;
-      display: block;
-      margin: 0;
-      width: 3rem;
-      height: 3rem;
-      background: $black;
-      border-radius: 1.625rem;
-      .icon {
-        @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        background: $white;
-        &.arrow {
-          @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-          left: 0.625rem;
-          width: 1.125rem;
-          height: 0.125rem;
-          background: none;
-          &::before {
-            position: absolute;
-            content: "";
-            top: -0.25rem;
-            right: 0.0625rem;
-            width: 0.625rem;
-            height: 0.625rem;
-            border-top: 0.125rem solid $white;
-            border-right: 0.125rem solid $white;
-            transform: rotate(45deg);
-          }
-        }
-      }
-    }
+  height: var(--uib-size);
+  width: var(--uib-size);
+  animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+}
 
-    .button-text {
-      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+.three-body__dot {
+  position: absolute;
+  height: 100%;
+  width: 30%;
+}
 
-      font-size: 1rem;
-      line-height: 1.5;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 0.75rem 0;
-      margin: 0 0 0 1.85rem;
-      color: $black;
-      font-weight: 700;
-      line-height: 1.6;
-      text-align: center;
-      text-transform: uppercase;
-    }
+.three-body__dot:after {
+  content: "";
+  position: absolute;
+  height: 0%;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: var(--uib-color);
+  border-radius: 50%;
+}
+
+.three-body__dot:nth-child(1) {
+  bottom: 5%;
+  left: 0;
+  transform: rotate(60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(1)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite ease-in-out;
+  animation-delay: calc(var(--uib-speed) * -0.3);
+}
+
+.three-body__dot:nth-child(2) {
+  bottom: 5%;
+  right: 0;
+  transform: rotate(-60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(2)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15)
+    ease-in-out;
+}
+
+.three-body__dot:nth-child(3) {
+  bottom: -5%;
+  left: 0;
+  transform: translateX(116.666%);
+}
+
+.three-body__dot:nth-child(3)::after {
+  top: 0;
+  left: 0;
+  animation: wobble2 var(--uib-speed) infinite ease-in-out;
+}
+
+@keyframes spin78236 {
+  0% {
+    transform: rotate(0deg);
   }
-  &:hover {
-    .circle {
-      width: 100%;
-      .icon {
-        &.arrow {
-          background: $white;
-          transform: translate(1rem, 0);
-        }
-      }
-    }
-    .button-text {
-      color: $white;
-    }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-@supports (display: grid) {
-  body {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 0.625rem;
-    grid-template-areas: ". main main ." ". main main .";
+@keyframes wobble1 {
+  0%,
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
   }
 
-  #container {
-    grid-area: main;
-    align-self: center;
-    justify-self: center;
+  50% {
+    transform: translateY(-66%) scale(0.65);
+    opacity: 0.8;
+  }
+}
+
+@keyframes wobble2 {
+  0%,
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(66%) scale(0.65);
+    opacity: 0.8;
   }
 }
 

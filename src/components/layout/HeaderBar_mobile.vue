@@ -11,11 +11,8 @@
           <!-- P F P -->
           <router-link
             to="/"
-            class="w-10 h-10 overflow-hidden rounded-full"
-            :class="{
-              'opacity-0': isMenuOpen,
-              'header-item-active': route.path === '/',
-            }"
+            class="w-10 h-10 overflow-hidden rounded-full hover:outline-2 hover:outline-amber-500"
+            :class="{ 'header-item-active': route.path === '/' }"
           >
             <img
               src="/images/gostosao_ouro.jpg"
@@ -35,14 +32,28 @@
             <router-link
               to="/contacts"
               class="header-item"
-              :class="{ 'header-item-active': route.path === '/contacts' }"
+              :class="[
+                route.path === '/' ? 'text-white after:bg-white' : '',
+                route.path === '/' ? 'hover:after:bg-white' : '',
+                route.path === '/' ? '!text-white' : '',
+                route.path === '/contacts' && route.path !== '/'
+                  ? 'header-item-active'
+                  : '',
+              ]"
             >
               contacts</router-link
             >
             <router-link
               to="/prices"
               class="header-item"
-              :class="{ 'header-item-active': route.path === '/prices' }"
+              :class="[
+                route.path === '/' ? 'text-white after:bg-white' : '',
+                route.path === '/' ? 'hover:after:bg-white' : '',
+                route.path === '/' ? '!text-white' : '',
+                route.path === '/prices' && route.path !== '/'
+                  ? 'header-item-active'
+                  : '',
+              ]"
             >
               prices</router-link
             >
@@ -63,14 +74,28 @@
             v-if="userStore.isLoggedIn"
             to="/profile"
             class="header-item"
-            :class="{ 'header-item-active': route.path === '/profile' }"
+            :class="[
+              route.path === '/' ? 'text-white after:bg-white' : '',
+              route.path === '/' ? 'hover:after:bg-white' : '',
+              route.path === '/' ? '!text-white' : '',
+              route.path === '/profile' && route.path !== '/'
+                ? 'header-item-active'
+                : '',
+            ]"
             >{{ userStore.username }}</router-link
           >
           <router-link
             v-else
             to="/login"
             class="header-item"
-            :class="{ 'header-item-active': route.path === '/login' }"
+            :class="[
+              route.path === '/' ? 'text-white after:bg-white' : '',
+              route.path === '/' ? 'hover:after:bg-white' : '',
+              route.path === '/' ? '!text-white' : '',
+              route.path === '/login' && route.path !== '/'
+                ? 'header-item-active'
+                : '',
+            ]"
             >sign in</router-link
           >
 
@@ -87,22 +112,34 @@
               icon="ri:user-3-line"
               width="32"
               height="32"
-              :class="isMenuOpen ? 'opacity-0' : ''"
+              :class="[
+                isMenuOpen ? 'opacity-0' : '',
+                route.path === '/' ? 'text-white' : 'text-charcoal',
+                'transition-colors duration-300',
+              ]"
             />
           </router-link>
           <Icon
             icon="ri:menu-2-fill"
             width="32"
             height="32"
-            class="md:hidden relative z-50"
+            class="md:hidden relative z-50 cursor-pointer transition-colors duration-300"
             @click="showMobileMenu"
+            :class="[
+              route.path === '/' && !isMenuOpen
+                ? 'text-white'
+                : 'text-charcoal',
+            ]"
           />
         </div>
       </nav>
     </header>
   </div>
   <!-- M O B I L E M E N U-->
-  <div v-if="isMenuOpen" class="md:hidden w-dvw h-dvh overflow-hidden bg-white">
+  <div
+    v-if="isMenuOpen"
+    class="md:hidden block w-screen h-dvh bg-violet-50 !pt-24 transition-all ease-in duration-400 fixed z-90"
+  >
     <div
       class="flex flex-col !px-5 justify-start w-full text-2xl uppercase gap-3 font-medium [&>*]:h-8"
     >
@@ -130,6 +167,7 @@ const isMenuOpen = ref(false);
 function showMobileMenu() {
   isMenuOpen.value = !isMenuOpen.value;
 }
+
 // 🔴 MOBILE MENU HANDLER
 
 // 🟢 NAVBAR SCROLL
