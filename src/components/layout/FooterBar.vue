@@ -1,11 +1,11 @@
 <template>
   <!-- T O T A L   H E A D I N G-->
-  <div class="w-dvw h-fit bg-home-bg-500">
+  <div class="w-full h-fit bg-home-bg-500">
     <!-- BOTTOM CONTENT-->
-    <div class="flex flex-col w-full md?h-[38rem]">
+    <div class="flex flex-col w-full md:h-[38rem]">
       <!--find your way-->
       <div
-        class="flex w-full bg-home-bg-500 h-full !py-16 !px-5 md:!px-32 md:justify-between flex-col-reverse md:flex-row md:flex-nowrap"
+        class="flex bg-home-bg-500 h-full !py-16 !px-5 md:!px-32 md:justify-between flex-col-reverse md:flex-row md:flex-nowrap"
       >
         <!-- teste -->
         <div class="flex flex-col gap-8 h-fit w-full">
