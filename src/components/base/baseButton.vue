@@ -21,7 +21,7 @@ const props = defineProps({
 
 const filledColors = {
   login:
-    "bg-violet-500 text-login-bg hover:bg-violet-600 hover:translate-1 shadow-[4px_4px_32px_rgba(39,52,211,0.5)] active:text-gray-400 active:translate-0",
+    "bg-violet-500 text-login-bg hover:bg-violet-600 hover:translate-1 shadow-[4px_4px_16px_rgba(139,92,246,0.5)] active:text-gray-400 active:translate-0",
   forms:
     "bg-red-300 text-white active:bg-red-400 hover:translate-1 shadow-[4px_4px_16px_rgba(214,144,147,0.2)] active:text-gray-400 active:translate-0",
 };

@@ -4,7 +4,7 @@
       <div class="h-full relative">
         <router-link
           to="/"
-          class="absolute top-10 left-10 !text-xl md:!text-4xl"
+          class="absolute top-10 left-10 !text-xl md:!text-4xl z-50"
           ><span class="!font-abril !text-violet-50 underline"
             >brului</span
           ></router-link
@@ -13,16 +13,14 @@
         <img
           src="/images/genshin.jpg"
           alt="placeholder"
-          class="w-full h-full object-cover object-[28%]"
+          class="w-full h-full object-cover object-[34%] scale-125"
         />
       </div>
     </section>
     <section class="w-full">
       <main class="flex !items-center justify-start h-full">
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
-          <h1 class="!font-abril text-6xl md:text-8xl !mb-10 text-charcoal">
-            Sign in
-          </h1>
+          <h1 class="!font-abril text-6xl !mb-10 text-charcoal">Sign in</h1>
           <div>
             <form>
               <div class="flex flex-col gap-4">
