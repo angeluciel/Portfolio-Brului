@@ -1,5 +1,6 @@
 <script setup>
 import { gsap } from "gsap";
+import { useAuthListener } from "@/composables/useAuthListener";
 </script>
 
 <template>

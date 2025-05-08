@@ -1,7 +1,7 @@
 <template>
   <input
     type="submit"
-    class="flex flex-row !mt-5 py-2 px-2 justify-center items-center w-full max-w-2xl mx-auto h-12 rounded-xl gap-4 font-semibold cursor-pointer transition-all duration-100 md:!h-10"
+    class="flex flex-row !mt-5 py-2 px-2 justify-center items-center w-full max-w-2xl mx-auto !h-10 rounded-xl gap-4 font-semibold cursor-pointer transition-all duration-100 md:!h-12"
     :class="buttonClasses"
     v-bind="$attrs"
     :value="text"

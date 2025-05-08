@@ -82,7 +82,7 @@
                 ? 'header-item-active'
                 : '',
             ]"
-            >{{ userStore.username }}</router-link
+            >{{ userStore.user.display_name || "Perfil" }}</router-link
           >
           <router-link
             v-else
@@ -99,16 +99,15 @@
             >sign in</router-link
           >
 
-          <router-link to="/profile"
+          <router-link to="/profile" v-if="userStore.isLoggedIn"
             ><img
-              v-if="userStore.isLoggedIn"
               src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
               alt="profile"
               class="rounded-full w-[48px] h-[48px]"
             />
-
+          </router-link>
+          <router-link to="/login" v-else>
             <Icon
-              v-else
               icon="ri:user-3-line"
               width="32"
               height="32"
@@ -155,11 +154,11 @@
 <script setup>
 import { ref, readonly, onMounted, watch } from "vue";
 import gsap from "gsap";
-import { useUserStore } from "@/stores/userStore";
+import { useAuthStore } from "@/stores/authStore";
 import { Icon } from "@iconify/vue";
 import { useRoute } from "vue-router";
 
-const userStore = useUserStore();
+const userStore = useAuthStore();
 const route = useRoute();
 
 // 🟢 MOBILE MENU HANDLER
