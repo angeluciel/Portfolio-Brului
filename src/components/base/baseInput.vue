@@ -1,53 +1,33 @@
 <template>
-  <div
-    class="flex flex-col justify-start items-start max-w-2xl gap-2 w-full mx-auto md:gap-0"
+  <fieldset
+    class="flex flex-col justify-start items-start gap-0 w-full mx-auto md:gap-2"
     v-bind="$attrs"
   >
-    <span v-if="title" class="text-xl font-semibold md:!text-lg">{{
-      title
-    }}</span>
+    <label
+      v-if="title"
+      class="text-lg !font-bold !font-josefin md:!text-xl w-full"
+      >{{ title }}</label
+    >
     <div :class="divClass">
-      <div class="flex flex-row gap-2 w-full items-center justify-start">
-        <Icon
-          v-if="leftIcon"
-          :icon="leftIcon"
-          width="24"
-          height="24"
-          id="icon_input"
-        />
-        <input
-          :placeholder="placeholder"
-          :type="currentType"
-          v-model="inputModel"
-          class="focus:outline-none !text-lg w-full md:!text-base"
-        />
-      </div>
-      <div class="w-100dvw flex flex-row justify-end cursor-pointer">
-        <Icon
-          v-if="shouldShowRightIcon"
-          :icon="iconName"
-          width="24"
-          height="24"
-          @click="switchVisibility"
-          class="mr-0"
-        />
-      </div>
+      <input
+        :placeholder="placeholder"
+        :type="currentType"
+        v-model="inputModel"
+        class="focus:outline-none !text-lg md:py-2 md:px-4 !w-full h-14 md:!text-base"
+      />
     </div>
-  </div>
+  </fieldset>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-import { Icon } from "@iconify/vue";
 
 const props = defineProps({
   variant: { type: String, default: "login" },
-  leftIcon: String,
   icon: String,
   title: String,
   placeholder: String,
   type: { type: String, default: "Text" },
-  isPasswordVisible: { type: Boolean, default: false },
   modelValue: { type: String, default: "" },
 });
 
@@ -62,12 +42,12 @@ const inputModel = computed({
 });
 
 const baseClasses =
-  "flex flex-row gap-4 w-full !py-1 !px-4 items-center md:!py-0 rounded-[12px] border-[2px] ";
+  "flex flex-row gap-4 w-full items-center md:!py-0 rounded-[12px] border-[1.5px] ";
 
 const divClass = computed(() => {
   let variantClasses = "";
   if (props.variant === "login") {
-    variantClasses = "border-charcoal-50";
+    variantClasses = "border-violet-200";
   } else if (props.variant === "forms") {
     variantClasses = "border-charcoal-10";
   }
