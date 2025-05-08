@@ -74,15 +74,17 @@ const showButtons = ref(false);
 <template>
   <HeaderBar_mobile />
 
-  <div class="flex flex-col gap-4 w-full !py-24 bg-violet-50 overflow-x-hidden">
+  <div
+    class="flex flex-col gap-4 w-full !py-24 h-fit md:h-auto bg-violet-50 overflow-x-hidden"
+  >
     <div
       class="relative flex flex-col justify-between gap-4 items-center w-full !pl-6 sm:!px-24"
     >
       <div
-        class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white to-transparent"
+        class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-violet-50 to-transparent"
       ></div>
       <div
-        class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent"
+        class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-violet-50 to-transparent"
       ></div>
 
       <div
@@ -122,48 +124,52 @@ const showButtons = ref(false);
     </div>
 
     <div
-      class="relative flex-col w-dvw"
+      class="relative flex-col w-screen h-fit"
       @mouseenter="showButtons = true"
       @mouseleave="showButtons = false"
     >
-      <!-- adicione relative aqui -->
-      <div class="flex w-full !pl-6 sm:!px-24 gap-2">
+      <div class="flex w-full !pl-6 sm:!md-24 gap-2">
         <span class="!font-abril text-2xl">All Services.</span>
         <span class="!font-abril text-2xl text-gray-500">Choose Yours!</span>
       </div>
+      <div class="w-screen">
+        <div
+          class="flex justify-start w-full !p-6 sm:!px-24 gap-8 overflow-auto no-scrollbar touch-pan-x overscroll-contain snap-x snap-mandatory"
+          ref="scrollEl"
+        >
+          <CardTemplateVue
+            class="snap-center shrink-0 w-[250px]"
+            v-for="(card, index) in cards"
+            :key="index"
+            v-bind="card"
+          />
+        </div>
 
-      <div
-        class="flex justify-start w-full !p-6 sm:!px-24 gap-8 overflow-auto no-scrollbar snap-x snap-mandatory"
-        ref="scrollEl"
-      >
-        <CardTemplateVue
-          class="snap-center shrink-0 w-[250px]"
-          v-for="(card, index) in cards"
-          :key="index"
-          v-bind="card"
-        />
+        <!-- Mova os botões aqui, fora do scroll container -->
+        <button
+          @click="scrollLeft"
+          class="hidden md:flex absolute left-9 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.4)] text-gray-200 shadow-[0px_0px_16px_1px_rgba(255,255,255,0.5)] rounded-full p-2 transition-all duration-300"
+          :class="
+            showButtons
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-4'
+          "
+        >
+          <Icon icon="ri:arrow-left-s-line" width="24" height="24" />
+        </button>
+
+        <button
+          @click="scrollRight"
+          class="hidden md:flex absolute right-9 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.4)] text-gray-200 shadow-[0px_0px_8px_1px_rgba(89,125,161,0.5)] rounded-full p-2 transition-all duration-300"
+          :class="
+            showButtons
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-4'
+          "
+        >
+          <Icon icon="ri:arrow-right-s-line" width="24" height="24" />
+        </button>
       </div>
-
-      <!-- Mova os botões aqui, fora do scroll container -->
-      <button
-        @click="scrollLeft"
-        class="hidden md:flex absolute left-9 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.4)] text-gray-200 shadow-[0px_0px_16px_1px_rgba(255,255,255,0.5)] rounded-full p-2 transition-all duration-300"
-        :class="
-          showButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        "
-      >
-        <Icon icon="ri:arrow-left-s-line" width="24" height="24" />
-      </button>
-
-      <button
-        @click="scrollRight"
-        class="hidden md:flex absolute right-9 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.4)] text-gray-200 shadow-[0px_0px_8px_1px_rgba(89,125,161,0.5)] rounded-full p-2 transition-all duration-300"
-        :class="
-          showButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-        "
-      >
-        <Icon icon="ri:arrow-right-s-line" width="24" height="24" />
-      </button>
     </div>
   </div>
   <FooterBar />
