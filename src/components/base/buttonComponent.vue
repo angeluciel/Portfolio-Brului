@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex-center text-black bg-home-blue-100 font-bold !px-10 !py-2 !text-sm tracking-wider rounded-4xl hover:rounded-lg transition-all ease-in-out duration-200 hover:translate-x-5 w-56"
+    class="flex-center text-black bg-home-blue-100 font-bold !px-10 !py-2 !text-sm tracking-wider rounded-4xl hover:rounded-lg transition-all ease-in-out duration-200 hover:translate-x-5 w-48 sm:w-56"
     @mouseenter="animateText"
   >
     <Icon icon="ri:arrow-right-s-line" width="24" height="24" />
