@@ -1,8 +1,9 @@
 <template>
   <div
-    class="flex justify-center pt-80 h-[200dvh] w-full bg-violet-50 overflow-x-hidden"
+    class="flex flex-col items-center justify-between py-80 h-[200dvh] w-full bg-violet-50 overflow-x-hidden"
   >
-    <span class="home-heading !text-black" ref="buttonText">PLACEHOLDER</span>
+    <h1 class="home-heading text-black" ref="buttonText">Still in <br/>Progress</h1>
+    <span class="font-black">Content still being made</span>
   </div>
 </template>
 
