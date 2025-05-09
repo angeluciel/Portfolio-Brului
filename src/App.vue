@@ -2,6 +2,9 @@
 import { gsap } from "gsap";
 import { useAuthListener } from "@/composables/useAuthListener";
 import { useAuthStore } from "@/stores/authStore";
+import { useToast } from "primevue";
+
+const toast = useToast();
 
 const authStore = useAuthStore();
 
@@ -12,7 +15,7 @@ authStore.fetchCurrentUser();
 <template>
   <div id="app">
     <router-view />
-
+    <Toast />
   </div>
 </template>
 

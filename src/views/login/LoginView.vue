@@ -20,6 +20,9 @@
     <section class="w-full">
       <main class="flex relative !items-center justify-start h-full">
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
+          <!--BREADCRUMBS-->
+          
+          <!--BREADCRUMBS END-->
           <h1 class="!font-abril text-6xl !mb-10 text-charcoal">Sign in</h1>
           <div>
             <form @submit.prevent="handleLogin">
@@ -47,10 +50,12 @@
               </div>
               <!--button-->
               <baseButton text="Sign in" color="login" variant="filled" />
+              
             </form>
 
             <!--google auth-->
             <div class="">
+              
               <form>
                 <baseButton
                   text="Sign in with Google"
@@ -80,13 +85,25 @@ import baseToast from "@/components/base/baseToast.vue"
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
+import { useToast } from 'primevue/usetoast';
+import { Breadcrumb } from "primevue/breadcrumb";
 
+// VARIÁVEIS 🔵
+const toast = useToast();
 const router = useRouter();
 const auth = useAuthStore();
 const email = ref("");
 const password = ref("");
 const errorMessage = ref("");
+const home = ref({
+  icon:'pi pi-home',
+  route: '/'
+});
+const items= ref([
+  { label: 'Login' },
+])
 
+// LOGIN 💖
 const handleLogin = async () => {
   errorMessage.value = "";
   try {
@@ -98,7 +115,12 @@ const handleLogin = async () => {
     router.push("/profile");
   } catch (error: any) {
     console.error("Erro no login: ", error);
-    errorMessage.value = error.message || "Credenciais Inválidas.";
+    toast.add({
+      severity: 'error',
+      summary: 'Failed to login',
+      detail: error.message || 'Credenciais inválidas.',
+      life: 4000,
+    })
   }
 };
 </script>
