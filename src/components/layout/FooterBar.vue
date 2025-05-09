@@ -83,7 +83,7 @@
           </div>
           <!--Introduction-->
           <span class="!text-home-blue !text-[1.2em] md:!text-[1.3em]"
-            >Hi, I'm Bruna! I'm a freelance artist and I can't wait to meet you.
+            >Hi, I'm Bruna! I'm an artist commited to  my passion, and I can't wait to meet you.
             Let's illustrate your mind!</span
           >
           <!--button and social medias-->
