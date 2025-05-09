@@ -34,6 +34,10 @@
 }
 
 @layer components {
+  body {
+    @apply text-black
+  }
+
   .no-scroll {
     @apply overflow-hidden touch-none;
   }

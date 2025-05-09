@@ -5,7 +5,7 @@
   >
     <label
       v-if="title"
-      class="text-lg !font-bold !font-josefin md:!text-xl w-full"
+      class="text-lg !font-bold !font-josefin text-violet-950 md:!text-xl w-full"
       >{{ title }}</label
     >
     <div :class="divClass">
@@ -13,7 +13,7 @@
         :placeholder="placeholder"
         :type="currentType"
         v-model="inputModel"
-        class="focus:outline-none !text-lg md:py-2 md:px-4 !w-full h-14 md:!text-base"
+        class="focus:outline-none text-gray-800 placeholder:text-gray-400 !text-lg md:py-2 md:px-4 !w-full h-14 md:!text-base"
       />
     </div>
   </fieldset>

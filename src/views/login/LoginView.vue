@@ -41,13 +41,14 @@
                   variant="login"
                   v-model="password"
                 />
-                <router-link to="/login/forgot-password" class="underline"
+                <router-link to="/login/forgot-password" class="underline text-black/80"
                   >Forgot your password?</router-link
                 >
               </div>
               <!--button-->
               <baseButton text="Sign in" color="login" variant="filled" />
             </form>
+
             <!--google auth-->
             <div class="">
               <form>
@@ -59,7 +60,7 @@
               </form>
             </div>
             <div class="mt-5">
-              <router-link to="/login/createAccount" class="underline"
+              <router-link to="/login/createAccount" class="underline text-black/80"
                 >Don't have an account?</router-link
               >
             </div>
@@ -67,17 +68,18 @@
         </div>
       </main>
     </section>
+    
   </div>
-  <BaseToast v-if="errorMessage" :message="errorMessage" />
+  
 </template>
 
 <script setup lang="ts">
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
+import baseToast from "@/components/base/baseToast.vue"
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
-import BaseToast from "@/components/base/BaseToast.vue";
 
 const router = useRouter();
 const auth = useAuthStore();
@@ -86,6 +88,7 @@ const password = ref("");
 const errorMessage = ref("");
 
 const handleLogin = async () => {
+  errorMessage.value = "";
   try {
     console.log("Tentando login com:", email.value, password.value);
     await auth.login(email.value, password.value);
@@ -95,7 +98,7 @@ const handleLogin = async () => {
     router.push("/profile");
   } catch (error: any) {
     console.error("Erro no login: ", error);
-    errorMessage.value = error.message;
+    errorMessage.value = error.message || "Credenciais Inválidas.";
   }
 };
 </script>
