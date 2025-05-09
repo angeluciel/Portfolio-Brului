@@ -1,6 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { gsap } from "gsap";
 import { useAuthListener } from "@/composables/useAuthListener";
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore();
+
+authStore.fetchCurrentUser();
+
 </script>
 
 <template>

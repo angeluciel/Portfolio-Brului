@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { supabase } from "@/lib/supabase";
 
 export const useAuthStore = defineStore("auth", () => {
-  const user = ref<any>(null);
+  const user = ref(null);
   const loading = ref(null);
 
   const isLoggedIn = computed(() => !!user.value);
@@ -77,21 +77,21 @@ export const useAuthStore = defineStore("auth", () => {
   };
 
   const fetchCurrentUser = async () => {
-    const { data: sessionData } = await supabase.auth.getSession();
-    const userId = sessionData?.session?.user?.id;
+    const { data, error } = await supabase.auth.getSession();
+    const userId = data?.session?.user?.id;
   
     if (!userId) return;
   
-    const { data: profile, error } = await supabase
+    const { data: profile, error: dbError } = await supabase
       .from("users")
-      .select("id, email, display_name, username")
+      .select("*")
       .eq("id", userId)
       .single();
   
-    if (!error && profile) {
+    if (!dbError && profile) {
       user.value = profile;
     }
   };
 
-  return { user, loading, signUp, login, logout, getSession, isLoggedIn };
+  return { user, loading, signUp, login, logout, getSession, isLoggedIn, fetchCurrentUser };
 });
