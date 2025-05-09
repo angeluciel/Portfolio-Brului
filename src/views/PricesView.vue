@@ -72,69 +72,69 @@ const showButtons = ref(false);
 </script>
 
 <template>
-  <main>
-    <HeaderBar_mobile />
+  <HeaderBar_mobile />
 
-    <div class="flex flex-col gap-4 w-dvw !py-24">
+  <div
+    class="flex flex-col gap-4 w-full !py-24 h-fit md:h-auto bg-violet-50 overflow-x-hidden"
+  >
+    <div
+      class="relative flex flex-col justify-between gap-4 items-center w-full !pl-6 sm:!px-24"
+    >
       <div
-        class="relative flex flex-col justify-between gap-4 items-center w-full !pl-6 sm:!px-24"
+        class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-violet-50 to-transparent"
+      ></div>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-violet-50 to-transparent"
+      ></div>
+
+      <div
+        class="flex flex-col sm:flex-row gap-8 sm:justify-between justify-center w-full"
       >
-        <div
-          class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white to-transparent"
-        ></div>
-        <div
-          class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent"
-        ></div>
-
-        <div
-          class="flex flex-col sm:flex-row gap-8 sm:justify-between justify-center w-full"
-        >
-          <h1 class="!font-abril !text-4xl text-charcoal sm:!text-5xl">
-            Place your Order
-          </h1>
-          <div class="flex flex-col items-start">
-            <span>Need something that's not on the menu?</span>
-            <div class="flex text-gold-500">
-              <span>Let me know how I can help!</span>
-              <Icon icon="ri:arrow-right-up-line" width="24" height="24" />
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="flex justify-around w-full [&>*]:w-full text-center overflow-x-scroll no-scrollbar gap-12 sm:gap-0"
-        >
-          <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-            All Prices
-          </div>
-          <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-            Complete Render
-          </div>
-          <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-            Lineart + Base Color
-          </div>
-          <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-            Emotes
-          </div>
-          <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-            Background
+        <h1 class="!font-abril !text-4xl text-charcoal sm:!text-5xl">
+          Place your Order
+        </h1>
+        <div class="flex flex-col items-start">
+          <span>Need something that's not on the menu?</span>
+          <div class="flex text-gold-500">
+            <span>Let me know how I can help!</span>
+            <Icon icon="ri:arrow-right-up-line" width="24" height="24" />
           </div>
         </div>
       </div>
 
       <div
-        class="relative flex-col w-dvw"
-        @mouseenter="showButtons = true"
-        @mouseleave="showButtons = false"
+        class="flex justify-around w-full [&>*]:w-full text-center overflow-x-scroll no-scrollbar gap-12 sm:gap-0"
       >
-        <!-- adicione relative aqui -->
-        <div class="flex w-full !pl-6 sm:!px-24 gap-2">
-          <span class="!font-abril text-2xl">All Services.</span>
-          <span class="!font-abril text-2xl text-gray-500">Choose Yours!</span>
+        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
+          All Prices
         </div>
+        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
+          Complete Render
+        </div>
+        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
+          Lineart + Base Color
+        </div>
+        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
+          Emotes
+        </div>
+        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
+          Background
+        </div>
+      </div>
+    </div>
 
+    <div
+      class="relative flex-col w-screen h-fit"
+      @mouseenter="showButtons = true"
+      @mouseleave="showButtons = false"
+    >
+      <div class="flex w-full !pl-6 sm:!md-24 gap-2">
+        <span class="!font-abril text-2xl">All Services.</span>
+        <span class="!font-abril text-2xl text-gray-500">Choose Yours!</span>
+      </div>
+      <div class="w-screen">
         <div
-          class="flex justify-start w-full !p-6 sm:!px-24 gap-8 overflow-auto no-scrollbar snap-x snap-mandatory"
+          class="flex justify-start w-full !p-6 sm:!px-24 gap-8 overflow-auto no-scrollbar touch-pan-x overscroll-contain snap-x snap-mandatory"
           ref="scrollEl"
         >
           <CardTemplateVue
@@ -171,11 +171,8 @@ const showButtons = ref(false);
         </button>
       </div>
     </div>
-  </main>
-
-  <div>
-    <FooterBar />
   </div>
+  <FooterBar />
 </template>
 
 <style lang="scss" scoped></style>

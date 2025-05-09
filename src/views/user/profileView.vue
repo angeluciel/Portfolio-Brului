@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#C6C5D4]">
+  <div class="bg-violet-100">
     <HeaderBar_mobile />
     <!-- Content -->
     <div class="flex flex-col w-full justify-center items-center !py-20 gap-5">
@@ -15,7 +15,7 @@
             ></div>
           </div>
           <div
-            v-else-if="user"
+            v-else-if="auth.user"
             class="relative flex justify-center items-center group"
           >
             <img
@@ -47,7 +47,7 @@
           >
             <h2 v-if="error">{{ error }}</h2>
             <h2 v-else-if="user" class="text-2xl text-gray-800 font-semibold">
-              {{ user.name }}
+              @{{ user.username }}
             </h2>
             <span class="text-xl font-bold text-gray-400">{{
               user.email
@@ -103,6 +103,7 @@
       <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
         <button
           class="flex items-center gap-5 justify-start text-gray-500 group"
+          @click="handleLogout"
         >
           <Icon
             icon="ri:door-open-line"
@@ -123,23 +124,27 @@
 import FooterBar from "@/components/layout/FooterBar.vue";
 import { Icon, loadIcons } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
+import { useAuthStore } from "@/stores/authStore";
+import { supabase } from "@/lib/supabase";
 
-interface User {
-  name: string;
-  email: string;
-  bio?: string;
-}
-
-const route = useRoute();
-
+const auth = useAuthStore();
 const user = ref<User | null>(null);
 const loading = ref<boolean>(true);
 const error = ref<string | null>(null);
+const route = useRoute();
+const router = useRouter();
 
-async function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+interface User {
+  display_name: string;
+  username: string;
+  email: string;
+}
+
+function handleLogout() {
+  auth.logout();
+  router.push("/login")
 }
 
 async function fetchUserProfile(): Promise<void> {
@@ -147,35 +152,33 @@ async function fetchUserProfile(): Promise<void> {
   error.value = null;
 
   try {
-    await sleep(2000);
+    const { data: sessionData, error: sessionError } =
+      await supabase.auth.getSession();
+    if (sessionError) throw sessionError;
 
-    if (route.params.id) {
-      // usuário simulado
-      // const response = await axios.get(`/api/user/${route.params.id}`)
-      // user.value = response.data
-      user.value = {
-        name: "Usuário Público",
-        email: "publico@email.com",
-        bio: "Perfil público carregado via ID.",
-      };
-    } else {
-      // usuario dono
-      // const response = await axios.get('/api/user/me')
-      // user.value = response.data
-      user.value = {
-        name: "João Bacanildo da Silva Sauro",
-        email: "jao@bacano@silva.tv",
-        bio: "Esse é o perfil pessoal.",
-      };
+    const userId = sessionData?.session?.user?.id;
+    if (!userId) {
+      throw new Error("Usuário não autenticado.");
     }
-  } catch (err: unknown) {
-    error.value = "Erro ao carregar perfil.";
+
+    const { data, error: dbError } = await supabase
+      .from("users")
+      .select("display_name, username, email")
+      .eq("id", userId)
+      .single();
+
+    if (dbError) throw dbError;
+
+    user.value = data;
+  } catch (err: any) {
+    error.value = `Erro ao carregar perfil: ${err.message}`;
   } finally {
     loading.value = false;
   }
 }
 
 onMounted(fetchUserProfile);
+
 watch(() => route.params.id, fetchUserProfile);
 
 // ======================================

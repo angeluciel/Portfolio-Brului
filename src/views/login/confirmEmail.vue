@@ -66,6 +66,7 @@
 <script setup>
 import { useMailStore } from "@/stores/mailStore";
 import { computed } from "vue";
+import { useAuthStore } from "@/stores/authStore";
 
 const mailStore = useMailStore();
 const email = mailStore.email;

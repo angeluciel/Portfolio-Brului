@@ -1,140 +1,145 @@
 <template>
-  <div
-    class="flex flex-row justify-between items-center w-dvw h-dvh bg-login-bg"
-  >
-    <div class="box-border h-dvh w-[45dvw] p-0 m-0 overflow-hidden">
-      <img
-        src="/images/third-first.jpg"
-        alt="fotinha"
-        class="object-cover object-right-top h-full w-full"
-      />
-    </div>
-
-    <div
-      class="flex flex-col justify-between !px-[60px] !py-[80px] md:!py-[50px] h-dvh w-fit items-start"
-    >
-      <!--top-->
-      <div
-        class="flex flex-col justify-start items-start text-charcoal max-w-md"
-      >
-        <div class="flex flex-row gap-2">
-          <router-link to="/" class=""
-            ><span
-              class="font-normal text-gray-400 hover:text-gray-600 !text-lg"
-              >home</span
-            ></router-link
-          >
-          <div class="cursor-alias">/</div>
-          <router-link to="/login" class=""
-            ><span
-              class="text-gray-400 font-normal hover:text-gray-600 !text-lg"
-              >login</span
-            ></router-link
-          >
-          <div class="cursor-alias">/</div>
-          <span class="text-charcoal font-semibold !text-lg"
-            >create account</span
-          >
-        </div>
-        <h1 class="flex justify-start md:!text-4xl">Complete your account</h1>
-      </div>
-      <!--boxes-->
-      <div class="flex flex-col gap-5 max-w-md">
-        <div class="flex flex-row gap-5">
-          <baseInput
-            class="!w-1/2"
-            title="Name"
-            placeholder="Your Name"
-            variant="login"
-            type="text"
-          />
-          <baseInput
-            class="!w-1/2"
-            title="Username"
-            placeholder="Bananaboat123"
-            variant="login"
-            type="text"
-          />
-        </div>
-        <baseInput
-          title="Email *"
-          leftIcon="ion:mail-outline"
-          placeholder="Your email here"
-          variant="login"
-          type="email"
-        />
-        <baseInput
-          title="Password *"
-          leftIcon="ri:door-lock-line"
-          placeholder="Password Here"
-          variant="login"
-          type="password"
-        />
-        <div class="flex flex-row gap-4 justify-start items-center">
-          <input
-            type="checkbox"
-            class="w-[20px] h-[20px]"
-            v-model="checked"
-            required
-          />
-          <span class="text-xl font-medium"
-            >I agree with Brului's
-            <span
-              class="border-b hover:text-gray-500 hover:border-gray-500 hover:cursor-pointer"
-              >terms and conditions</span
-            >
-          </span>
-        </div>
-      </div>
-      <!--bottom-->
-      <div class="flex flex-col gap-20 max-w-md w-full md:gap-10">
-        <baseButton
-          variant="filled"
-          text="Sign in"
-          color="login"
-          type="submit"
-          @click="loginError = !loginError"
-        />
-
-        <div v-if="loginError" class="text-red-500">
-          Not implemented yet! s2
-        </div>
-        <router-link to="/login" class=""
-          ><span class="hover:text-gray-400"
-            >Already have an account? Sign in
-          </span>
+  <div id="main" class="flex h-dvh overflow-hidden bg-violet-50">
+    <section class="hidden lg:block md:w-[35dvw] lg:w-[50dvw] h-dvh">
+      <div class="h-full relative">
+        <router-link
+          to="/"
+          class="absolute top-10 left-10 !text-xl md:!text-4xl z-50"
+        >
+          <span class="!font-abril !text-violet-50 underline">brului</span>
         </router-link>
+        <img
+          src="/images/wallpaper1.png"
+          alt="placeholder"
+          class="w-full h-full object-cover object-[60%]"
+        />
       </div>
-    </div>
+    </section>
+
+    <section class="w-full">
+      <main class="flex relative !items-center justify-start h-full">
+        <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
+          <h1 class="!font-abril text-6xl !mb-10 text-charcoal">
+            Create your account
+          </h1>
+
+          <form @submit.prevent="handleSignUp">
+            <div class="flex flex-col gap-4">
+              <div class="w-full flex gap-4 justify-between">
+                <baseInput
+                  title="Name"
+                  type="text"
+                  variant="login"
+                  v-model="display_name"
+                />
+                <baseInput
+                  title="Username"
+                  type="text"
+                  variant="login"
+                  v-model="username"
+                />
+              </div>
+              <baseInput
+                title="Email"
+                type="text"
+                variant="login"
+                v-model="email"
+              />
+              <baseInput
+                title="Password"
+                type="password"
+                variant="login"
+                placeholder="8+ characters"
+                v-model="password"
+              />
+            </div>
+
+            <p v-if="errorMessage" class="text-red-600 text-sm mt-2">
+              {{ errorMessage }}
+            </p>
+
+            <baseButton
+              :text="loading ? 'Creating...' : 'Sign up'"
+              :disabled="loading"
+              color="login"
+              variant="filled"
+            />
+          </form>
+
+          <div class="mt-5">
+            <router-link to="/login" class="underline"
+              >Already have an account?</router-link
+            >
+          </div>
+        </div>
+      </main>
+    </section>
   </div>
+  <BaseToast v-if="errorMessage" :message="errorMessage" />
 </template>
 
-<script setup>
-import Breadcrumb from "primevue/breadcrumb";
-import Checkbox from "primevue/checkbox";
-import { RouterLink, useRoute } from "vue-router";
-import { ref } from "vue";
-import { Icon } from "@iconify/vue";
-import baseButton from "../../components/base/baseButton.vue";
+<script setup lang="ts">
+import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { supabase } from "@/lib/supabase";
+import { useAuthStore } from "@/stores/authStore";
 
-const passwordField = ref(null);
-const iconName = ref("ri:eye-close-line");
-const checked = ref(false);
-const loginError = ref(false);
+const email = ref("");
+const password = ref("");
+const display_name = ref("");
+const username = ref("");
+const auth = useAuthStore();
+const errorMessage = ref("");
+const loading = ref(false);
+const router = useRouter();
 
-const items = ref([{ label: "Home" }]);
+const handleSignUp = async () => {
+  errorMessage.value = "";
+  loading.value = true;
 
-const props = defineProps({
-  to: { type: String, required: true },
-});
+  try {
+    // Verifica se username já existe
+    const { data: existingUsers, error: checkError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("username", username.value)
+      .limit(1);
+
+    if (checkError) throw checkError;
+    if (existingUsers && existingUsers.length > 0) {
+      throw new Error("Este nome de usuário já está em uso.");
+    }
+
+    // Usa authStore centralizado
+    await auth.signUp(
+      email.value,
+      password.value,
+      display_name.value,
+      username.value
+    );
+
+    router.push("/profile");
+  } catch (err: any) {
+    errorMessage.value = err.message || "Erro inesperado.";
+  } finally {
+    loading.value = false;
+  }
+};
+
+const handleGoogleLogin = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: "http://localhost:5173",
+    },
+  });
+
+  if (error) {
+    errorMessage.value = error.message;
+  }
+};
 </script>
 
-<style scoped lang="scss">
-@use "@/assets/variables.scss" as var;
-
-h1 {
-  @include var.fontAbril(56px, 300, normal);
-  color: var.$login_charcoal;
-}
-</style>
+<style scoped></style>

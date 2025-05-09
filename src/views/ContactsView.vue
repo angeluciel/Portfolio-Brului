@@ -1,7 +1,7 @@
 <template>
   <HeaderBar_mobile></HeaderBar_mobile>
   <div
-    class="flex flex-col sm:flex-row justify-center !py-16 !px-6 text-charcoal"
+    class="flex flex-col sm:flex-row justify-center !py-16 !px-6 text-charcoal bg-violet-50"
   >
     <div class="flex flex-col gap-20 items-start justify-start">
       <div class="flex flex-col gap-1 uppercase">

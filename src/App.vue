@@ -1,10 +1,18 @@
-<script setup>
-import HeaderBar from "@/components/layout/HeaderBar.vue";
+<script setup lang="ts">
+import { gsap } from "gsap";
+import { useAuthListener } from "@/composables/useAuthListener";
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore();
+
+authStore.fetchCurrentUser();
+
 </script>
 
 <template>
   <div id="app">
     <router-view />
+
   </div>
 </template>
 

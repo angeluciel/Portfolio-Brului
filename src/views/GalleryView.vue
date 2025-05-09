@@ -3,20 +3,40 @@
   <!-- A D M I N -->
   <div class="w-dvw"></div>
   <!--C O N T E N T-->
-  <div class="flex gap-4 !px-5 items-top justify-center w-full !py-20">
+  <div
+    class="flex gap-4 !px-5 items-top justify-center w-full !py-20 bg-violet-50"
+  >
     <div
       v-for="(col, colIndex) in columns"
       :key="colIndex"
       class="flex flex-col gap-4"
     >
-      <img
+      <div
         v-for="(image, imgIndex) in col"
         :key="imgIndex"
-        :src="image"
-        alt="Gallery Image"
-        class="gallery-image"
-        @click="openModal(colIndex, imgIndex)"
-      />
+        class="relative group"
+      >
+        <!-- FAVORITE ICON -->
+        <button
+          @click.stop="toggleFavorite(image)"
+          class="absolute top-2 right-2 z-20 bg-white/80 backdrop-blur-md p-1 rounded-full shadow-md group-hover:scale-110 transition-transform"
+        >
+          <Icon
+            :icon="isFavorited(image) ? 'ri:heart-fill' : 'ri:heart-line'"
+            class="text-red-500"
+            width="24"
+            height="24"
+          />
+        </button>
+
+        <!-- IMAGE -->
+        <img
+          :src="image"
+          alt="Gallery Image"
+          class="gallery-image"
+          @click="openModal(colIndex, imgIndex)"
+        />
+      </div>
     </div>
   </div>
   <FooterBar />
@@ -70,6 +90,20 @@ import { ref, computed } from "vue";
 import HeaderBar from "@/components/layout/HeaderBar.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
+import { Icon } from "@iconify/vue";
+
+// F A V O R I T E 💖
+const favorites = ref(new Set());
+
+const toggleFavorite = (imagePath) => {
+  if (favorites.value.has(imagePath)) {
+    favorites.value.delete(imagePath);
+  } else {
+    favorites.value.add(imagePath);
+  }
+};
+
+const isFavorited = (imagePath) => favorites.value.has(imagePath);
 
 // Z O O M 🔎
 const isZoomed = ref(false);
