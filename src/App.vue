@@ -9,13 +9,12 @@ const toast = useToast();
 const authStore = useAuthStore();
 
 authStore.fetchCurrentUser();
-
 </script>
 
 <template>
   <div id="app">
-    <router-view />
     <Toast />
+    <router-view />
   </div>
 </template>
 

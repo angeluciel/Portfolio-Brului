@@ -8,9 +8,10 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 // TODO: PRIMEVUE (just used todo cuz its pretty)
 import PrimeVue from "primevue/config";
-import ToastService from 'primevue/toastservice'
-import Toast from 'primevue/toast';
-import Aura from '@primeuix/themes/aura'
+import ToastService from "primevue/toastservice";
+import Toast from "primevue/toast";
+import { Breadcrumb } from "primevue";
+import nora from "@primeuix/themes/nora";
 
 import App from "./App.vue";
 import router from "./router";
@@ -23,13 +24,14 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.use(PrimeVue, {
-    theme: {
-        preset: Aura
-    }
+  theme: {
+    preset: nora,
+  },
 });
 app.use(ToastService);
 
 app.component("fa", FontAwesomeIcon);
-app.component('Toast', Toast);
+app.component("Toast", Toast);
+app.component("Breadcrumb", Breadcrumb);
 
 app.mount("#app");

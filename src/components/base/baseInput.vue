@@ -5,17 +5,16 @@
   >
     <label
       v-if="title"
-      class="text-lg !font-bold !font-josefin text-violet-950 md:!text-xl w-full"
+      class="text-lg !font-bold !font-josefin text-violet-950 dark:text-violet-800 md:!text-xl w-full"
       >{{ title }}</label
     >
-    <div :class="divClass">
-      <input
-        :placeholder="placeholder"
-        :type="currentType"
-        v-model="inputModel"
-        class="focus:outline-none text-gray-800 placeholder:text-gray-400 !text-lg md:py-2 md:px-4 !w-full h-14 md:!text-base"
-      />
-    </div>
+    <input
+      :placeholder="placeholder"
+      :type="currentType"
+      v-model="inputModel"
+      class="focus:outline-none !text-lg md:py-2 px-4 !w-full h-14 md:!text-base hover:shadow-[0_0_16px_rgba(109,40,217,0.4)] focus:shadow-[0_0_16px_rgba(109,40,217,0.4)] transition-[background-color,outline,color,box-shadow] duration-200 ease-in-out text-zinc-950 dark:text-zinc-400"
+      :class="divClass"
+    />
   </fieldset>
 </template>
 
@@ -47,7 +46,7 @@ const baseClasses =
 const divClass = computed(() => {
   let variantClasses = "";
   if (props.variant === "login") {
-    variantClasses = "border-violet-200";
+    variantClasses = "border-violet-200 dark:border-zinc-800";
   } else if (props.variant === "forms") {
     variantClasses = "border-charcoal-10";
   }

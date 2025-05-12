@@ -2,7 +2,9 @@
   <div
     class="flex flex-col items-center justify-between py-80 h-[200dvh] w-full bg-violet-50 overflow-x-hidden"
   >
-    <h1 class="home-heading text-black" ref="buttonText">Still in <br/>Progress</h1>
+    <h1 class="!font-abril !text-xl text-black" ref="buttonText">
+      Still in Progress
+    </h1>
     <span class="font-black">Content still being made</span>
   </div>
 </template>

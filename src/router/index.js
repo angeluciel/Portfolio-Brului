@@ -56,9 +56,10 @@ const router = createRouter({
       component: () => import("../views/user/wizardForm.vue"),
     },
     {
-      path: "/profile",
+      path: "/profile/:display_name",
       name: "userProfile",
       component: () => import("../views/user/profileView.vue"),
+      props: true,
     },
     {
       path: "/user/:id",

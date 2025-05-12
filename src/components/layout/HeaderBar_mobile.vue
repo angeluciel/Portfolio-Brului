@@ -72,7 +72,7 @@
           </router-link>
           <router-link
             v-if="userStore.isLoggedIn"
-            to="/profile"
+            :to="`/profile/${userStore.user.display_name}`"
             class="header-item"
             :class="[
               route.path === '/' ? 'text-white after:bg-white' : '',

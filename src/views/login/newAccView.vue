@@ -1,5 +1,8 @@
 <template>
-  <div id="main" class="flex h-dvh overflow-hidden bg-violet-50">
+  <div
+    id="main"
+    class="flex h-dvh overflow-hidden bg-background dark:bg-zinc-900"
+  >
     <section class="hidden lg:block md:w-[35dvw] lg:w-[50dvw] h-dvh">
       <div class="h-full relative">
         <router-link
@@ -17,9 +20,41 @@
     </section>
 
     <section class="w-full">
-      <main class="flex relative !items-center justify-start h-full">
+      <main class="flex flex-col relative !items-start justify-center h-full">
+        <Breadcrumb
+          :model="items"
+          class="!bg-transparent !ml-12 md:!ml-20 sm:!py-8 md:!px-16"
+        >
+          <template #item="{ item, props }">
+            <router-link
+              v-if="item.route"
+              v-slot="{ href, navigate }"
+              :to="item.route"
+              custom
+            >
+              <a :href="href" v-bind="props.action" @click="navigate">
+                <span
+                  class="text-violet-800 hover:text-black/80 dark:hover:text-violet-700 font-semibold"
+                  >{{ item.label }}</span
+                >
+              </a>
+            </router-link>
+            <a
+              v-else
+              :href="item.url"
+              :target="item.target"
+              v-bind="props.action"
+            >
+              <span class="text-surface-700 dark:text-surface-0">{{
+                item.label
+              }}</span>
+            </a>
+          </template>
+        </Breadcrumb>
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
-          <h1 class="!font-abril text-6xl !mb-10 text-charcoal">
+          <h1
+            class="!font-abril text-4xl !mb-10 text-charcoal dark:text-gray-500"
+          >
             Create your account
           </h1>
 
@@ -67,7 +102,7 @@
           </form>
 
           <div class="mt-5">
-            <router-link to="/login" class="underline"
+            <router-link to="/login" class="underline dark:text-gray-300"
               >Already have an account?</router-link
             >
           </div>
@@ -85,7 +120,14 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/authStore";
+import { useToast } from "primevue";
 
+const items = ref([
+  { label: "Home", route: "/" },
+  { label: "Login", route: "/login" },
+  { label: "New Account" },
+]);
+const toast = useToast();
 const email = ref("");
 const password = ref("");
 const display_name = ref("");
@@ -100,7 +142,6 @@ const handleSignUp = async () => {
   loading.value = true;
 
   try {
-    // Verifica se username já existe
     const { data: existingUsers, error: checkError } = await supabase
       .from("users")
       .select("id")
@@ -112,7 +153,6 @@ const handleSignUp = async () => {
       throw new Error("Este nome de usuário já está em uso.");
     }
 
-    // Usa authStore centralizado
     await auth.signUp(
       email.value,
       password.value,
@@ -120,24 +160,24 @@ const handleSignUp = async () => {
       username.value
     );
 
-    router.push("/profile");
+    toast.add({
+      severity: "success",
+      summary: "Cadastro concluído!",
+      detail: `Bem-vindo(a), ${display_name.value}`,
+      life: 4000,
+    });
+
+    router.push(`/profile/${username.value}`);
   } catch (err: any) {
     errorMessage.value = err.message || "Erro inesperado.";
+    toast.add({
+      severity: "error",
+      summary: "Erro no cadastro",
+      detail: errorMessage.value,
+      life: 4000,
+    });
   } finally {
     loading.value = false;
-  }
-};
-
-const handleGoogleLogin = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: "http://localhost:5173",
-    },
-  });
-
-  if (error) {
-    errorMessage.value = error.message;
   }
 };
 </script>

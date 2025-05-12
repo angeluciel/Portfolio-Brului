@@ -5,19 +5,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-login-hg: #2734d3;
-  --color-login-hg-10: rgba(39, 52, 211, 0.1);
-  --color-login-hg-50: rgba(42, 56, 219, 1);
   --color-charcoal: #2e3a4f;
   --color-login-grey: #a3a2a5;
-  --color-login-bg: #f7f7fb;
-  --color-charcoal-10: rgba(0, 0, 0, 0.1);
-  --color-charcoal-50: rgba(0, 0, 0, 0.5);
+  --color-background: #f5f3ff;
 
-  --color-gold-100: #ba8d2e;
   --color-gold-200: #f3c463;
   --color-gold-500: #ba8d2e;
-  --color-gold-600: #866115;
 
   --color-home-blue: #c6d1e6;
   --color-home-blue-100: #b2bccf;
@@ -35,7 +28,7 @@
 
 @layer components {
   body {
-    @apply text-black
+    @apply text-black;
   }
 
   .no-scroll {

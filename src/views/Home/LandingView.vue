@@ -33,13 +33,13 @@
       <h1
         class="home-heading !font-abril absolute bottom-5 right-5 !text-violet-100 z-40 text-blue-75"
       >
-        DECIDE.
+        CHARACTERS.
       </h1>
       <div class="absolute left-0 top-0 z-40 size-full">
         <div class="mt-24 px-5 sm:px-10">
           <h1 class="home-heading text-violet-100">
-            YOU. <br />
-            GET TO.
+            BUILD. <br />
+            YOUR.
           </h1>
           <!-- B O T T O M -->
           <div class="relative h-24">
@@ -89,7 +89,7 @@
     </div>
     <!-- O U T S I D E   T E X T -->
     <h1 class="home-heading !font-abril absolute bottom-5 right-5 text-black">
-      DECIDE.
+      CHARACTERS.
     </h1>
     <div class="w-screen h-dvh"></div>
   </div>

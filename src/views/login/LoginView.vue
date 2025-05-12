@@ -1,5 +1,8 @@
 <template>
-  <div id="main" class="flex h-dvh overflow-hidden bg-violet-50">
+  <div
+    id="main"
+    class="flex h-dvh overflow-hidden bg-background dark:bg-zinc-900"
+  >
     <section class="hidden lg:block md:w-[35dvw] lg:w-[50dvw] h-dvh">
       <div class="h-full relative">
         <router-link
@@ -18,12 +21,46 @@
       </div>
     </section>
     <section class="w-full">
-      <main class="flex relative !items-center justify-start h-full">
+      <main class="flex flex-col relative !items-start justify-center h-full">
+        <Breadcrumb
+          :model="items"
+          class="!bg-transparent !ml-12 md:!ml-20 sm:!py-8 md:!px-16"
+        >
+          <template #item="{ item, props }">
+            <router-link
+              v-if="item.route"
+              v-slot="{ href, navigate }"
+              :to="item.route"
+              custom
+            >
+              <a :href="href" v-bind="props.action" @click="navigate">
+                <span
+                  class="text-violet-800 hover:text-black/80 dark:hover:text-violet-700 font-semibold"
+                  >{{ item.label }}</span
+                >
+              </a>
+            </router-link>
+            <a
+              v-else
+              :href="item.url"
+              :target="item.target"
+              v-bind="props.action"
+            >
+              <span class="text-surface-700 dark:text-surface-0">{{
+                item.label
+              }}</span>
+            </a>
+          </template>
+        </Breadcrumb>
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
           <!--BREADCRUMBS-->
-          
+
           <!--BREADCRUMBS END-->
-          <h1 class="!font-abril text-6xl !mb-10 text-charcoal">Sign in</h1>
+          <h1
+            class="!font-abril text-6xl !mb-10 text-charcoal dark:text-gray-500"
+          >
+            Sign in
+          </h1>
           <div>
             <form @submit.prevent="handleLogin">
               <div class="flex flex-col gap-4">
@@ -44,18 +81,18 @@
                   variant="login"
                   v-model="password"
                 />
-                <router-link to="/login/forgot-password" class="underline text-black/80"
+                <router-link
+                  to="/login/forgot-password"
+                  class="underline text-black/80 dark:text-gray-300"
                   >Forgot your password?</router-link
                 >
               </div>
               <!--button-->
               <baseButton text="Sign in" color="login" variant="filled" />
-              
             </form>
 
             <!--google auth-->
             <div class="">
-              
               <form>
                 <baseButton
                   text="Sign in with Google"
@@ -65,7 +102,9 @@
               </form>
             </div>
             <div class="mt-5">
-              <router-link to="/login/createAccount" class="underline text-black/80"
+              <router-link
+                to="/login/createAccount"
+                class="underline text-black/80 dark:text-gray-300"
                 >Don't have an account?</router-link
               >
             </div>
@@ -73,20 +112,16 @@
         </div>
       </main>
     </section>
-    
   </div>
-  
 </template>
 
 <script setup lang="ts">
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
-import baseToast from "@/components/base/baseToast.vue"
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
-import { useToast } from 'primevue/usetoast';
-import { Breadcrumb } from "primevue/breadcrumb";
+import { useToast } from "primevue/usetoast";
 
 // VARIÁVEIS 🔵
 const toast = useToast();
@@ -95,13 +130,8 @@ const auth = useAuthStore();
 const email = ref("");
 const password = ref("");
 const errorMessage = ref("");
-const home = ref({
-  icon:'pi pi-home',
-  route: '/'
-});
-const items= ref([
-  { label: 'Login' },
-])
+
+const items = ref([{ label: "Home", route: "/" }, { label: "Login" }]);
 
 // LOGIN 💖
 const handleLogin = async () => {
@@ -112,15 +142,21 @@ const handleLogin = async () => {
     const session = await auth.getSession();
     console.log("Access Token:", session?.access_token);
     console.log("Usuario autenticado:", auth.user);
-    router.push("/profile");
+    router.push(`/profile/${auth.user.display_name}`);
+    toast.add({
+      severity: "success",
+      summary: "Olá!",
+      detail: `É bom ter você de volta, ${auth.user.display_name}!`,
+      life: 4000,
+    });
   } catch (error: any) {
     console.error("Erro no login: ", error);
     toast.add({
-      severity: 'error',
-      summary: 'Failed to login',
-      detail: error.message || 'Credenciais inválidas.',
+      severity: "error",
+      summary: "Failed to login",
+      detail: error.message || "Credenciais inválidas.",
       life: 4000,
-    })
+    });
   }
 };
 </script>
