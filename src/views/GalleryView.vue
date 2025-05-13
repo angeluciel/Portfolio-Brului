@@ -1,11 +1,11 @@
 <template>
   <HeaderBar_mobile />
   <!-- A D M I N -->
-  <div class="flex-center w-screen bg-violet-50 !pt-32" v-if="showAdminContent">
+  <div class="flex-center w-full bg-violet-50 !pt-32" v-if="showAdminContent">
     <div
-      class="flex-center w-full text-center mx-24 h-8 bg-zinc-500 rounded-xl text-violet-50"
+      class="flex-center w-full md:w-40 text-center mx-24 h-8 bg-zinc-500 rounded-xl text-violet-50"
     >
-      <span class="w-fit">Botão</span>
+      <button class="w-fit">Upload art</button>
     </div>
   </div>
   <!--C O N T E N T-->
@@ -93,7 +93,6 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import HeaderBar from "@/components/layout/HeaderBar.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 import { Icon } from "@iconify/vue";
@@ -102,7 +101,7 @@ import { useRouter, onBeforeRouteUpdate } from "vue-router";
 
 const auth = useAuthStore();
 const router = useRouter();
-const showAdminContent = ref(false);
+const showAdminContent = computed(() => auth.is("artist")); // Change to computed property that checks for artist role
 
 // F A V O R I T E 💖
 const favorites = ref(new Set());
@@ -186,18 +185,6 @@ const nextImage = () => {
     currentImg.value = 0;
   }
 };
-
-// Checa credencial
-onBeforeMount(async () => {
-  if (!auth.user) {
-    await auth.fetchCurrentUser();
-  }
-
-  if (auth.is("artist") || auth.is("admin")) {
-    showAdminContent.value = true;
-  }
-  ready.value = true;
-});
 </script>
 
 <style lang="scss" scoped></style>
