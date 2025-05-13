@@ -49,6 +49,8 @@ const divClass = computed(() => {
     variantClasses = "border-violet-200 dark:border-zinc-800";
   } else if (props.variant === "forms") {
     variantClasses = "border-charcoal-10";
+  } else if (props.variant === "profile") {
+    variantClasses = "border-violet-200 dark:border-zinc-800 !h-10"; // Reduced height for profile variant
   }
 
   return `${baseClasses} ${variantClasses}`;

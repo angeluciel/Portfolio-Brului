@@ -1,263 +1,112 @@
 <template>
-  <div class="bg-violet-100">
-    <div class="flex flex-col w-full justify-center items-center !py-20 gap-5">
-      <!--top content-->
-      <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
-        <!--head-->
-        <div
-          class="flex !px-24 items-center gap-5 !py-2 w-full bg-white rounded-xl"
+  <div class="flex justify-start items-center ml-20 w-full h-full">
+    <div class="flex flex-col gap-14">
+      <!-- TITLE -->
+      <div class="flex flex-col items-start justify-start gap-3">
+        <h3
+          class="font-raleway font-bold uppercase text-xl tracking-wide text-indigo-950 dark:text-gray-200"
         >
-          <div v-if="loading">
-            <div
-              class="flex justify-center items-center !h-16 !w-16 rounded-full bg-gray-400"
-            ></div>
-          </div>
-          <div
-            v-else-if="auth.user"
-            class="relative flex justify-center items-center group"
+          {{ auth.user?.username }}'s information
+        </h3>
+        <span class="font-medium text-lg text-black/50 dark:text-gray-400"
+          >Here you can see and edit all public information about yourself.
+          <br />
+          The changes should be applied in about 5 minutes.
+        </span>
+      </div>
+      <!-- PFP SECTION -->
+      <div class="flex flex-col w-full justify-between items-start">
+        <!-- PFP -->
+        <div class="flex flex-col gap-2 items-start justify-start">
+          <span class="font-medium text-xl text-zinc-950 dark:text-gray-200"
+            >Profile Picture</span
           >
+          <div class="relative flex-center group">
             <img
-              src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
-              alt="pfp"
-              class="w-20 rounded-full group-hover:opacity-70"
+              src="/images/Sage.jpg"
+              alt="placeholder pfp"
+              class="ml-5 w-40 h-40 object-cover rounded-full group-hover:opacity-70"
             />
             <div
               class="text-center rounded-full ease-in opacity-0 duration-100 absolute group-hover:opacity-100"
             >
               <button
-                class="bg-white opacity-75 text-gray-600 rounded-full !p-1 hover:opacity-100"
-              >
-                <Icon icon="ri:camera-fill" width="32" height="32" />
-              </button>
+                class="bg-background/70 opacity-75 text-zinc-700 rounded-full !p-1 hover:opacity-100"
+              ></button>
             </div>
           </div>
-
-          <div
-            class="flex flex-col w-full justify-start items-start gap-2"
-            v-if="loading"
-          >
-            <div class="w-80 h-8 bg-gray-800 opacity-50 rounded-full"></div>
-            <div class="w-40 h-5 bg-gray-400 opacity-50 rounded-full"></div>
-          </div>
-          <div
-            v-else
-            class="flex flex-col w-full justify-start items-start gap-2"
-          >
-            <h2 v-if="error">{{ error }}</h2>
-            <h2 v-else-if="user" class="text-2xl text-gray-800 font-semibold">
-              @{{ user.username }}
-            </h2>
-            <span class="text-xl font-bold text-gray-400">{{
-              user.email
-            }}</span>
-          </div>
         </div>
-      </div>
-      <!-- mid content -->
-      <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
-        <!-- head -->
-        <div class="flex flex-col w-full bg-white rounded-xl overflow-hidden">
-          <ul class="gap-4">
-            <li
-              v-for="(item, index) in menuOptions"
-              :key="item.route"
-              @mouseenter="hoveredIndex = index"
-              @mouseleave="hoveredIndex = null"
-            >
-              <router-link
-                :to="item.route"
-                class="flex items-start justify-start gap-3 !px-16 !py-5 w-full hover:bg-gray-300 group active:bg-[#B7B7C3]"
-              >
-                <div
-                  class="text-gray-400 rounded-full border-2 border-gray-400 !p-3 group-hover:text-purple-700 group-hover:border-purple-800 group-active:text-white group-active:border-white"
-                >
-                  <Icon
-                    :icon="
-                      hoveredIndex === index
-                        ? item.icon.replace('-line', '-fill')
-                        : item.icon
-                    "
-                    width="32"
-                    height="32"
-                  />
-                </div>
-                <!--text-->
-                <div class="flex flex-col">
-                  <h3
-                    class="text-2xl text-charcoal font-medium group-active:text-white"
-                  >
-                    {{ item.title }}
-                  </h3>
-                  <span
-                    class="text-gray-500 text-xl font-medium group-active:text-gray-200"
-                    >{{ item.description }}</span
-                  >
-                </div>
-              </router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
-        <button
-          class="flex items-center gap-5 justify-start text-gray-500 group"
-          @click="handleLogout"
-        >
-          <Icon
-            icon="ri:door-open-line"
-            width="32"
-            height="32"
-            class="group-hover:text-red-400"
-          />
-          <span class="font-semibold group-hover:text-gray-600">Logoff</span>
-        </button>
+        <!-- FORMS -->
+        <form class="w-full" submit.prevent="handleSave">
+          <div class="flex flex-col gap-4">
+            <div>
+              <baseInput
+                title="Email address"
+                placeholder="email@exemplo.com"
+                type="text"
+                variant="profile"
+                v-model="email"
+              />
+            </div>
+            <div class="flex gap-4">
+              <baseInput
+                title="name"
+                placeholder="JÃO"
+                type="text"
+                variant="profile"
+                v-model="display_name"
+              />
+              <baseInput
+                title="username"
+                placeholder="jão"
+                type="text"
+                variant="profile"
+                v-model="username"
+              />
+            </div>
+            <div class="flex gap-4">
+              <baseInput
+                title="twitter"
+                type="text"
+                variant="profile"
+                v-model="twitter"
+              />
+              <baseInput
+                title="instagram"
+                type="text"
+                variant="profile"
+                v-model="instagram"
+              />
+            </div>
+            <baseButton text="save changes" color="login" variant="filled" />
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// nvm the error it means nothing
-import { Icon, loadIcons } from "@iconify/vue";
-import { ref, onMounted, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { baseInput as BaseInput } from "@/components/base/baseInput.vue";
+import { baseButton as BaseButton } from "@/components/base/baseButton.vue";
 import { useAuthStore } from "@/stores/authStore";
-import { supabase } from "@/lib/supabase";
+import { ref, onMounted } from "vue";
 
 const auth = useAuthStore();
-const user = ref<User | null>(null);
-const loading = ref<boolean>(true);
-const error = ref<string | null>(null);
-const route = useRoute();
-const router = useRouter();
 
-interface User {
-  display_name: string;
-  username: string;
-  email: string;
-}
+const email = ref("");
+const display_name = ref("");
+const username = ref("");
+const twitter = ref("");
+const instagram = ref("");
 
-function handleLogout() {
-  auth.logout();
-  router.push("/login");
-}
-
-async function fetchUserProfile(): Promise<void> {
-  loading.value = true;
-  error.value = null;
-
-  try {
-    const { data: sessionData, error: sessionError } =
-      await supabase.auth.getSession();
-    if (sessionError) throw sessionError;
-
-    const userId = sessionData?.session?.user?.id;
-    if (!userId) {
-      throw new Error("Usuário não autenticado.");
-    }
-
-    const { data, error: dbError } = await supabase
-      .from("users")
-      .select("display_name, username, email")
-      .eq("id", userId)
-      .single();
-
-    if (dbError) throw dbError;
-
-    user.value = data;
-  } catch (err: any) {
-    error.value = `Erro ao carregar perfil: ${err.message}`;
-  } finally {
-    loading.value = false;
-  }
-}
-
-onMounted(fetchUserProfile);
-
-watch(() => route.params.id, fetchUserProfile);
-
-// ======================================
-
-const iconList = [
-  "ri:bank-card-line",
-  "ri:bank-card-fill",
-  "ri:lock-2-line",
-  "ri:lock-2-fill",
-  "ri:user-4-line",
-  "ri:user-4-fill",
-  "ri:artboard-line",
-  "ri:artboard-fill",
-  "ri:heart-3-line",
-  "ri:heart-3-fill",
-  "ri:door-open-line",
-  "ri:door-open-fill",
-  "ri:camera-fill",
-];
-
-async function preloadIcons(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    loadIcons(iconList, (loaded, missing, pending) => {
-      if (pending.length) return; // Wait for the callback to finish
-      if (missing.length) {
-        console.error("Failed to load icons:", missing);
-        reject({ loaded, missing });
-      } else {
-        resolve();
-      }
-    });
-  });
-}
-
-interface MenuOption {
-  title: string;
-  description: string;
-  icon: string;
-  route: string;
-}
-
-const hoveredIndex = ref<number | null>(null);
-
-const menuOptions: MenuOption[] = [
-  {
-    title: "Suas informações",
-    description: "Suas preferências de contato e perfil",
-    icon: "ri:bank-card-line",
-    route: `/profile/${route.params.display_name}/edit`,
-  },
-  {
-    title: "Segurança",
-    description: "Suas medidas de segurança",
-    icon: "ri:lock-2-line",
-    route: "/profile",
-  },
-  {
-    title: "Privacidade",
-    description: "Quais conteúdos mostrar ou não mostrar",
-    icon: "ri:user-4-line",
-    route: "/profile",
-  },
-  {
-    title: "Comissões",
-    description: "Histórico de envios de Comissões",
-    icon: "ri:artboard-line",
-    route: "/profile",
-  },
-  {
-    title: "Artes Favoritas",
-    description: "Artes favoritas em 'Galeria'",
-    icon: "ri:heart-3-line",
-    route: "/gallery",
-  },
-];
-
-onMounted(async () => {
-  try {
-    await preloadIcons();
-    console.log("All icons preloaded!");
-  } catch (err) {
-    console.error("Error preloading icons:", err);
+onMounted(() => {
+  if (auth.user) {
+    email.value = auth.user.email || "";
+    display_name.value = auth.user.display_name || "";
+    username.value = auth.user.username || "";
   }
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

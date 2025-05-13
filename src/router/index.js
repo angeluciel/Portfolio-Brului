@@ -58,12 +58,12 @@ const router = createRouter({
     {
       path: "/profile/:display_name",
       name: "userProfile",
-      component: () => import("../views/user/userOverview.vue"),
+      component: () => import("../views/user/profileLayout.vue"),
       props: true,
-      childen: [
+      children: [
         {
-          path: "",
-          name: "infos",
+          path: "details",
+          name: "details",
           component: () => import("@/views/user/userOverview.vue"),
         },
         {

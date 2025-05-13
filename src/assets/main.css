@@ -95,6 +95,18 @@
   .mobile-card {
     @apply flex flex-col justify-between items-center !py-4 !px-3 bg-[linear-gradient(to_top,_#F5BDBD,_#EBE5D6)] rounded-2xl gap-3 min-w-[80dvw] shadow-[1px_1px_8px_2px_rgba(71,69,69,0.25)] hover:scale-101 transition-all duration-250 hover:shadow-[1px_1px_16px_2px_rgba(71,69,69,0.3)];
   }
+  .layout-header {
+    @apply font-josefin px-8 w-full text-start text-indigo-950 font-semibold text-xl dark:text-gray-100;
+  }
+  .options-item {
+    @apply flex w-full h-full justify-start rounded-lg py-3 px-8 text-slate-500 font-medium 
+    transition-all duration-200 ease-in-out
+    hover:translate-y-[2px] hover:shadow-sm
+    focus:translate-y-[-2px] focus:shadow-md;
+  }
+  .options-item-selected {
+    @apply flex w-full h-full justify-start rounded-lg py-3 px-8 bg-black/20 text-neutral-700 font-medium dark:text-neutral-300 dark:bg-white/10;
+  }
 }
 
 @layer base {
