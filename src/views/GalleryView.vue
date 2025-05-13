@@ -1,10 +1,16 @@
 <template>
   <HeaderBar_mobile />
   <!-- A D M I N -->
-  <div class="w-dvw"></div>
+  <div class="flex-center w-screen bg-violet-50 !pt-32" v-if="showAdminContent">
+    <div
+      class="flex-center w-full text-center mx-24 h-8 bg-zinc-500 rounded-xl text-violet-50"
+    >
+      <span class="w-fit">Botão</span>
+    </div>
+  </div>
   <!--C O N T E N T-->
   <div
-    class="flex gap-4 !px-5 items-top justify-center w-full !py-20 bg-violet-50"
+    class="flex gap-4 !px-5 items-top justify-center w-full pt-20 !pb-20 bg-violet-50"
   >
     <div
       v-for="(col, colIndex) in columns"
@@ -91,6 +97,12 @@ import HeaderBar from "@/components/layout/HeaderBar.vue";
 import FooterBar from "@/components/layout/FooterBar.vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 import { Icon } from "@iconify/vue";
+import { useAuthStore } from "@/stores/authStore";
+import { useRouter, onBeforeRouteUpdate } from "vue-router";
+
+const auth = useAuthStore();
+const router = useRouter();
+const showAdminContent = ref(false);
 
 // F A V O R I T E 💖
 const favorites = ref(new Set());
@@ -107,9 +119,7 @@ const isFavorited = (imagePath) => favorites.value.has(imagePath);
 
 // Z O O M 🔎
 const isZoomed = ref(false);
-
 const zoomOrigin = ref("center center");
-
 const toggleZoom = (event) => {
   if (!isZoomed.value) {
     const img = event.target;
@@ -144,30 +154,22 @@ const columns = [
   ],
 ];
 
-// ############ MOCK
-const user = ref("admin");
-// ############ MOCK_END
-
 // Modal controls
 const isModalOpen = ref(false);
 const currentCol = ref(0);
 const currentImg = ref(0);
-
 const openModal = (colIndex, imgIndex) => {
   currentCol.value = colIndex;
   currentImg.value = imgIndex;
   isModalOpen.value = true;
 };
-
 const closeModal = () => {
   isModalOpen.value = false;
 };
-
 const currentImage = computed(
   () => columns[currentCol.value][currentImg.value]
 );
 
-// Navigation
 const prevImage = () => {
   if (currentImg.value > 0) {
     currentImg.value--;
@@ -176,7 +178,6 @@ const prevImage = () => {
     currentImg.value = columns[currentCol.value].length - 1;
   }
 };
-
 const nextImage = () => {
   if (currentImg.value < columns[currentCol.value].length - 1) {
     currentImg.value++;
@@ -185,6 +186,18 @@ const nextImage = () => {
     currentImg.value = 0;
   }
 };
+
+// Checa credencial
+onBeforeMount(async () => {
+  if (!auth.user) {
+    await auth.fetchCurrentUser();
+  }
+
+  if (auth.is("artist") || auth.is("admin")) {
+    showAdminContent.value = true;
+  }
+  ready.value = true;
+});
 </script>
 
 <style lang="scss" scoped></style>

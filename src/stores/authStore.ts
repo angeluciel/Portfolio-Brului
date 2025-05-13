@@ -43,27 +43,27 @@ export const useAuthStore = defineStore("auth", () => {
 
   const login = async (email: string, password: string) => {
     loading.value = true;
-  
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-  
+
     loading.value = false;
     if (error) throw error;
-  
+
     const authUser = data.user;
     if (!authUser) throw new Error("Usuário inválido");
-  
+
     // Busca dados na tabela public.users
     const { data: profile, error: profileError } = await supabase
       .from("users")
       .select("id, email, display_name, username")
       .eq("id", authUser.id)
       .single();
-  
+
     if (profileError) throw profileError;
-  
+
     user.value = profile;
   };
 
@@ -79,19 +79,45 @@ export const useAuthStore = defineStore("auth", () => {
   const fetchCurrentUser = async () => {
     const { data, error } = await supabase.auth.getSession();
     const userId = data?.session?.user?.id;
-  
+
     if (!userId) return;
-  
+
     const { data: profile, error: dbError } = await supabase
       .from("users")
       .select("*")
       .eq("id", userId)
       .single();
-  
+
     if (!dbError && profile) {
       user.value = profile;
     }
   };
 
-  return { user, loading, signUp, login, logout, getSession, isLoggedIn, fetchCurrentUser };
+  const rolePermissions: Record<string, string[]> = {
+    admin: ["upload", "deleteUser", "viewStats", "editPrices"],
+    artist: ["upload", "editPrices"],
+    client: ["viewGallery", "createComission"],
+    guests: ["viewGallery"],
+  };
+
+  const is = (role: string) => user.value?.role === role;
+
+  const can = (permission: string): boolean => {
+    const role = user.value?.role;
+    if (!role) return false;
+    return rolePermissions[role]?.includes(permission) || false;
+  };
+
+  return {
+    user,
+    loading,
+    signUp,
+    login,
+    logout,
+    getSession,
+    isLoggedIn,
+    fetchCurrentUser,
+    is,
+    can,
+  };
 });

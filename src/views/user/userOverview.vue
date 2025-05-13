@@ -1,7 +1,5 @@
 <template>
   <div class="bg-violet-100">
-    <HeaderBar_mobile />
-    <!-- Content -->
     <div class="flex flex-col w-full justify-center items-center !py-20 gap-5">
       <!--top content-->
       <div class="flex w-full lg:!px-64 md:!px-56 gap-5">
@@ -115,17 +113,14 @@
         </button>
       </div>
     </div>
-    <FooterBar />
   </div>
 </template>
 
 <script setup lang="ts">
 // nvm the error it means nothing
-import FooterBar from "@/components/layout/FooterBar.vue";
 import { Icon, loadIcons } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { supabase } from "@/lib/supabase";
 
@@ -144,7 +139,7 @@ interface User {
 
 function handleLogout() {
   auth.logout();
-  router.push("/login")
+  router.push("/login");
 }
 
 async function fetchUserProfile(): Promise<void> {

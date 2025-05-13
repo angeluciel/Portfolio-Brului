@@ -58,13 +58,45 @@ const router = createRouter({
     {
       path: "/profile/:display_name",
       name: "userProfile",
-      component: () => import("../views/user/profileView.vue"),
+      component: () => import("../views/user/profileLayout.vue"),
       props: true,
+      childen: [
+        {
+          path: "",
+          name: "infos",
+          component: () => import("@/views/user/userOverview.vue"),
+        },
+        {
+          path: "edit",
+          name: "edit",
+          component: () => import("@/views/user/userEdit.vue"),
+        },
+        {
+          path: "security",
+          name: "security",
+          component: () => import("@/views/user/userSecurity.vue"),
+        },
+        {
+          path: "privacy",
+          name: "privacy",
+          component: () => import("@/views/user/userPrivacy.vue"),
+        },
+        {
+          path: "comissions",
+          name: "comissions",
+          component: () => import("@/views/user/userComissions.vue"),
+        },
+        {
+          path: "favorites",
+          name: "favorites",
+          component: () => import("@/views/user/userFavorites.vue"),
+        },
+      ],
     },
     {
       path: "/user/:id",
       name: "userView",
-      component: () => import("../views/user/profileView.vue"),
+      component: () => import("../views/user/userOverview.vue"),
     },
   ],
 });
