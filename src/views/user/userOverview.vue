@@ -37,7 +37,7 @@
           </div>
         </div>
         <!-- FORMS -->
-        <form class="w-full" submit.prevent="handleSave">
+        <form class="w-full" @submit.prevent="handleSave">
           <div class="flex flex-col gap-4">
             <div>
               <baseInput
@@ -87,8 +87,8 @@
 </template>
 
 <script setup lang="ts">
-import { baseInput as BaseInput } from "@/components/base/baseInput.vue";
-import { baseButton as BaseButton } from "@/components/base/baseButton.vue";
+import BaseInput from "@/components/base/baseInput.vue";
+import BaseButton from "@/components/base/baseButton.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { ref, onMounted } from "vue";
 
