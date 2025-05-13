@@ -34,7 +34,7 @@
             >
               <a :href="href" v-bind="props.action" @click="navigate">
                 <span
-                  class="text-violet-800 hover:text-black/80 dark:hover:text-violet-700 font-semibold"
+                  class="text-violet-800 dark:text-violet-300 hover:text-black/80 dark:hover:text-violet-400 font-semibold"
                   >{{ item.label }}</span
                 >
               </a>
@@ -53,7 +53,7 @@
         </Breadcrumb>
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
           <h1
-            class="!font-abril text-4xl !mb-10 text-charcoal dark:text-gray-500"
+            class="!font-raleway !font-black tracking-wider text-4xl !mb-10 text-charcoal dark:text-gray-300"
           >
             Create your account
           </h1>

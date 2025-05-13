@@ -36,7 +36,7 @@
             >
               <a :href="href" v-bind="props.action" @click="navigate">
                 <span
-                  class="text-violet-800 hover:text-black/80 dark:hover:text-violet-700 font-semibold"
+                  class="text-violet-800 dark:text-violet-300 hover:text-black/80 dark:hover:text-violet-700 font-semibold"
                   >{{ item.label }}</span
                 >
               </a>
@@ -56,11 +56,11 @@
         <!--breadcrumbs end-->
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
           <h1
-            class="!font-abril text-6xl !mb-5 text-charcoal dark:text-gray-500"
+            class="!font-raleway !font-black tracking-wide text-6xl !mb-5 text-charcoal dark:text-gray-300"
           >
             Reset your Password
           </h1>
-          <p class="!mb-10 text-violet-900 dark:text-violet-700 font-semibold">
+          <p class="!mb-10 text-violet-900 dark:text-violet-300 font-semibold">
             Please enter your email so that we can send a link for the password
             reset.
           </p>
@@ -78,16 +78,7 @@
               <!--button-->
               <baseButton text="Sign in" color="login" variant="filled" />
             </form>
-            <!--google auth-->
-            <div class="">
-              <form>
-                <baseButton
-                  text="Sign in with Google"
-                  color="login"
-                  variant="outline"
-                />
-              </form>
-            </div>
+
             <div class="mt-5">
               <router-link to="/login/" class="underline dark:text-gray-300"
                 >Already have an account?</router-link

@@ -22,6 +22,7 @@
     </section>
     <section class="w-full">
       <main class="flex flex-col relative !items-start justify-center h-full">
+        <!--BREADCRUMBS-->
         <Breadcrumb
           :model="items"
           class="!bg-transparent !ml-12 md:!ml-20 sm:!py-8 md:!px-16"
@@ -35,7 +36,7 @@
             >
               <a :href="href" v-bind="props.action" @click="navigate">
                 <span
-                  class="text-violet-800 hover:text-black/80 dark:hover:text-violet-700 font-semibold"
+                  class="text-violet-800 dark:text-violet-300 hover:text-black/80 dark:hover:text-violet-200 font-semibold"
                   >{{ item.label }}</span
                 >
               </a>
@@ -46,18 +47,17 @@
               :target="item.target"
               v-bind="props.action"
             >
-              <span class="text-surface-700 dark:text-surface-0">{{
-                item.label
-              }}</span>
+              <span
+                class="text-surface-700 dark:text-surface-0 dark:text-zinc-400"
+                >{{ item.label }}</span
+              >
             </a>
           </template>
         </Breadcrumb>
+        <!--BREADCRUMBS END-->
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
-          <!--BREADCRUMBS-->
-
-          <!--BREADCRUMBS END-->
           <h1
-            class="!font-abril text-6xl !mb-10 text-charcoal dark:text-gray-500"
+            class="!font-raleway !font-black tracking-wider text-6xl !mb-10 text-charcoal dark:text-gray-300"
           >
             Sign in
           </h1>

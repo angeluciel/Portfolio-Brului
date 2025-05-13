@@ -58,7 +58,7 @@ const router = createRouter({
     {
       path: "/profile/:display_name",
       name: "userProfile",
-      component: () => import("../views/user/profileLayout.vue"),
+      component: () => import("../views/user/userOverview.vue"),
       props: true,
       childen: [
         {

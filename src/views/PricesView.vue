@@ -128,7 +128,7 @@ const showButtons = ref(false);
       @mouseenter="showButtons = true"
       @mouseleave="showButtons = false"
     >
-      <div class="flex w-full !pl-6 sm:!md-24 gap-2">
+      <div class="flex w-full !pl-6 sm:!pl-24 gap-2">
         <span class="!font-abril text-2xl">All Services.</span>
         <span class="!font-abril text-2xl text-gray-500">Choose Yours!</span>
       </div>

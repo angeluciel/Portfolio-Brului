@@ -222,7 +222,7 @@ const menuOptions: MenuOption[] = [
     title: "Suas informações",
     description: "Suas preferências de contato e perfil",
     icon: "ri:bank-card-line",
-    route: "/profile",
+    route: `/profile/${route.params.display_name}/edit`,
   },
   {
     title: "Segurança",
