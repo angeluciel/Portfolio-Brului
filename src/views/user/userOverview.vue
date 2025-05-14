@@ -26,18 +26,20 @@
           <span class="font-medium text-xl text-zinc-950 dark:text-gray-200"
             >Profile Picture</span
           >
-          <div class="relative flex-center group">
+          <div class="relative ml-5 flex-center group">
             <img
               src="/images/Sage.jpg"
               alt="placeholder pfp"
-              class="ml-5 w-40 h-40 object-cover rounded-full group-hover:opacity-70"
+              class="w-40 h-40 object-cover rounded-full group-hover:opacity-70"
             />
             <div
-              class="text-center rounded-full ease-in opacity-0 duration-100 absolute group-hover:opacity-100"
+              class="text-center absolute-center rounded-full ease-in opacity-0 duration-100 group-hover:opacity-100"
             >
               <button
-                class="bg-background/70 opacity-75 text-zinc-700 rounded-full !p-1 hover:opacity-100"
-              ></button>
+                class="bg-background/70 opacity-75 text-zinc-700 rounded-full !p-2 hover:opacity-100"
+              >
+                <Icon icon="ri:camera-ai-line" width="32" height="32" />
+              </button>
             </div>
           </div>
         </div>
@@ -95,6 +97,7 @@
 import BaseInput from "@/components/base/baseInput.vue";
 import BaseButton from "@/components/base/baseButton.vue";
 import { useAuthStore } from "@/stores/authStore";
+import { Icon } from "@iconify/vue";
 import { ref, onMounted } from "vue";
 
 const auth = useAuthStore();
