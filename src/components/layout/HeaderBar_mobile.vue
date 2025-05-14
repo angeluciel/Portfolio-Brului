@@ -99,7 +99,9 @@
             >sign in</router-link
           >
 
-          <router-link to="/profile" v-if="userStore.isLoggedIn"
+          <router-link
+            :to="`/profile/${userStore.user.display_name}`"
+            v-if="userStore.isLoggedIn"
             ><img
               src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
               alt="profile"

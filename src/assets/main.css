@@ -33,16 +33,15 @@
     @apply text-black;
   }
 
-  .no-scroll {
-    @apply overflow-hidden touch-none;
-  }
-  .no-scrollbar {
-    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
   }
 
-  .mask-clip-path {
-    @apply [clip-path:_polygon(0_0,_100%_0,_100%_100%,_0_100%)];
+  .flex-center {
+    @apply flex justify-center items-center;
   }
+
+  /* H O M E */
 
   .home-heading {
     @apply uppercase !font-abril font-black !text-6xl sm:!right-10 sm:!text-7xl md:!text-9xl lg:!text-[10rem];
@@ -52,27 +51,19 @@
     @apply bg-black rounded-lg border  [&_*]:!text-violet-50;
   }
 
+  /* C O N T A C T S */
+
   .contacts_heading {
     @apply !font-abril text-5xl md:text-8xl dark:text-zinc-300;
   }
 
-  .absolute-center {
-    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
-  }
-
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
+  /* H E A D E R */
 
   .header-item {
     @apply hidden sm:flex !p-1.5 cursor-pointer relative transition-all text-zinc-900 dark:text-zinc-200 font-medium !text-[1.12em] uppercase 
       active:!text-amber-500 active:font-bold active:hover:after:bg-amber-500 
       hover:after:w-full 
       after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-charcoal after:transition-all after:duration-300 after:ease-in-out;
-  }
-
-  .prices-list {
-    @apply !p-1 sm:!py-3 sm:!px-5 hover:bg-gray-200 dark:hover:bg-zinc-800 text-nowrap text-zinc-900 dark:text-zinc-200 font-medium;
   }
 
   .header-item-active {
@@ -82,6 +73,21 @@
   .header-after {
     @apply absolute bottom-0 left-0 h-0.5 w-0 bg-zinc-900 dark:bg-zinc-200 transition-all duration-300 ease-in-out;
   }
+
+  /* P R I C E S */
+
+  .prices-list {
+    @apply !p-1 sm:!py-3 sm:!px-5 hover:bg-gray-200 dark:hover:bg-zinc-800 text-nowrap text-zinc-900 dark:text-zinc-200 font-medium;
+  }
+
+  .no-scroll {
+    @apply overflow-hidden touch-none;
+  }
+  .no-scrollbar {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  }
+
+  /* F O O T E R >> button */
 
   .button-anim {
     @apply relative overflow-hidden !px-6 !py-2 font-semibold text-home-blue;
@@ -93,15 +99,28 @@
     @apply absolute inset-0 translate-y-full bg-[rgba(69,69,86,.5)] transition-transform duration-300 group-hover:translate-y-0 active:bg-[rgba(69,69,86,.7)];
   }
 
+  /* G A L L E R Y */
+
   .gallery-image {
     @apply w-[300px] h-auto block transition-transform duration-150 ease-in-out hover:scale-104 cursor-pointer;
   }
+
+  /* C A R D   T E M P L A T E */
+
   .mobile-card {
     @apply flex flex-col justify-between items-center !py-4 !px-3 bg-[linear-gradient(to_top,_#F5BDBD,_#EBE5D6)] rounded-2xl gap-3 min-w-[80dvw] shadow-[1px_1px_8px_2px_rgba(71,69,69,0.25)] hover:scale-101 transition-all duration-250 hover:shadow-[1px_1px_16px_2px_rgba(71,69,69,0.3)];
   }
+
+  /* P R O F I L E */
+
   .layout-header {
     @apply font-josefin px-8 w-full text-start text-indigo-950 font-semibold text-xl dark:text-gray-100;
   }
+
+  .close-profile {
+    @apply absolute right-4 top-4 p-3 rounded-full bg-violet-200 dark:bg-indigo-900 border-2 cursor-pointer border-indigo-950 dark:border-violet-200 text-indigo-950 dark:text-violet-200 hover:scale-110 hover:rotate-90 transition-all duration-300 ease-in-out hover:bg-violet-300 dark:hover:bg-indigo-800 hover:shadow-lg;
+  }
+
   .options-item {
     @apply flex w-full h-full justify-start rounded-lg py-3 px-8 text-slate-500 font-medium 
     transition-all duration-200 ease-in-out

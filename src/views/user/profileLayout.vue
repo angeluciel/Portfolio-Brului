@@ -2,10 +2,12 @@
   <div class="flex h-dvh overflow-hidden bg-background dark:bg-zinc-900">
     <!-- SIDE BAR -->
     <section
-      class="flex justify-end w-[40dvw] bg-violet-300 h-full dark:bg-indigo-950"
+      v-if="!isMobile || showSidebar"
+      class="md:flex justify-end w-dvw md:w-[40dvw] bg-violet-300 h-full dark:bg-indigo-950"
     >
+      <!-- left -->
       <div
-        class="flex flex-col items-start justify-between max-w-[400px] px-5 py-10"
+        class="flex flex-col items-start justify-between w-full h-full max-w-[400px] px-5 py-10"
       >
         <!-- user name and pfp -->
         <div class="flex gap-6 w-full items-center px-5">
@@ -16,9 +18,11 @@
           />
           <div class="flex flex-col">
             <h2 class="text-xl font-bold text-zinc-950 dark:text-gray-300">
-              username
+              {{ username }}
             </h2>
-            <p class="text-lg text-zinc-800 dark:text-gray-400">display_name</p>
+            <p class="text-lg text-zinc-800 dark:text-gray-400">
+              {{ display_name }}
+            </p>
           </div>
         </div>
         <!-- options -->
@@ -30,7 +34,7 @@
               'options-item',
               $route.name === 'details' ? 'options-item-selected' : '',
             ]"
-            @click="$router.push({ name: 'details' })"
+            @click="navigateTo('details')"
           >
             user information
           </button>
@@ -42,7 +46,7 @@
               'options-item',
               $route.name === 'security' ? 'options-item-selected' : '',
             ]"
-            @click="$router.push({ name: 'security' })"
+            @click="navigateTo('security')"
           >
             security
           </button>
@@ -51,7 +55,7 @@
               'options-item',
               $route.name === 'privacy' ? 'options-item-selected' : '',
             ]"
-            @click="$router.push({ name: 'privacy' })"
+            @click="navigateTo('privacy')"
           >
             privacy settings
           </button>
@@ -63,7 +67,7 @@
               'options-item',
               $route.name === 'comissions' ? 'options-item-selected' : '',
             ]"
-            @click="$router.push({ name: 'comissions' })"
+            @click="navigateTo('comissions')"
           >
             my comissions
           </button>
@@ -72,7 +76,7 @@
               'options-item',
               $route.name === 'favorites' ? 'options-item-selected' : '',
             ]"
-            @click="$router.push({ name: 'favorites' })"
+            @click="navigateTo('favorites')"
           >
             my favorites
           </button>
@@ -90,18 +94,13 @@
       </div>
     </section>
     <!-- COMPONENTS PAGE -->
-    <section class="w-[60dvw] relative">
+    <section
+      v-if="!isMobile || !showSidebar"
+      class="md:flex items-center w-dvw md:w-[60dvw] relative"
+    >
       <RouterView />
-      <div
-        class="absolute right-4 top-4 p-3 rounded-full bg-violet-200 border-1 cursor-pointer border-indigo-950"
-        @click="router.push({ name: 'home' })"
-      >
-        <Icon
-          icon="ri:close-large-line"
-          width="24"
-          height="24"
-          style="color: #1e1b4b"
-        />
+      <div class="close-profile" @click="router.push({ name: 'home' })">
+        <Icon icon="ri:close-large-line" width="16" height="16" />
       </div>
     </section>
   </div>
@@ -109,21 +108,44 @@
 
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { useRouter, useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const auth = useAuthStore();
-const user = ref<User | null>(null);
-const loading = ref<boolean>(true);
-const error = ref<string | null>(null);
-const route = useRoute();
 const router = useRouter();
 
-interface User {
-  display_name: string;
-  username: string;
-  email: string;
+// 1. Mobile State
+const isMobile = ref(window.innerWidth < 768);
+function updateIsMobile() {
+  isMobile.value = window.innerWidth < 760;
+}
+
+// 2. Sidebar State
+const showSidebar = ref(true);
+
+// 3. User State
+const display_name = ref("");
+const username = ref("");
+
+onMounted(() => {
+  if (auth.user) {
+    display_name.value = auth.user.display_name || "";
+    username.value = auth.user.username || "";
+  } else {
+    router.push("/");
+  }
+});
+
+// cleanup
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateIsMobile);
+});
+
+// 4. Nav helper
+function navigateTo(name: string) {
+  router.push({ name });
+  if (isMobile.value) showSidebar.value = false;
 }
 
 function handleLogout() {

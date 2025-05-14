@@ -1,14 +1,19 @@
 <template>
-  <div class="flex justify-start items-center ml-20 w-full h-full">
+  <div
+    class="flex justify-start items-center px-5 md:p-0 md:ml-20 w-full h-full max-w-[440px]"
+  >
     <div class="flex flex-col gap-14">
       <!-- TITLE -->
-      <div class="flex flex-col items-start justify-start gap-3">
+      <div
+        class="flex flex-col w-full md:w-auto items-start justify-start gap-3"
+      >
         <h3
-          class="font-raleway font-bold uppercase text-xl tracking-wide text-indigo-950 dark:text-gray-200"
+          class="font-raleway font-bold uppercase text-lg md:text-xl tracking-wide text-indigo-950 dark:text-gray-200"
         >
           {{ auth.user?.username }}'s information
         </h3>
-        <span class="font-medium text-lg text-black/50 dark:text-gray-400"
+        <span
+          class="font-medium md:text-lg text-black/50 dark:text-gray-400 text-base"
           >Here you can see and edit all public information about yourself.
           <br />
           The changes should be applied in about 5 minutes.
