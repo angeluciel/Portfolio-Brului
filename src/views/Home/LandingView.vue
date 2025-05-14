@@ -13,7 +13,7 @@
   <!-- P A G E -->
 
   <div
-    class="relative h-dvh w-full overflow-x-hidden bg-violet-50 overflow-y-hidden"
+    class="relative h-dvh w-full overflow-x-hidden bg-background dark:bg-zinc-900 overflow-y-hidden"
   >
     <div
       class="relative z-10 h-full w-full overflow-hidden rounded-lg bg-blue-75"
@@ -88,7 +88,9 @@
       </div>
     </div>
     <!-- O U T S I D E   T E X T -->
-    <h1 class="home-heading !font-abril absolute bottom-5 right-5 text-black">
+    <h1
+      class="home-heading !font-abril absolute bottom-5 right-5 text-zinc-900 dark:text-indigo-600"
+    >
       CHARACTERS.
     </h1>
     <div class="w-screen h-dvh"></div>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center justify-between py-80 h-[200dvh] w-full bg-violet-50 overflow-x-hidden"
+    class="flex flex-col items-center justify-between py-80 h-[200dvh] w-full bg-violet-50 dark:bg-zinc-900 overflow-x-hidden"
   >
     <h1 class="!font-abril !text-xl text-black" ref="buttonText">
       Still in Progress

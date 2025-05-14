@@ -1,7 +1,7 @@
 <template>
   <div
     ref="navContainerRef"
-    class="fixed inset-x-0 top-4 z-999 !h-16 border-none transition-all duration-700 sm:inset-x-6"
+    class="fixed inset-x-0 top-4 z-999 !h-16 md:!h-20 border-none transition-all duration-700 sm:inset-x-6"
   >
     <!-- MAIN CONTENT -->
     <header class="absolute top-1/2 w-full -translate-y-1/2">
@@ -63,7 +63,7 @@
         <div class="flex justify-end items-center gap-6">
           <router-link
             to="/gallery"
-            class="bg-[#597DA1] hidden md:flex gap-1 items-center justify-center !py-2 !px-6 rounded-4xl [&>*]:text-white hover:scale-90 transition-all active:bg-[#395C83] active:!text-white duration-200"
+            class="bg-indigo-400 hidden md:flex gap-1 items-center justify-center !py-2 !px-6 rounded-4xl [&>*]:text-white hover:scale-90 transition-all active:bg-indigo-500 active:!text-white duration-200"
           >
             <span class="uppercase font-medium tracking-wide text-[1.1em] z-40"
               >gallery</span
@@ -113,7 +113,9 @@
               height="32"
               :class="[
                 isMenuOpen ? 'opacity-0' : '',
-                route.path === '/' ? 'text-white' : 'text-charcoal',
+                route.path === '/'
+                  ? 'text-white'
+                  : 'text-zinc-900 dark:text-zinc-300',
                 'transition-colors duration-300',
               ]"
             />
@@ -127,7 +129,7 @@
             :class="[
               route.path === '/' && !isMenuOpen
                 ? 'text-white'
-                : 'text-charcoal',
+                : 'text-charcoal dark:text-zinc-300',
             ]"
           />
         </div>
@@ -137,16 +139,21 @@
   <!-- M O B I L E M E N U-->
   <div
     v-if="isMenuOpen"
-    class="md:hidden block w-screen h-dvh bg-violet-50 !pt-24 transition-all ease-in duration-400 fixed z-90"
+    class="md:hidden block w-screen h-dvh bg-background dark:bg-zinc-900 !pt-24 transition-all ease-in duration-400 fixed z-90"
   >
     <div
-      class="flex flex-col !px-5 justify-start w-full text-2xl uppercase gap-3 font-medium [&>*]:h-8"
+      class="flex flex-col !px-5 justify-start w-full text-2xl uppercase gap-3 font-medium [&>*]:h-8 text-zinc-900 dark:text-zinc-200"
     >
       <router-link to="/">Home</router-link>
       <router-link to="/prices">prices</router-link>
       <router-link to="/gallery">Gallery</router-link>
       <router-link to="/contacts">contacts</router-link>
-      <router-link to="/login">sign in</router-link>
+      <router-link
+        v-if="userStore.isLoggedIn"
+        :to="`/profile/${userStore.user.display_name}`"
+        >{{ userStore.user.display_name }}</router-link
+      >
+      <router-link v-else to="/login">sign in</router-link>
     </div>
   </div>
 </template>

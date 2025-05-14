@@ -1,7 +1,10 @@
 <template>
   <HeaderBar_mobile />
   <!-- A D M I N -->
-  <div class="flex-center w-full bg-violet-50 !pt-32" v-if="showAdminContent">
+  <div
+    class="flex-center w-full bg-background dark:bg-zinc-900 !pt-32"
+    v-if="showAdminContent"
+  >
     <div
       class="flex-center w-full md:w-40 text-center mx-24 h-8 bg-zinc-500 rounded-xl text-violet-50"
     >
@@ -10,7 +13,7 @@
   </div>
   <!--C O N T E N T-->
   <div
-    class="flex gap-4 !px-5 items-top justify-center w-full pt-20 !pb-20 bg-violet-50"
+    class="flex gap-4 !px-5 items-top justify-center w-full pt-20 md:pt-32 !pb-20 bg-violet-50 dark:bg-zinc-900"
   >
     <div
       v-for="(col, colIndex) in columns"

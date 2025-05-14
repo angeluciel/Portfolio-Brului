@@ -75,26 +75,30 @@ const showButtons = ref(false);
   <HeaderBar_mobile />
 
   <div
-    class="flex flex-col gap-4 w-full !py-24 h-fit md:h-auto bg-violet-50 overflow-x-hidden"
+    class="flex flex-col gap-4 w-full !py-24 md:!py-32 h-fit md:h-auto bg-violet-50 dark:bg-zinc-900 overflow-x-hidden"
   >
     <div
       class="relative flex flex-col justify-between gap-4 items-center w-full !pl-6 sm:!px-24"
     >
       <div
-        class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-violet-50 to-transparent"
+        class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-violet-50 dark:from-zinc-900 to-transparent"
       ></div>
       <div
-        class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-violet-50 to-transparent"
+        class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-violet-50 dark:from-zinc-900 to-transparent"
       ></div>
 
       <div
         class="flex flex-col sm:flex-row gap-8 sm:justify-between justify-center w-full"
       >
-        <h1 class="!font-abril !text-4xl text-charcoal sm:!text-5xl">
+        <h1
+          class="!font-abril !text-4xl text-zinc-900 dark:text-zinc-300 sm:!text-5xl"
+        >
           Place your Order
         </h1>
         <div class="flex flex-col items-start">
-          <span>Need something that's not on the menu?</span>
+          <span class="text-zinc-900 dark:text-zinc-400"
+            >Need something that's not on the menu?</span
+          >
           <div class="flex text-gold-500">
             <span>Let me know how I can help!</span>
             <Icon icon="ri:arrow-right-up-line" width="24" height="24" />
@@ -105,21 +109,11 @@ const showButtons = ref(false);
       <div
         class="flex justify-around w-full [&>*]:w-full text-center overflow-x-scroll no-scrollbar gap-12 sm:gap-0"
       >
-        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-          All Prices
-        </div>
-        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-          Complete Render
-        </div>
-        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-          Lineart + Base Color
-        </div>
-        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-          Emotes
-        </div>
-        <div class="!p-1 sm:!py-3 sm:!px-5 hover:bg-gray-100 text-nowrap">
-          Background
-        </div>
+        <div class="prices-list">All Prices</div>
+        <div class="prices-list">Complete Render</div>
+        <div class="prices-list">Lineart + Base Color</div>
+        <div class="prices-list">Emotes</div>
+        <div class="prices-list">Background</div>
       </div>
     </div>
 
@@ -129,8 +123,12 @@ const showButtons = ref(false);
       @mouseleave="showButtons = false"
     >
       <div class="flex w-full !pl-6 sm:!pl-24 gap-2">
-        <span class="!font-abril text-2xl">All Services.</span>
-        <span class="!font-abril text-2xl text-gray-500">Choose Yours!</span>
+        <span class="!font-abril text-2xl text-zinc-950 dark:text-gray-200"
+          >All Services.</span
+        >
+        <span class="!font-abril text-2xl text-gray-500 dark:text-zinc-400"
+          >Choose Yours!</span
+        >
       </div>
       <div class="w-screen">
         <div
@@ -148,7 +146,7 @@ const showButtons = ref(false);
         <!-- Mova os botões aqui, fora do scroll container -->
         <button
           @click="scrollLeft"
-          class="hidden md:flex absolute left-9 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.4)] text-gray-200 shadow-[0px_0px_16px_1px_rgba(255,255,255,0.5)] rounded-full p-2 transition-all duration-300"
+          class="hidden md:flex absolute left-9 top-1/2 -translate-y-1/2 bg-zinc-900/25 dark:bg-zinc-300 text-gray-200 dark:text-zinc-900 shadow-[0px_0px_16px_1px_rgba(255,255,255,0.5)] dark:shadow-[0px_0px_16px_1px_rgba(1,1,1,0.5)] rounded-full p-2 transition-all duration-300"
           :class="
             showButtons
               ? 'opacity-100 translate-y-0'
