@@ -101,52 +101,46 @@
 
             <!--google auth-->
             <div class="w-full">
-              <form>
-                <p
-                  class="text-center w-full text-gray-500 dark:text-gray-300 mb-5 text-sm font-medium"
+              <p
+                class="text-center w-full text-gray-500 dark:text-gray-300 mb-5 text-sm font-medium"
+              >
+                Continue with
+              </p>
+              <div class="flex justify-center gap-4">
+                <!-- google -->
+                <button
+                  class="social-buttons"
+                  @click="handleGoogleLogin"
+                  v-tooltip="{
+                    value: 'Login with Google',
+                    showDelay: 1000,
+                    hideDelay: 300,
+                  }"
                 >
-                  Continue with
-                </p>
-                <div class="flex justify-center gap-4">
-                  <!-- google -->
-                  <button
-                    class="social-buttons"
-                    @click="handleGoogleLogin"
-                    v-tooltip="{
-                      value: 'Login with Google',
-                      showDelay: 1000,
-                      hideDelay: 300,
-                    }"
-                  >
-                    <Icon
-                      icon="flat-color-icons:google"
-                      width="24"
-                      height="24"
-                    />
-                  </button>
-                  <!-- apple -->
-                  <button
-                    class="social-buttons text-zinc-900 dark:text-background"
-                    @click.prevent="handleComingSoon('Apple')"
-                  >
-                    <Icon icon="icon-park-solid:apple" width="24" height="24" />
-                  </button>
-                  <!-- facebook -->
-                  <button
-                    class="social-buttons text-zinc-900 dark:text-background"
-                    @click.prevent="handleComingSoon('Facebook')"
-                  >
-                    <Icon icon="basil:facebook-solid" width="24" height="24" />
-                  </button>
-                  <!-- discord -->
-                  <button
-                    class="social-buttons text-zinc-900 dark:text-background"
-                    @click.prevent="handleComingSoon('Discord')"
-                  >
-                    <Icon icon="ic:baseline-discord" width="24" height="24" />
-                  </button>
-                </div>
-              </form>
+                  <Icon icon="flat-color-icons:google" width="24" height="24" />
+                </button>
+                <!-- apple -->
+                <button
+                  class="social-buttons text-zinc-900 dark:text-background"
+                  @click.prevent="handleComingSoon('Apple')"
+                >
+                  <Icon icon="icon-park-solid:apple" width="24" height="24" />
+                </button>
+                <!-- facebook -->
+                <button
+                  class="social-buttons text-zinc-900 dark:text-background"
+                  @click.prevent="handleComingSoon('Facebook')"
+                >
+                  <Icon icon="basil:facebook-solid" width="24" height="24" />
+                </button>
+                <!-- discord -->
+                <button
+                  class="social-buttons text-zinc-900 dark:text-background"
+                  @click.prevent="handleComingSoon('Discord')"
+                >
+                  <Icon icon="ic:baseline-discord" width="24" height="24" />
+                </button>
+              </div>
             </div>
             <!-- register route -->
             <div class="flex-center mt-5 w-full gap-2">
@@ -221,20 +215,18 @@ const handleLogin = async () => {
 
 // GOOGLE AUTH 🔴
 const handleGoogleLogin = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      // Avisa o Supabase para voltar aqui
-      redirectTo: `${window.location.origin}/oauth-callback`,
-    },
-  });
-  if (error) {
-    toast.add({
-      severity: "error",
-      summary: "Failed to login with Google",
-      detail: error.message,
-      life: 4000,
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/oauth-callback`,
+      },
     });
+
+    if (error) throw error;
+  } catch (error) {
+    console.error("Google login error:", error);
+    errorMessage.value = "Failed to login with Google";
   }
 };
 
