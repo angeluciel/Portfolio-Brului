@@ -53,6 +53,10 @@ const router = createRouter({
       component: () => import("../views/user/wizardForm.vue"),
     },
     {
+      path: "/oauth-callback",
+      component: () => import("@/views/OAuthCallback.vue"),
+    },
+    {
       path: "/profile/:display_name",
       name: "userProfile",
       component: () => import("../views/user/profileLayout.vue"),

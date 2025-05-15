@@ -47,10 +47,6 @@
     @apply uppercase !font-abril font-black !text-6xl sm:!right-10 sm:!text-7xl md:!text-9xl lg:!text-[10rem];
   }
 
-  .floating-nav {
-    @apply bg-black rounded-lg border  [&_*]:!text-violet-50;
-  }
-
   /* C O N T A C T S */
 
   .contacts_heading {
@@ -60,10 +56,8 @@
   /* H E A D E R */
 
   .header-item {
-    @apply hidden sm:flex !p-1.5 cursor-pointer relative transition-all text-zinc-900 dark:text-zinc-200 font-medium !text-[1.12em] uppercase 
-      active:!text-amber-500 active:font-bold active:hover:after:bg-amber-500 
-      hover:after:w-full 
-      after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-charcoal after:transition-all after:duration-300 after:ease-in-out;
+    @apply hidden sm:flex !p-1.5 cursor-pointer relative transition-all text-zinc-900 dark:text-zinc-200 font-medium !text-[1.12em] uppercase active:!text-amber-500 active:font-bold active:hover:after:bg-amber-500 hover:after:w-full 
+      after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-charcoal dark:after:bg-zinc-200 after:transition-all after:duration-300 after:ease-in-out;
   }
 
   .header-item-active {
@@ -72,6 +66,10 @@
 
   .header-after {
     @apply absolute bottom-0 left-0 h-0.5 w-0 bg-zinc-900 dark:bg-zinc-200 transition-all duration-300 ease-in-out;
+  }
+
+  .floating-nav {
+    @apply bg-black rounded-lg border  [&_*]:!text-violet-50;
   }
 
   /* P R I C E S */

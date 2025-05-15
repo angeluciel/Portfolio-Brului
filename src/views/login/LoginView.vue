@@ -98,6 +98,7 @@
                   text="Sign in with Google"
                   color="login"
                   variant="outline"
+                  @click="handleGoogleLogin"
                 />
               </form>
             </div>
@@ -122,6 +123,7 @@ import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
+import { supabase } from "@/lib/supabase";
 
 // VARIÁVEIS 🔵
 const toast = useToast();
@@ -155,6 +157,25 @@ const handleLogin = async () => {
       severity: "error",
       summary: "Failed to login",
       detail: error.message || "Credenciais inválidas.",
+      life: 4000,
+    });
+  }
+};
+
+// GOOGLE AUTH 🔴
+const handleGoogleLogin = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      // Avisa o Supabase para voltar aqui
+      redirectTo: `${window.location.origin}/oauth-callback`,
+    },
+  });
+  if (error) {
+    toast.add({
+      severity: "error",
+      summary: "Failed to login with Google",
+      detail: error.message,
       life: 4000,
     });
   }
