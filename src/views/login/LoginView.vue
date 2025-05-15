@@ -7,7 +7,7 @@
       <div class="h-full relative">
         <router-link
           to="/"
-          class="absolute top-10 left-10 !text-xl md:!text-4xl z-50"
+          class="absolute top-20 left-10 !text-xl md:!text-4xl z-50"
           ><span class="!font-abril !text-violet-50 underline"
             >Brului</span
           ></router-link
@@ -57,9 +57,9 @@
         <!--BREADCRUMBS END-->
         <div class="w-full sm:!py-8 !px-16 md:!ml-20 max-w-xl">
           <h1
-            class="!font-raleway !font-black tracking-wider text-6xl !mb-10 text-charcoal dark:text-gray-300"
+            class="!font-raleway !font-black tracking-wider !text-xl md:!text-4xl !mb-10 text-charcoal dark:text-gray-300"
           >
-            Sign in
+            Sign in with email
           </h1>
           <div>
             <form @submit.prevent="handleLogin">
@@ -90,23 +90,79 @@
               <!--button-->
               <baseButton text="Sign in" color="login" variant="filled" />
             </form>
+            <!--separator-->
+            <div class="flex items-center gap-4 w-full mt-8 mb-4">
+              <div class="h-px flex-1 bg-black/25 dark:bg-white/20"></div>
+              <span class="text-gray-500 dark:text-gray-300 text-sm font-medium"
+                >or</span
+              >
+              <div class="h-px flex-1 bg-black/25 dark:bg-white/20"></div>
+            </div>
 
             <!--google auth-->
-            <div class="">
+            <div class="w-full">
               <form>
-                <baseButton
-                  text="Sign in with Google"
-                  color="login"
-                  variant="outline"
-                  @click="handleGoogleLogin"
-                />
+                <p
+                  class="text-center w-full text-gray-500 dark:text-gray-300 mb-5 text-sm font-medium"
+                >
+                  Continue with
+                </p>
+                <div class="flex justify-center gap-4">
+                  <!-- google -->
+                  <button
+                    class="social-buttons"
+                    @click="handleGoogleLogin"
+                    v-tooltip="{
+                      value: 'Login with Google',
+                      showDelay: 1000,
+                      hideDelay: 300,
+                    }"
+                  >
+                    <Icon
+                      icon="flat-color-icons:google"
+                      width="24"
+                      height="24"
+                    />
+                  </button>
+                  <!-- apple -->
+                  <button
+                    class="social-buttons text-zinc-900 dark:text-background"
+                    @click.prevent="handleComingSoon('Apple')"
+                  >
+                    <Icon icon="icon-park-solid:apple" width="24" height="24" />
+                  </button>
+                  <!-- facebook -->
+                  <button
+                    class="social-buttons text-zinc-900 dark:text-background"
+                    @click.prevent="handleComingSoon('Facebook')"
+                  >
+                    <Icon icon="basil:facebook-solid" width="24" height="24" />
+                  </button>
+                  <!-- discord -->
+                  <button
+                    class="social-buttons text-zinc-900 dark:text-background"
+                    @click.prevent="handleComingSoon('Discord')"
+                  >
+                    <Icon icon="ic:baseline-discord" width="24" height="24" />
+                  </button>
+                </div>
               </form>
             </div>
-            <div class="mt-5">
+            <!-- register route -->
+            <div class="flex-center mt-5 w-full gap-2">
+              <span class="text-black/80 dark:text-gray-300 text-nowrap"
+                >Don't have an account?</span
+              >
               <router-link
                 to="/login/createAccount"
-                class="underline text-black/80 dark:text-gray-300"
-                >Don't have an account?</router-link
+                class="underline text-black/80 dark:text-gray-300 text-nowrap"
+                v-tooltip.bottom="{
+                  value: 'Create an account',
+                  showDelay: 1000,
+                  hideDelay: 300,
+                }"
+              >
+                Sign up!</router-link
               >
             </div>
           </div>
@@ -124,6 +180,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
 import { supabase } from "@/lib/supabase";
+import { Icon } from "@iconify/vue";
 
 // VARIÁVEIS 🔵
 const toast = useToast();
@@ -179,6 +236,15 @@ const handleGoogleLogin = async () => {
       life: 4000,
     });
   }
+};
+
+const handleComingSoon = (provider: string) => {
+  toast.add({
+    severity: "info",
+    summary: "Coming Soon",
+    detail: `${provider} login will be available soon!`,
+    life: 3000,
+  });
 };
 </script>
 

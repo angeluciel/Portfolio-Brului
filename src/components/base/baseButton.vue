@@ -21,14 +21,14 @@ const props = defineProps({
 
 const filledColors = {
   login:
-    "bg-violet-500 text-background dark:text-white hover:bg-violet-700 hover:translate-1 shadow-[4px_4px_16px_rgba(139,92,246,0.5)] active:text-gray-400 active:translate-0",
+    "bg-violet-500 text-background text-background hover:bg-violet-700 hover:translate-1 shadow-[4px_4px_16px_rgba(139,92,246,0.5)] active:text-gray-400 active:translate-0",
   forms:
     "bg-red-300 text-white active:bg-red-400 hover:translate-1 shadow-[4px_4px_16px_rgba(214,144,147,0.2)] active:text-gray-400 active:translate-0",
 };
 
 const outlineColors = {
   login:
-    "border border-violet-600 text-violet-700 hover:bg-violet-500/20 hover:translate-1 active:translate-0 active:text-login-hg-50",
+    "border border-violet-600 hover:bg-violet-500/20 text-violet-700  hover:translate-1 active:translate-0 active:text-login-hg-50",
   forms: "border border-red-200 text-red-200 hover:bg-red-200/20",
 };
 
