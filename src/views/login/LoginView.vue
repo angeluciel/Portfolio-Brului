@@ -189,12 +189,24 @@ const items = ref([{ label: "Home", route: "/" }, { label: "Login" }]);
 // LOGIN 💖
 const handleLogin = async () => {
   errorMessage.value = "";
+  console.log("Login attempt with:", {
+    email: email.value,
+    password: password.value,
+  });
+
   try {
-    console.log("Tentando login com:", email.value, password.value);
     await auth.login(email.value, password.value);
     const session = await auth.getSession();
-    console.log("Access Token:", session?.access_token);
-    console.log("Usuario autenticado:", auth.user);
+
+    if (!session?.access_token) {
+      throw new Error("No session token received");
+    }
+
+    if (!auth.user) {
+      throw new Error("No user data received");
+    }
+
+    console.log("Login successful:", auth.user);
     router.push(`/profile/${auth.user.display_name}`);
     toast.add({
       severity: "success",
