@@ -124,12 +124,12 @@
   .close-profile {
     @apply absolute right-4 top-4 p-3 rounded-full bg-violet-200 dark:bg-indigo-900 border-2 cursor-pointer border-indigo-950 dark:border-violet-200 text-indigo-950 dark:text-violet-200 hover:scale-110 hover:rotate-90 transition-all duration-300 ease-in-out hover:bg-violet-300 dark:hover:bg-indigo-800 hover:shadow-lg;
   }
-
   .options-item {
-    @apply flex w-full h-full justify-start rounded-lg py-3 px-8 text-slate-500 font-medium 
+    @apply flex w-full h-full justify-start rounded-lg py-3 px-8 text-slate-500 dark:text-slate-400 font-medium 
     transition-all duration-200 ease-in-out
-    hover:translate-y-[2px] hover:shadow-sm
-    focus:translate-y-[-2px] focus:shadow-md;
+    hover:translate-y-[2px] hover:shadow-sm hover:shadow-black/5 dark:hover:shadow-white/5
+    hover:bg-black/5 dark:hover:bg-white/5
+    focus:translate-y-[-2px] focus:shadow-md focus:shadow-black/5 dark:focus:shadow-white/5;
   }
   .options-item-selected {
     @apply flex w-full h-full justify-start rounded-lg py-3 px-8 bg-black/20 text-neutral-700 font-medium dark:text-neutral-300 dark:bg-white/10;
