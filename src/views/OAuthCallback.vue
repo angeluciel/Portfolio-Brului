@@ -26,25 +26,42 @@ onMounted(async () => {
     if (error) throw error;
 
     if (session) {
-      await auth.fetchCurrentUser();
-      if (auth.user) {
-        toast.add({
-          severity: "success",
-          summary: "Success",
-          detail: "Successfully logged in!",
-          life: 3000,
-        });
-        router.replace(`/profile/${auth.user.display_name}`);
+      const { data: existingUser } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", session.user.id)
+        .single();
+
+      if (!existingUser) {
+        await supabase.from("users").insert([
+          {
+            id: session.user.id,
+            email: session.user.email,
+            display_name:
+              session.user.user_metadata?.full_name ||
+              session.user.email.split("@")[0],
+            username: session.user.email.split("@")[0],
+            profile_picture: session.user.user_metadata?.avatar_url,
+          },
+        ]);
       }
-    } else {
-      throw new Error("No session found");
+
+      await auth.fetchCurrentUser();
+
+      toast.add({
+        severity: "success",
+        summary: "Success",
+        detail: "Successfully logged in!",
+        life: 3000,
+      });
+      router.replace(`/profile/${auth.user.display_name}`);
     }
   } catch (error) {
     console.error("OAuth callback error:", error);
     toast.add({
       severity: "error",
       summary: "Error",
-      detail: "Failed to complete login",
+      detail: error.message || "Failed to complete login",
       life: 3000,
     });
     router.replace("/login");

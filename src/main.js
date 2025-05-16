@@ -3,6 +3,7 @@ import "@/assets/main.css";
 import { createApp } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { useAuthListener } from "./composables/useAuthListener";
 //TODO: REMOVE FORTAWESOME WE DONT NEED IT (we do)
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -20,6 +21,7 @@ import router from "./router";
 import { createPinia } from "pinia";
 
 library.add(fas, fab);
+useAuthListener();
 
 const app = createApp(App);
 
