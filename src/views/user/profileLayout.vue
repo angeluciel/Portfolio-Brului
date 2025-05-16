@@ -12,7 +12,7 @@
         <!-- user name and pfp -->
         <div class="flex gap-6 w-full items-center px-5">
           <img
-            src="/images/genshin.jpg"
+            :src="auth.user?.profile_picture || '/images/gostosao_ouro.jpg'"
             alt="placeholder"
             class="w-16 h-16 rounded-full object-cover object-center"
           />

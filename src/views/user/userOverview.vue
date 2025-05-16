@@ -28,7 +28,7 @@
           >
           <div class="relative ml-5 flex-center group">
             <img
-              src="/images/Sage.jpg"
+              :src="auth.user?.profile_picture || '/images/gostosao_ouro.jpg'"
               alt="placeholder pfp"
               class="w-40 h-40 object-cover rounded-full group-hover:opacity-70"
             />

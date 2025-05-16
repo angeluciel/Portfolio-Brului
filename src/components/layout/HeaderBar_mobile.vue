@@ -8,7 +8,7 @@
       <nav class="flex size-full items-center justify-between !p-4">
         <!-- L E F T -->
         <div class="flex items-center gap-4">
-          <!-- P F P -->
+          <!-- HOME IMAGE-->
           <router-link
             to="/"
             class="w-10 h-10 overflow-hidden rounded-full hover:outline-2 hover:outline-amber-500"
@@ -98,14 +98,16 @@
             ]"
             >sign in</router-link
           >
-
+          <!-- PROFILE PICTURE -->
           <router-link
             :to="`/profile/${userStore.user.display_name}`"
             v-if="userStore.isLoggedIn"
             ><img
-              src="https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg"
+              :src="
+                userStore.user?.profile_picture || '/images/gostosao_ouro.jpg'
+              "
               alt="profile"
-              class="rounded-full w-[48px] h-[48px]"
+              class="rounded-full w-[48px] h-[48px] object-cover"
             />
           </router-link>
           <router-link to="/login" v-else>
