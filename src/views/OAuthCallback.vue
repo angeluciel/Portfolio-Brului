@@ -22,6 +22,8 @@ onMounted(async () => {
       error,
     } = await supabase.auth.getSession();
 
+    console.log("Session atual:", session);
+    console.log("Usuário:", session?.user);
     if (error) throw error;
 
     if (session) {
@@ -32,6 +34,7 @@ onMounted(async () => {
         .single();
 
       if (!existingUser) {
+        console.log("Inserindo novo usuario...", existingUser);
         const { error: insertError } = await supabase.from("users").insert([
           {
             id: session.user.id,
@@ -45,6 +48,11 @@ onMounted(async () => {
         ]);
         if (insertError) {
           console.error("Erro ao inserir usuário Google:", insertError.message);
+          console.log("Tentando inserir: ", {
+            id: session.user.id,
+            email: session.user.email,
+            username: session.user.email.split("@")[0],
+          });
           toast.add({
             severity: "error",
             summary: "Erro",
