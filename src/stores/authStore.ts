@@ -17,6 +17,42 @@ export const useAuthStore = defineStore("auth", () => {
 
   const isLoggedIn = computed(() => !!user.value);
 
+  // Initialize auth state
+  const initialize = async () => {
+    // Check for existing session
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session?.user) {
+      const { data: profile } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", session.user.id)
+        .single();
+
+      if (profile) {
+        user.value = profile;
+      }
+    }
+
+    // Listen for auth changes
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN" && session?.user) {
+        const { data: profile } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", session.user.id)
+          .single();
+
+        if (profile) {
+          user.value = profile;
+        }
+      } else if (event === "SIGNED_OUT") {
+        user.value = null;
+      }
+    });
+  };
+
   const signUp = async (
     email: string,
     password: string,
@@ -143,5 +179,6 @@ export const useAuthStore = defineStore("auth", () => {
     fetchCurrentUser,
     is,
     can,
+    initialize,
   };
 });

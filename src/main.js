@@ -19,6 +19,7 @@ import nora from "@primeuix/themes/nora";
 import App from "./App.vue";
 import router from "./router";
 import { createPinia } from "pinia";
+import { useAuthStore } from "@/stores/authStore";
 
 library.add(fas, fab);
 useAuthListener();
