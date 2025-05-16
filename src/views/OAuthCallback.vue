@@ -56,6 +56,22 @@ onMounted(async () => {
             profile_picture: session.user.user_metadata?.avatar_url,
           },
         ]);
+      } else if (
+        !existingUser.profile_picture &&
+        session.user.user_metadata?.avatar_url
+      ) {
+        const { error: updateError } = await supabase
+          .from("users")
+          .update({
+            profile_picture: session.user.user_metadata?.avatar_url,
+          })
+          .eq("id", session.user.id);
+
+        if (updateError) {
+          console.log(
+            `Erro ao atualizar foto de perfil: ${updateError.message}`
+          );
+        }
       }
 
       await auth.fetchCurrentUser();
