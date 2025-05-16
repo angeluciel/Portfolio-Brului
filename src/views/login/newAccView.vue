@@ -113,7 +113,7 @@
   <BaseToast v-if="errorMessage" :message="errorMessage" />
 </template>
 
-<script setup lang="ts">
+<script setup>
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
 import { ref } from "vue";
@@ -168,7 +168,7 @@ const handleSignUp = async () => {
     });
 
     router.push(`/profile/${username.value}`);
-  } catch (err: any) {
+  } catch (err) {
     errorMessage.value = err.message || "Erro inesperado.";
     toast.add({
       severity: "error",

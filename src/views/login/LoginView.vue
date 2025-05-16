@@ -166,7 +166,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
 import { ref } from "vue";
@@ -202,7 +202,7 @@ const handleLogin = async () => {
       detail: `É bom ter você de volta, ${auth.user.display_name}!`,
       life: 4000,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Erro no login: ", error);
     toast.add({
       severity: "error",
@@ -233,7 +233,7 @@ const handleGoogleLogin = async () => {
   }
 };
 
-const handleComingSoon = (provider: string) => {
+const handleComingSoon = (provider) => {
   toast.add({
     severity: "info",
     summary: "Coming Soon",

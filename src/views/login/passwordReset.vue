@@ -91,7 +91,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import baseButton from "@/components/base/baseButton.vue";
 import baseInput from "@/components/base/baseInput.vue";
 import { ref } from "vue";
