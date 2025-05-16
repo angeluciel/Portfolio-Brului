@@ -2,9 +2,18 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { supabase } from "@/lib/supabase";
 
+interface User {
+  id: string;
+  email: string;
+  display_name: string;
+  username: string;
+  role?: string;
+  profile_picture?: string;
+}
+
 export const useAuthStore = defineStore("auth", () => {
-  const user = ref(null);
-  const loading = ref(null);
+  const user = ref<User | null>(null);
+  const loading = ref<boolean>(false);
 
   const isLoggedIn = computed(() => !!user.value);
 
@@ -34,26 +43,36 @@ export const useAuthStore = defineStore("auth", () => {
         username,
       },
     ]);
-
     loading.value = false;
 
     if (dbError) throw dbError;
-    user.value = authUser;
+    user.value = {
+      id: authUser.id,
+      email: email,
+      display_name,
+      username,
+      role: "client", // default role for new users
+    };
   };
 
   const login = async (email: string, password: string) => {
     loading.value = true;
+    console.log("Starting login process..."); // Debug log
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
+    console.log("Auth response:", { data, error }); // Debug log
+
     loading.value = false;
     if (error) throw error;
 
     const authUser = data.user;
     if (!authUser) throw new Error("Usuário inválido");
+
+    console.log("Auth user found:", authUser); // Debug log
 
     // Busca dados na tabela public.users
     const { data: profile, error: profileError } = await supabase
@@ -62,9 +81,14 @@ export const useAuthStore = defineStore("auth", () => {
       .eq("id", authUser.id)
       .single();
 
+    console.log("Profile data:", { profile, profileError }); // Debug log
+
     if (profileError) throw profileError;
 
     user.value = profile;
+    console.log("Login completed, user set to:", user.value); // Debug log
+
+    return profile;
   };
 
   const logout = async () => {

@@ -195,23 +195,26 @@ const handleLogin = async () => {
   });
 
   try {
-    await auth.login(email.value, password.value);
+    const profile = await auth.login(email.value, password.value);
+    console.log("Login returned profile:", profile); // Debug log
+
     const session = await auth.getSession();
+    console.log("Session after login:", session); // Debug log
 
     if (!session?.access_token) {
       throw new Error("No session token received");
     }
 
-    if (!auth.user) {
-      throw new Error("No user data received");
+    if (!profile) {
+      throw new Error("No user profile received");
     }
 
-    console.log("Login successful:", auth.user);
-    router.push(`/profile/${auth.user.display_name}`);
+    console.log("Login successful:", profile);
+    router.push(`/profile/${profile.display_name}`);
     toast.add({
       severity: "success",
       summary: "Olá!",
-      detail: `É bom ter você de volta, ${auth.user.display_name}!`,
+      detail: `É bom ter você de volta, ${profile.display_name}!`,
       life: 4000,
     });
   } catch (error) {
