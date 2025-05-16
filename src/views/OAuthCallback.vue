@@ -26,11 +26,23 @@ onMounted(async () => {
     if (error) throw error;
 
     if (session) {
-      const { data: existingUser } = await supabase
+      const { data: existingUser, error: selectError } = await supabase
         .from("users")
         .select("*")
         .eq("id", session.user.id)
-        .single();
+        .maybeSingle();
+
+      if (selectError && selectError.code !== "PGRST116") {
+        // Só trate erro se NÃO for "nenhuma linha encontrada"
+        console.error("Erro ao buscar usuário:", selectError.message);
+        toast.add({
+          severity: "error",
+          summary: "Erro ao buscar usuário",
+          detail: selectError.message,
+          life: 3000,
+        });
+        return;
+      }
 
       if (!existingUser) {
         await supabase.from("users").insert([
