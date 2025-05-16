@@ -28,7 +28,10 @@
           >
           <div class="relative ml-5 flex-center group">
             <img
-              src="/images/Sage.jpg"
+              :src="
+                auth.user?.profile_picture ||
+                'https://i.pinimg.com/736x/ff/ea/b4/ffeab4e9eab37e9a84d858560ae197f6.jpg'
+              "
               alt="placeholder pfp"
               class="w-40 h-40 object-cover rounded-full group-hover:opacity-70"
             />
