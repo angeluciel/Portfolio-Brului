@@ -32,7 +32,7 @@ onMounted(async () => {
         .single();
 
       if (!existingUser) {
-        await supabase.from("users").insert([
+        const { error: insertError } = await supabase.from("users").insert([
           {
             id: session.user.id,
             email: session.user.email,
@@ -43,6 +43,16 @@ onMounted(async () => {
             profile_picture: session.user.user_metadata?.avatar_url,
           },
         ]);
+        if (insertError) {
+          console.error("Erro ao inserir usuário Google:", insertError.message);
+          toast.add({
+            severity: "error",
+            summary: "Erro",
+            detail: insertError.message,
+            life: 3000,
+          });
+          return router.replace("/login");
+        }
       }
 
       await auth.fetchCurrentUser();
