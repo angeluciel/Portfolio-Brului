@@ -220,6 +220,9 @@ const handleGoogleLogin = async () => {
       provider: "google",
       options: {
         redirectTo: `${window.location.origin}/oauth-callback`,
+        queryParams: {
+          prompt: "select_account",
+        },
       },
     });
 
