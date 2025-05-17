@@ -13,7 +13,10 @@
     >
       <div
         class="flex-center relative gap-1.5 px-32 rounded-4xl h-full text-slate-600 dark:text-slate-400 border-dashed border-2 border-slate-600 dark:border-slate-400"
-        :class="{ 'border-indigo-400 bg-indigo-50 border-solid': isDragging }"
+        :class="{
+          'border-indigo-800 bg-zinc-400 dark:border-indigo-400 dark:bg-indigo-50 border-solid':
+            isDragging,
+        }"
         id="dropzone"
         @drop="handleDrop"
         @dragover="handleDragOver"
