@@ -33,13 +33,13 @@
       <h1
         class="home-heading !font-abril absolute bottom-5 right-5 !text-violet-100 z-40 text-blue-75"
       >
-        CHARACTERS.
+        REAL.
       </h1>
       <div class="absolute left-0 top-0 z-40 size-full">
         <div class="mt-24 px-5 sm:px-10">
           <h1 class="home-heading text-violet-100">
-            BUILD. <br />
-            YOUR.
+            MAKE. <br />
+            IT.
           </h1>
           <!-- B O T T O M -->
           <div class="relative h-24">
@@ -91,7 +91,7 @@
     <h1
       class="home-heading !font-abril absolute bottom-5 right-5 text-zinc-900 dark:text-indigo-600"
     >
-      CHARACTERS.
+      REAL.
     </h1>
     <div class="w-screen h-dvh"></div>
   </div>
@@ -120,11 +120,11 @@ onMounted(() => {
   gsap.from(bgFrame.value, {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
     borderRadius: "0 0 0 0",
-    ease: "power1.inOut",
+    ease: "power1.out",
     scrollTrigger: {
       trigger: bgFrame.value,
       start: "center center",
-      end: "bottom center",
+      end: "bottom top",
       scrub: true,
     },
   });
