@@ -14,7 +14,7 @@
       <div
         class="flex-center relative gap-1.5 px-32 rounded-4xl h-full text-slate-600 dark:text-slate-400 border-dashed border-2 border-slate-600 dark:border-slate-400"
         :class="{
-          'border-indigo-800 bg-zinc-400 dark:border-indigo-400 dark:bg-indigo-50 border-solid':
+          'border-indigo-800 bg-zinc-600 dark:border-indigo-400 dark:bg-indigo-50 border-solid':
             isDragging,
         }"
         id="dropzone"
@@ -71,7 +71,7 @@
 
           <!-- IMAGE -->
           <img
-            :src="image"
+            :src="image.url"
             alt="Gallery Image"
             class="gallery-image"
             @click="openModal(colIndex, imgIndex)"
@@ -84,11 +84,19 @@
   <FooterBar />
   <div
     v-if="isModalOpen"
-    class="fixed w-dvw h-dvh inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-999 !px-12"
+    class="fixed w-dvw h-dvh inset-0 flex items-center justify-center z-999 !px-12 overflow-hidden"
+    :style="{
+      backgroundImage: `url(${currentImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }"
     @click="closeModal"
   >
+    <!-- Blur + dark overlay -->
+    <div class="absolute inset-0 backdrop-blur-md bg-black/50"></div>
+
     <div
-      class="flex justify-center items-center relative bg-rgba[0,0,0,0.5]"
+      class="flex justify-center items-center relative bg-rgba[0,0,0,0.5] z-10"
       @click.stop
     >
       <img
@@ -96,7 +104,7 @@
         alt="Current Image"
         class="rounded-lg transition-transform duration-300 cursor-zoom-in"
         :class="{
-          'max-w-full max-h-[90vh]': !isZoomed,
+          'max-w-[80dvw] max-h-dvh !py-4': !isZoomed,
           'scale-150 cursor-zoom-out': isZoomed,
         }"
         :style="isZoomed ? { transformOrigin: zoomOrigin } : {}"
@@ -138,18 +146,18 @@ import { useToast } from "primevue/usetoast";
 
 const auth = useAuthStore();
 const router = useRouter();
+const toast = useToast();
+
 const showAdminContent = computed(() => {
   if (!auth.user) return false;
   return auth.is("artist");
 });
-const toast = useToast();
 
-// fetch if user is admin
 onMounted(async () => {
   await auth.fetchCurrentUser();
 });
 
-// D R O P Z O N E
+// DROPZONE
 const fileInput = ref(null);
 const isDragging = ref(false);
 
@@ -175,121 +183,148 @@ const handleFileSelect = (e) => {
   handleFiles(files);
 };
 
-const handleFiles = (files) => {
-  if (files.length === 0) {
-    toast.add({
-      severity: "warn",
-      summary: "No files",
-      detail: "No image files were selected",
-      life: 3000,
-    });
-    return;
-  }
+const openFileDialog = () => {
+  fileInput.value.click();
+};
 
-  files.forEach((file) => {
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
+// IMAGES
+const images = ref([
+  { url: "/images/gostosao_ouro.jpg", width: 1, height: 1 },
+  { url: "/images/first-first.jpg", width: 1, height: 1 },
+  { url: "/images/third-first.jpg", width: 1, height: 1 },
+  { url: "/images/gostosao_loiro.jpg", width: 1, height: 1 },
+  { url: "/images/cultivador_branco.jpg", width: 1, height: 1 },
+  { url: "/images/wallpaper1.png", width: 1, height: 1 },
+  { url: "/images/second-first.jpg", width: 1, height: 1 },
+  { url: "/images/OC_big.jpg", width: 1, height: 1 },
+  { url: "/images/second-second.jpg", width: 1, height: 1 },
+  { url: "/images/first-second.jpg", width: 1, height: 1 },
+  { url: "/images/last-last.jpg", width: 1, height: 1 },
+]);
 
-      reader.onload = (e) => {
-        columns[0].unshift(e.target.result);
-        toast.add({
-          severity: "success",
-          summary: "Image added",
-          detail: `${file.name} was added to the gallery`,
-          life: 3000,
-        });
-      };
+const columns = reactive([[], [], []]);
 
-      reader.onerror = (error) => {
-        toast.add({
-          severity: "error",
-          summary: "Error",
-          detail: `Failed to load ${file.name}`,
-          life: 3000,
-        });
-        console.error("Error reading file:", error);
-      };
-
-      reader.readAsDataURL(file);
-    } else {
+async function handleFiles(files) {
+  for (const file of files) {
+    if (!file.type.startsWith("image/")) {
       toast.add({
         severity: "error",
         summary: "Invalid file",
         detail: `${file.name} is not an image file`,
         life: 3000,
       });
+      continue;
     }
+
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const url = e.target.result;
+      const { width, height } = await getImageSize(url);
+      const image = { url, width, height };
+      images.value.unshift(image);
+      balanceColumns();
+
+      toast.add({
+        severity: "success",
+        summary: "Image added",
+        detail: `${file.name} was added to the gallery`,
+        life: 3000,
+      });
+    };
+
+    reader.onerror = (error) => {
+      toast.add({
+        severity: "error",
+        summary: "Error",
+        detail: `Failed to load ${file.name}`,
+        life: 3000,
+      });
+      console.error("Error reading file:", error);
+    };
+
+    reader.readAsDataURL(file);
+  }
+}
+
+function getImageSize(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve({ width: img.width, height: img.height });
+    img.src = url;
   });
-};
+}
 
-const openFileDialog = () => {
-  fileInput.value.click();
-};
+function balanceColumns() {
+  // Reset columns
+  columns.forEach((col) => col.splice(0));
+  const heights = [0, 0, 0];
 
-// F A V O R I T E 💖
+  for (const image of images.value) {
+    const ratio = image.height / image.width;
+    const displayWidth = 300; // assume fixed image width
+    const displayHeight = displayWidth * ratio;
+
+    const minIndex = heights.indexOf(Math.min(...heights));
+    columns[minIndex].push(image);
+    heights[minIndex] += displayHeight;
+  }
+}
+
+// Run once on mount
+onMounted(() => {
+  balanceColumns();
+});
+
+// FAVORITES
 const favorites = ref(new Set());
 
-const toggleFavorite = (imagePath) => {
-  if (favorites.value.has(imagePath)) {
-    favorites.value.delete(imagePath);
+const toggleFavorite = (image) => {
+  const url = typeof image === "string" ? image : image.url;
+  if (favorites.value.has(url)) {
+    favorites.value.delete(url);
   } else {
-    favorites.value.add(imagePath);
+    favorites.value.add(url);
   }
 };
 
-const isFavorited = (imagePath) => favorites.value.has(imagePath);
+const isFavorited = (image) => {
+  const url = typeof image === "string" ? image : image.url;
+  return favorites.value.has(url);
+};
 
-// Z O O M 🔎
+// ZOOM
 const isZoomed = ref(false);
 const zoomOrigin = ref("center center");
+
 const toggleZoom = (event) => {
   if (!isZoomed.value) {
     const img = event.target;
     const rect = img.getBoundingClientRect();
     const offsetX = ((event.clientX - rect.left) / rect.width) * 100;
     const offsetY = ((event.clientY - rect.top) / rect.height) * 100;
-
     zoomOrigin.value = `${offsetX}% ${offsetY}%`;
   }
   isZoomed.value = !isZoomed.value;
 };
 
-// Z O O M 🔎❌ E N D
-
-const columns = reactive([
-  [
-    "/images/gostosao_ouro.jpg",
-    "/images/first-first.jpg",
-    "/images/third-first.jpg",
-    "/images/gostosao_loiro.jpg",
-  ],
-  [
-    "/images/cultivador_branco.jpg",
-    "/images/wallpaper1.png",
-    "/images/second-first.jpg",
-    "/images/OC_big.jpg",
-  ],
-  [
-    "/images/second-second.jpg",
-    "/images/first-second.jpg",
-    "/images/last-last.jpg",
-  ],
-]);
-
-// Modal controls
+// MODAL
 const isModalOpen = ref(false);
 const currentCol = ref(0);
 const currentImg = ref(0);
+
 const openModal = (colIndex, imgIndex) => {
   currentCol.value = colIndex;
   currentImg.value = imgIndex;
   isModalOpen.value = true;
 };
+
 const closeModal = () => {
   isModalOpen.value = false;
 };
+
 const currentImage = computed(
-  () => columns[currentCol.value][currentImg.value]
+  () => columns[currentCol.value][currentImg.value]?.url
 );
 
 const prevImage = () => {
@@ -300,6 +335,7 @@ const prevImage = () => {
     currentImg.value = columns[currentCol.value].length - 1;
   }
 };
+
 const nextImage = () => {
   if (currentImg.value < columns[currentCol.value].length - 1) {
     currentImg.value++;
