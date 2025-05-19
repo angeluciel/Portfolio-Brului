@@ -55,7 +55,7 @@
     </div>
     <div class="flex justify-between items-center h-full !w-[70dvw]">
       <img
-        src="/images/first-second.jpg"
+        src="/images/redhead1.jpg"
         alt="imagem massa demaisi"
         class="object-cover object-right-top h-full w-full rounded-4xl"
       />

@@ -14,7 +14,7 @@
         >
 
         <img
-          src="/images/first-second.jpg"
+          src="/images/redhead1.jpg"
           alt="placeholder"
           class="w-full h-full object-cover object-left-top"
         />
