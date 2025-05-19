@@ -219,6 +219,7 @@ async function getImages() {
   );
 
   images.value = imageList;
+  await new Promise((r) => setTimeout(r, 200));
   balanceColumns();
   isLoading.value = false;
 }
