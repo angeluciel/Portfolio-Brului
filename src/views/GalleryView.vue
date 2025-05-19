@@ -12,7 +12,7 @@
       v-if="showAdminContent"
     >
       <div
-        class="flex-center relative gap-1.5 px-32 rounded-4xl h-full text-slate-600 dark:text-slate-400 border-dashed border-2 border-slate-600 dark:border-slate-400"
+        class="flex-center relative w-[80dvw] md:w-auto gap-1.5 px-16 md:px-32 rounded-4xl h-full text-slate-600 dark:text-slate-400 border-dashed border-2 border-slate-600 dark:border-slate-400"
         :class="{
           'border-indigo-800 bg-zinc-600 dark:border-indigo-400 dark:bg-indigo-50 border-solid':
             isDragging,
@@ -38,14 +38,32 @@
           class="absolute bottom-1/2 cursor-pointer"
           @click="openFileDialog"
         />
-        <span class="mt-10 cursor-alias">Drop your images here or</span>
-        <span class="underline mt-10 cursor-pointer" @click="openFileDialog"
+        <span class="mt-16 md:mt-10 cursor-alias text-nowrap text-xs md:text-xl"
+          >Drop your images here or</span
+        >
+        <span
+          class="underline mt-16 md:mt-10 cursor-pointer text-nowrap text-xs md:text-xl"
+          @click="openFileDialog"
           >browse files</span
         >
       </div>
     </div>
+
+    <!-- Skeleton loader -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 !px-5 items-top place-content-center justify-items-center w-auto !pb-20"
+      v-if="isLoading"
+    >
+      <useSkeleton height="320px" />
+      <useSkeleton height="280px" />
+      <useSkeleton height="300px" />
+      <useSkeleton height="280px" />
+      <useSkeleton height="320px" />
+      <useSkeleton height="300px" />
+    </div>
     <!-- gallery container -->
-    <div class="flex gap-4 !px-5 items-top justify-center w-full !pb-20">
+
+    <div class="flex gap-4 !px-5 items-top justify-center w-full !pb-20" v-else>
       <div
         v-for="(col, colIndex) in columns"
         :key="colIndex"
@@ -56,7 +74,6 @@
           :key="imgIndex"
           class="relative group"
         >
-          <!-- FAVORITE ICON -->
           <button
             @click.stop="toggleFavorite(image)"
             class="absolute top-2 right-2 z-20 bg-white/80 backdrop-blur-md p-1 rounded-full shadow-md group-hover:scale-110 transition-transform"
@@ -69,7 +86,6 @@
             />
           </button>
 
-          <!-- IMAGE -->
           <img
             :src="image.url"
             alt="Gallery Image"
@@ -143,10 +159,14 @@ import { Icon } from "@iconify/vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
+import { supabase } from "@/lib/supabase";
+import { v4 as uuidv4 } from "uuid";
+import UseSkeleton from "@/components/layout/useSkeleton.vue";
 
 const auth = useAuthStore();
 const router = useRouter();
 const toast = useToast();
+const isLoading = ref(true);
 
 const showAdminContent = computed(() => {
   if (!auth.user) return false;
@@ -155,7 +175,53 @@ const showAdminContent = computed(() => {
 
 onMounted(async () => {
   await auth.fetchCurrentUser();
+  getImages();
 });
+
+// GET IMAGES 🖼️🖼️
+
+async function getImages() {
+  isLoading.value = true;
+
+  const { data, error } = await supabase.storage
+    .from("artwork")
+    .list("gallery", {
+      limit: 100,
+      offset: 0,
+      sortBy: { column: "name", order: "asc" },
+    });
+
+  if (!data || error) {
+    toast.add({
+      severity: "error",
+      summary: "Error",
+      detail: "Failed to fetch images",
+      life: 3000,
+    });
+    console.error("Error fetching images:", error);
+    return;
+  }
+
+  // ✅ Filter out placeholder and non-image files
+  const validImages = data.filter(
+    (item) =>
+      item.name !== ".emptyFolderPlaceholder" &&
+      item.metadata?.mimetype?.startsWith("image/")
+  );
+
+  // ✅ Build image list with size estimation (optional)
+  const imageList = await Promise.all(
+    validImages.map(async (item) => {
+      const url = `https://dmkxiaphkvmmnzdgviro.supabase.co/storage/v1/object/public/artwork/gallery/${item.name}`;
+      const { width, height } = await getImageSize(url);
+      return { url, width, height };
+    })
+  );
+
+  images.value = imageList;
+  balanceColumns();
+  isLoading.value = false;
+}
 
 // DROPZONE
 const fileInput = ref(null);
@@ -187,20 +253,28 @@ const openFileDialog = () => {
   fileInput.value.click();
 };
 
-// IMAGES
-const images = ref([
-  { url: "/images/gostosao_ouro.jpg", width: 1, height: 1 },
-  { url: "/images/first-first.jpg", width: 1, height: 1 },
-  { url: "/images/third-first.jpg", width: 1, height: 1 },
-  { url: "/images/gostosao_loiro.jpg", width: 1, height: 1 },
-  { url: "/images/cultivador_branco.jpg", width: 1, height: 1 },
-  { url: "/images/wallpaper1.png", width: 1, height: 1 },
-  { url: "/images/second-first.jpg", width: 1, height: 1 },
-  { url: "/images/OC_big.jpg", width: 1, height: 1 },
-  { url: "/images/second-second.jpg", width: 1, height: 1 },
-  { url: "/images/first-second.jpg", width: 1, height: 1 },
-  { url: "/images/last-last.jpg", width: 1, height: 1 },
-]);
+async function uploadImage(e) {
+  let file = e.target.files[0];
+
+  const { data, error } = await supabase.storage
+    .from("artwork")
+    .upload(`gallery/${uuidv4()}${file}`);
+
+  if (data) {
+    getImages();
+  } else {
+    toast.add({
+      severity: "error",
+      summary: "Error",
+      detail: `Failed to upload ${file.name}`,
+      life: 3000,
+    });
+    console.error("Error uploading file:", error);
+  }
+}
+
+// IMAGES LOAD 🖼️🖼️
+const images = ref([]);
 
 const columns = reactive([[], [], []]);
 
@@ -215,35 +289,40 @@ async function handleFiles(files) {
       });
       continue;
     }
+    // Upload to Supabase
+    const { data, error } = await supabase.storage
+      .from("artwork")
+      .upload(`gallery/${uuidv4()}_${file.name}`, file);
 
-    const reader = new FileReader();
-
-    reader.onload = async (e) => {
-      const url = e.target.result;
-      const { width, height } = await getImageSize(url);
-      const image = { url, width, height };
-      images.value.unshift(image);
-      balanceColumns();
-
-      toast.add({
-        severity: "success",
-        summary: "Image added",
-        detail: `${file.name} was added to the gallery`,
-        life: 3000,
-      });
-    };
-
-    reader.onerror = (error) => {
+    if (error) {
       toast.add({
         severity: "error",
         summary: "Error",
-        detail: `Failed to load ${file.name}`,
+        detail: `Failed to upload ${file.name}`,
         life: 3000,
       });
-      console.error("Error reading file:", error);
-    };
+      console.error("Error uploading file:", error);
+      continue;
+    }
 
-    reader.readAsDataURL(file);
+    // Get public URL
+    const { data: publicUrlData } = supabase.storage
+      .from("artwork")
+      .getPublicUrl(`gallery/${data.path.split("/").pop()}`);
+    const url = publicUrlData.publicUrl;
+
+    // Optionally get image size
+    const { width, height } = await getImageSize(url);
+    const image = { url, width, height };
+    images.value.unshift(image);
+    balanceColumns();
+
+    toast.add({
+      severity: "success",
+      summary: "Image uploaded",
+      detail: `${file.name} was uploaded to the gallery`,
+      life: 3000,
+    });
   }
 }
 
@@ -257,12 +336,14 @@ function getImageSize(url) {
 
 function balanceColumns() {
   // Reset columns
-  columns.forEach((col) => col.splice(0));
+  columns.splice(0); // remove old content
+  columns.push([], [], []); // ensure 3 columns
+
   const heights = [0, 0, 0];
 
   for (const image of images.value) {
-    const ratio = image.height / image.width;
-    const displayWidth = 300; // assume fixed image width
+    const ratio = image.height / image.width || 1;
+    const displayWidth = 300;
     const displayHeight = displayWidth * ratio;
 
     const minIndex = heights.indexOf(Math.min(...heights));
@@ -271,12 +352,7 @@ function balanceColumns() {
   }
 }
 
-// Run once on mount
-onMounted(() => {
-  balanceColumns();
-});
-
-// FAVORITES
+// FAVORITES 💗💗
 const favorites = ref(new Set());
 
 const toggleFavorite = (image) => {
@@ -293,7 +369,7 @@ const isFavorited = (image) => {
   return favorites.value.has(url);
 };
 
-// ZOOM
+// ZOOM 🔎🔎
 const isZoomed = ref(false);
 const zoomOrigin = ref("center center");
 
@@ -308,7 +384,7 @@ const toggleZoom = (event) => {
   isZoomed.value = !isZoomed.value;
 };
 
-// MODAL
+// MODAL 🔍🔍
 const isModalOpen = ref(false);
 const currentCol = ref(0);
 const currentImg = ref(0);
