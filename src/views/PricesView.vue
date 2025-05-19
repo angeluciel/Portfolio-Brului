@@ -54,7 +54,7 @@ const cards = [
     title: "Lineart & Colors",
     subtitle: "(Half Body)",
     packageTitle: "Best Price",
-    imageSrc: "/images/sage.jpg",
+    imageSrc: "/images/Sage.jpg",
     oldPrice: "60.00",
     actualPrice: "45.99",
   },

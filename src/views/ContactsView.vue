@@ -48,7 +48,7 @@
     </div>
     <div class="flex flex-col w-72 items-start justify-start m-4">
       <img
-        src="/images/sage.jpg"
+        src="/images/Sage.jpg"
         alt="pfp"
         class="w-72 h-72 object-cover rounded-full border-8 border-neutral-700 dark:border-violet-400"
       />
