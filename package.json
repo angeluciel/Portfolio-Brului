@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -33,10 +36,14 @@
   "devDependencies": {
     "@iconify/vue": "^4.1.2",
     "@vitejs/plugin-vue": "^5.1.4",
+    "@vitest/ui": "^3.1.4",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^26.1.0",
     "sass": "^1.85.0",
     "sass-embedded": "^1.80.6",
     "sass-loader": "^16.0.5",
     "vite": "^5.4.10",
-    "vite-plugin-vue-devtools": "^7.5.4"
+    "vite-plugin-vue-devtools": "^7.5.4",
+    "vitest": "^3.1.4"
   }
 }

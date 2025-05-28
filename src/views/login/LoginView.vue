@@ -67,6 +67,7 @@
                 <!--mail-->
 
                 <baseInput
+                  ref="emailInput"
                   title="Email or Username"
                   placeholder=""
                   type="text"
@@ -76,6 +77,7 @@
 
                 <!--password-->
                 <baseInput
+                  ref="passwordInput"
                   title="Password"
                   type="password"
                   variant="login"
@@ -109,6 +111,7 @@
               <div class="flex justify-center gap-4">
                 <!-- google -->
                 <button
+                  data-test="google-login"
                   class="social-buttons"
                   @click="handleGoogleLogin"
                   v-tooltip="{
@@ -121,6 +124,7 @@
                 </button>
                 <!-- apple -->
                 <button
+                  data-test="apple-login"
                   class="social-buttons text-zinc-900 dark:text-background"
                   @click.prevent="handleComingSoon('Apple')"
                 >

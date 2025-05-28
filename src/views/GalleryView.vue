@@ -12,6 +12,7 @@
       v-if="showAdminContent"
     >
       <div
+        data-testid="dropzone"
         class="flex-center relative w-[80dvw] md:w-auto gap-1.5 px-16 md:px-32 rounded-4xl h-full text-slate-600 dark:text-slate-400 border-dashed border-2 border-slate-600 dark:border-slate-400"
         :class="{
           'border-indigo-800 bg-zinc-600 dark:border-indigo-400 dark:bg-indigo-50 border-solid':
@@ -51,6 +52,7 @@
 
     <!-- Skeleton loader -->
     <div
+      data-cy="skeleton-loader"
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 !px-5 items-top place-content-center justify-items-center w-auto !pb-20"
       v-if="isLoading"
     >
@@ -63,7 +65,11 @@
     </div>
     <!-- gallery container -->
 
-    <div class="flex gap-4 !px-5 items-top justify-center w-full !pb-20" v-else>
+    <div
+      data-cy="gallery-container"
+      class="flex gap-4 !px-5 items-top justify-center w-full !pb-20"
+      v-else
+    >
       <div
         v-for="(col, colIndex) in columns"
         :key="colIndex"
@@ -87,6 +93,7 @@
           </button>
 
           <img
+            data-testid="gallery-image"
             :src="image.url"
             alt="Gallery Image"
             class="gallery-image"

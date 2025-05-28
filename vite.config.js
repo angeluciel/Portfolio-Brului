@@ -8,6 +8,11 @@ import vueDevTools from "vite-plugin-vue-devtools";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueDevTools(), tailwindcss()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    testTimeout: 20000,
+  },
   server: {
     historyApiFallback: true,
   },
