@@ -164,6 +164,7 @@ import FooterBar from "@/components/layout/FooterBar.vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 import { Icon } from "@iconify/vue";
 import { useAuthStore } from "@/stores/authStore";
+import { useFavoriteStore } from '@/stores/favoriteStore.ts';
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
 import { supabase } from "@/lib/supabase";
@@ -171,6 +172,7 @@ import { v4 as uuidv4 } from "uuid";
 import UseSkeleton from "@/components/layout/useSkeleton.vue";
 
 const auth = useAuthStore();
+const favoriteStore = useFavoriteStore();
 const router = useRouter();
 const toast = useToast();
 const isLoading = ref(true);
@@ -182,6 +184,7 @@ const showAdminContent = computed(() => {
 
 onMounted(async () => {
   await auth.fetchCurrentUser();
+  favoriteStore.load();
   getImages();
 });
 
@@ -361,20 +364,14 @@ function balanceColumns() {
 }
 
 // FAVORITES 💗💗
-const favorites = ref(new Set());
-
 const toggleFavorite = (image) => {
   const url = typeof image === "string" ? image : image.url;
-  if (favorites.value.has(url)) {
-    favorites.value.delete(url);
-  } else {
-    favorites.value.add(url);
-  }
+  favoriteStore.toggleFavorite(url);
 };
 
 const isFavorited = (image) => {
   const url = typeof image === "string" ? image : image.url;
-  return favorites.value.has(url);
+  return favoriteStore.isFavorite(url);
 };
 
 // ZOOM 🔎🔎

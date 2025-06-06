@@ -47,13 +47,19 @@
         <form class="w-full" @submit.prevent="handleSave">
           <div class="flex flex-col gap-4">
             <div>
-              <baseInput
+              <fieldset>
+                <label class="text-lg !font-bold text-violet-950 dark:text-violet-300 w-full">Email address</label>
+                <input :placeholder="email" type="text" disabled
+                       class="focus:outline-none !text-lg md:py-2 px-4 !w-full h-14 md:!text-base hover:shadow-[0_0_16px_rgba(109,40,217,0.4)] focus:shadow-[0_0_16px_rgba(109,40,217,0.4)] transition-[background-color,outline,color,box-shadow] duration-200 ease-in-out text-zinc-950 dark:text-zinc-200 flex flex-row gap-4 w-full items-center md:!py-0 rounded-[12px] border-[1.5px] border-violet-200 dark:border-zinc-800 !h-10">
+
+              </fieldset>
+<!--              <baseInput
                 title="Email address"
                 placeholder="email@exemplo.com"
                 type="text"
                 variant="profile"
                 v-model="email"
-              />
+              />-->
             </div>
             <div class="flex gap-4">
               <baseInput
