@@ -65,11 +65,11 @@
           <button
             :class="[
               'options-item',
-              $route.name === 'comissions' ? 'options-item-selected' : '',
+              $route.name === 'commissions' ? 'options-item-selected' : '',
             ]"
-            @click="navigateTo('comissions')"
+            @click="navigateTo('commissions')"
           >
-            my comissions
+            my commissions
           </button>
           <button
             :class="[

@@ -84,9 +84,9 @@ const router = createRouter({
           component: () => import("@/views/user/userPrivacy.vue"),
         },
         {
-          path: "comissions",
-          name: "comissions",
-          component: () => import("@/views/user/userComissions.vue"),
+          path: "commissions",
+          name: "commissions",
+          component: () => import("@/views/user/userCommissions.vue"),
         },
         {
           path: "favorites",

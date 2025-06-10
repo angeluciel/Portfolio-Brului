@@ -164,6 +164,7 @@ import FooterBar from "@/components/layout/FooterBar.vue";
 import HeaderBar_mobile from "@/components/layout/HeaderBar_mobile.vue";
 import { Icon } from "@iconify/vue";
 import { useAuthStore } from "@/stores/authStore";
+import { useFavoriteStore } from '@/stores/favoriteStore.ts';
 import { useRouter } from "vue-router";
 import { useToast } from "primevue/usetoast";
 import { supabase } from "@/lib/supabase";
@@ -171,9 +172,10 @@ import { v4 as uuidv4 } from "uuid";
 import UseSkeleton from "@/components/layout/useSkeleton.vue";
 
 const auth = useAuthStore();
-const router = useRouter();
+const favoriteStore = useFavoriteStore();
 const toast = useToast();
 const isLoading = ref(true);
+const artworks = ref([])
 
 const showAdminContent = computed(() => {
   if (!auth.user) return false;
@@ -182,7 +184,20 @@ const showAdminContent = computed(() => {
 
 onMounted(async () => {
   await auth.fetchCurrentUser();
-  getImages();
+
+  if (auth.is("artist")) {
+    const migrated = await migrateImagesToDatabase();
+    if (migrated) {
+      toast.add({
+        severity: "success",
+        summary: "Migration was successful.",
+        detail: `Migrated ${migrated} images to the database.`,
+        life: 3000,
+      });
+    }
+  }
+
+  await getImages();
 });
 
 // GET IMAGES 🖼️🖼️
@@ -190,45 +205,60 @@ onMounted(async () => {
 async function getImages() {
   isLoading.value = true;
 
-  const { data, error } = await supabase.storage
-    .from("artwork")
-    .list("gallery", {
-      limit: 100,
-      offset: 0,
-      sortBy: { column: "name", order: "asc" },
-    });
+  try {
+    // Get artworks from database instead of directly from storage
+    const { data: artworkData, error: artworkError } = await supabase
+        .from('artworks')
+        .select('*')
+        .order('order_index', { ascending: true });
 
-  if (!data || error) {
+    if (artworkError) {
+      toast.add({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to fetch artworks",
+        life: 3000,
+      });
+      console.error("Error fetching artworks:", artworkError);
+      return;
+    }
+
+    // Get image dimensions for each artwork
+    const artworkList = await Promise.all(
+        artworkData.map(async (artwork) => {
+          const { width, height } = await getImageSize(artwork.image_url);
+          return {
+            ...artwork,
+            width,
+            height,
+            url: artwork.image_url // Keep for backward compatibility
+          };
+        })
+    );
+
+    artworks.value = artworkList;
+    images.value = artworkList; // Keep for existing column balance logic
+
+    balanceColumns();
+
+    // Load user favorites if logged in
+    if (auth.user?.id) {
+      await favoriteStore.loadFavorites(auth.user.id);
+      // One-time migration from localStorage
+      await favoriteStore.migrateFavoritesToDatabase(auth.user.id);
+    }
+
+  } catch (error) {
+    console.error("Error in getImages:", error);
     toast.add({
       severity: "error",
       summary: "Error",
-      detail: "Failed to fetch images",
+      detail: "Failed to load gallery",
       life: 3000,
     });
-    console.error("Error fetching images:", error);
-    return;
+  } finally {
+    isLoading.value = false;
   }
-
-  // ✅ Filter out placeholder and non-image files
-  const validImages = data.filter(
-    (item) =>
-      item.name !== ".emptyFolderPlaceholder" &&
-      item.metadata?.mimetype?.startsWith("image/")
-  );
-
-  // ✅ Build image list with size estimation (optional)
-  const imageList = await Promise.all(
-    validImages.map(async (item) => {
-      const url = `https://dmkxiaphkvmmnzdgviro.supabase.co/storage/v1/object/public/artwork/gallery/${item.name}`;
-      const { width, height } = await getImageSize(url);
-      return { url, width, height };
-    })
-  );
-
-  images.value = imageList;
-
-  balanceColumns();
-  isLoading.value = false;
 }
 
 // DROPZONE
@@ -297,40 +327,87 @@ async function handleFiles(files) {
       });
       continue;
     }
-    // Upload to Supabase
-    const { data, error } = await supabase.storage
-      .from("artwork")
-      .upload(`gallery/${uuidv4()}_${file.name}`, file);
 
-    if (error) {
+    try {
+      // Upload to Supabase Storage
+      const fileName = `${uuidv4()}_${file.name}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("artwork")
+          .upload(`gallery/${fileName}`, file);
+
+      if (uploadError) {
+        toast.add({
+          severity: "error",
+          summary: "Upload Error",
+          detail: `Failed to upload ${file.name}`,
+          life: 3000,
+        });
+        continue;
+      }
+
+      // Get public URL
+      const { data: publicUrlData } = supabase.storage
+          .from("artwork")
+          .getPublicUrl(`gallery/${fileName}`);
+
+      const imageUrl = publicUrlData.publicUrl;
+
+      // Create title from filename
+      const title = file.name
+          .replace(/\.[^/.]+$/, '') // Remove extension
+          .replace(/[_-]/g, ' ') // Replace underscores/hyphens with spaces
+          .trim();
+
+      // Save to artworks table
+      const { data: artworkData, error: artworkError } = await supabase
+          .from('artworks')
+          .insert({
+            title,
+            image_url: imageUrl,
+            order_index: artworks.value.length
+          })
+          .select()
+          .single();
+
+      if (artworkError) {
+        toast.add({
+          severity: "error",
+          summary: "Database Error",
+          detail: `Failed to save ${file.name} to database`,
+          life: 3000,
+        });
+        continue;
+      }
+
+      // Add to local array with dimensions
+      const { width, height } = await getImageSize(imageUrl);
+      const newArtwork = {
+        ...artworkData,
+        width,
+        height,
+        url: imageUrl
+      };
+
+      artworks.value.unshift(newArtwork);
+      images.value.unshift(newArtwork);
+      balanceColumns();
+
+      toast.add({
+        severity: "success",
+        summary: "Upload Success",
+        detail: `${file.name} uploaded successfully`,
+        life: 3000,
+      });
+
+    } catch (error) {
+      console.error("Error uploading file:", error);
       toast.add({
         severity: "error",
         summary: "Error",
-        detail: `Failed to upload ${file.name}`,
+        detail: `Failed to process ${file.name}`,
         life: 3000,
       });
-      console.error("Error uploading file:", error);
-      continue;
     }
-
-    // Get public URL
-    const { data: publicUrlData } = supabase.storage
-      .from("artwork")
-      .getPublicUrl(`gallery/${data.path.split("/").pop()}`);
-    const url = publicUrlData.publicUrl;
-
-    // Optionally get image size
-    const { width, height } = await getImageSize(url);
-    const image = { url, width, height };
-    images.value.unshift(image);
-    balanceColumns();
-
-    toast.add({
-      severity: "success",
-      summary: "Image uploaded",
-      detail: `${file.name} was uploaded to the gallery`,
-      life: 3000,
-    });
   }
 }
 
@@ -361,21 +438,105 @@ function balanceColumns() {
 }
 
 // FAVORITES 💗💗
-const favorites = ref(new Set());
-
-const toggleFavorite = (image) => {
-  const url = typeof image === "string" ? image : image.url;
-  if (favorites.value.has(url)) {
-    favorites.value.delete(url);
-  } else {
-    favorites.value.add(url);
+const toggleFavorite = async (artwork) => {
+  if (!auth.user?.id) {
+    toast.add({
+      severity: "warn",
+      summary: "Login Required",
+      detail: "Please login to save favorites",
+      life: 3000,
+    });
+    return;
   }
+
+  const artworkId = artwork.id || artwork.artwork_id;
+  await favoriteStore.toggleFavorite(artworkId, auth.user.id);
 };
 
-const isFavorited = (image) => {
-  const url = typeof image === "string" ? image : image.url;
-  return favorites.value.has(url);
+const isFavorited = (artwork) => {
+  if (!auth.user?.id) return false;
+  const artworkId = artwork.id || artwork.artwork_id;
+  return favoriteStore.isFavorite(artworkId);
 };
+
+async function migrateImagesToDatabase() {
+  try {
+    // Get all existing images from storage
+    const { data: storageFiles, error: storageError } = await supabase.storage
+        .from("artwork")
+        .list("gallery", {
+          limit: 1000,
+          offset: 0,
+          sortBy: { column: "name", order: "asc" },
+        });
+
+    if (storageError) {
+      console.error("Error fetching storage files:", storageError);
+      return;
+    }
+
+    const validImages = storageFiles.filter(
+        (item) =>
+            item.name !== ".emptyFolderPlaceholder" &&
+            item.metadata?.mimetype?.startsWith("image/")
+    );
+
+    // Check which images are already in the database
+    const { data: existingArtworks, error: dbError } = await supabase
+        .from("artworks")
+        .select("image_url");
+
+    if (dbError) {
+      console.error("Error fetching existing artworks:", dbError);
+      return;
+    }
+
+    const existingUrls = new Set(existingArtworks.map(art => art.image_url));
+
+    // Insert new artworks for images not yet in database
+    const newArtworks = [];
+    let orderIndex = existingArtworks.length;
+
+    for (const image of validImages) {
+      const imageUrl = `https://dmkxiaphkvmmnzdgviro.supabase.co/storage/v1/object/public/artwork/gallery/${image.name}`;
+
+      if (!existingUrls.has(imageUrl)) {
+        // Extract title from filename (remove UUID prefix and extension)
+        const filename = image.name;
+        const title = filename
+            .replace(/^[a-f0-9-]{36}_?/i, '')
+            .replace(/\.[^/.]+$/, '')
+            .replace(/[_-]/g, ' ')
+            .trim() || `Artwork ${orderIndex + 1}`;
+
+        newArtworks.push({
+          title,
+          image_url: imageUrl,
+          order_index: orderIndex++,
+          category: null
+        });
+      }
+    }
+
+    if (newArtworks.length > 0) {
+      const { error: insertError } = await supabase
+          .from("artworks")
+          .insert(newArtworks);
+
+      if (insertError) {
+        console.error("Error inserting artworks:", insertError);
+        return false;
+      }
+
+      console.log(`Successfully migrated ${newArtworks.length} images to database`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Migration error:", error);
+    return false;
+  }
+}
 
 // ZOOM 🔎🔎
 const isZoomed = ref(false);
@@ -418,6 +579,8 @@ const prevImage = () => {
     currentCol.value--;
     currentImg.value = columns[currentCol.value].length - 1;
   }
+
+  return newArtowkrs.length;
 };
 
 const nextImage = () => {

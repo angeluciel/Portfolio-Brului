@@ -12,7 +12,9 @@ export const useAuthStore = defineStore("auth", () => {
     email: string,
     password: string,
     display_name: string,
-    username: string
+    username: string,
+    twitter?: string,
+    instagram?: string
   ) => {
     loading.value = true;
     const { data, error } = await supabase.auth.signUp({ email, password });
@@ -58,7 +60,7 @@ export const useAuthStore = defineStore("auth", () => {
     // Busca dados na tabela public.users
     const { data: profile, error: profileError } = await supabase
       .from("users")
-      .select("id, email, display_name, username")
+      .select("id, email, display_name, username, twitter, instagram")
       .eq("id", authUser.id)
       .single();
 
