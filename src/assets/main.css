@@ -14,7 +14,6 @@
   --color-gold-500: #ba8d2e;
 
   --color-home-blue: #c6d1e6;
-  --color-home-blue-100: #b2bccf;
   --color-home-blue-300: #a3b5d6;
   --color-home-bg-200: #454456;
   --color-home-bg-500: #252438;
@@ -147,6 +146,10 @@
     font-style: normal;
     text-decoration: none;
     box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   @layer utilities {
